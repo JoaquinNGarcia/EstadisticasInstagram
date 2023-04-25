@@ -1,4 +1,4 @@
-package com.publication.perfilInstagram.publicacion;
+package com.estadisticasInstagram.dominio;
 
 public class Imagen {
     private float resolucion;

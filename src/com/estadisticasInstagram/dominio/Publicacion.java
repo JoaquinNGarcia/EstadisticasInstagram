@@ -1,6 +1,6 @@
-package com.publication.perfilInstagram.publicacion;
+package com.estadisticasInstagram.dominio;
 
-public class publicacion {
+public class Publicacion {
     private char nombre, fechaSubida, etiquetasHashtags, comentarios;
     private int cantidadMG;
 

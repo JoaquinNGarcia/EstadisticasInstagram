@@ -1,4 +1,4 @@
-package com.publication.perfilInstagram.publicacion;
+package com.estadisticasInstagram.dominio;
 
 public class Video {
     private float duracion, resolucion;
