@@ -1,7 +1,7 @@
 package com.estadisticasInstagram;
 
 /**
- * @author Facundo Cascallana, Gabriel Corvalan, Federico Nicolás Lussoro y Franco Miguel Vinciguerra.
+ * @author Joaquin Garcia, Gabriel Corvalan, Martin Errea.
  */
 public class Main {
     public static void main(String[] args) {
