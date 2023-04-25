@@ -1,15 +1,14 @@
-/**
- * @author Joaquin Garcia, Gabriel Corvalan, Martin Errea.
- */
 package com.estadisticasInstagram;
 
 import com.estadisticasInstagram.controladora.PerfilInstagram;
 import java.util.*;
+import java.lang.String;
+
 
 public class Main {
     private PerfilInstagram perfilInstagram;
 
-    public main() {
+    public Main() {
         this.perfilInstagram = new PerfilInstagram();
     }
 
@@ -34,5 +33,12 @@ public class Main {
                 "   ##     ##   ##  ##   ##    ##     ##  ##    ##  ##   ##  ##  ##  ##   ##   ##\n" +
                 "  ####    ##   ##   #####    ####    ##  ##     #####  #### ##  ##  ##   ##   ##\n" +
                 "\n\n");
+        System.out.println("\033[0;1m" + "\n========================================================================" );
+        System.out.println("\033[0;1m" + "============================" +  " MENÚ PRINCIPAL " +  "\033[0;1m" + "============================" );
+        System.out.println("\033[0;1m" + "========================================================================\n" );
+        System.out.println("\033[0;1m" +  "1" +  " - ABM de las publicaciones y albumes del perfil.\n" +
+                "\033[0;1m" + "2" + " - Consultar publicaciones.\n" +
+                "\033[0;1m" + "3" +  " - Generar estadisticas.\n" +
+                "\033[0;1m" + "4" +  " - Generar reportes.\n");
     }
 }
