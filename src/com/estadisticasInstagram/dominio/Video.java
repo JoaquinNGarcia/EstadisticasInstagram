@@ -2,7 +2,7 @@ package com.estadisticasInstagram.dominio;
 
 public class Video {
     private float duracion, resolucion;
-    private cantidadDeCuadros
+    private int cantidadDeCuadros;
 
     // Avanzar, detener, aplicar filtro
 }
