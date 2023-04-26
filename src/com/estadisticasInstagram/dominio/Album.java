@@ -13,11 +13,18 @@ public class Album {
         }
         return sum;
     }
-    public int cantPublicaciones() {
+    public int cantPublicacionesTotal() {
         int cant = 0;
         for (Publicacion publicacion : publicacionList) {
             cant++;
         }
         return cant;
     }
+
+    // to do, por cada una de las subclases
+    public int cantPublicacionesPorTipo() {
+
+    }
+
+
 }

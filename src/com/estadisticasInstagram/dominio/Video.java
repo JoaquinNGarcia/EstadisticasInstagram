@@ -5,4 +5,5 @@ public class Video {
     private int cantidadDeCuadros;
 
     // Avanzar, detener, aplicar filtro
+
 }
