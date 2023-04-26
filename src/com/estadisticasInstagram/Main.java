@@ -41,4 +41,8 @@ public class Main {
                 "\033[0;1m" + "3" +  " - Generar estadisticas.\n" +
                 "\033[0;1m" + "4" +  " - Generar reportes.\n");
     }
+    public static void main(String[] args) {
+        Main menu = new Main();
+        menu.iniciarMenu();
+    }
 }
