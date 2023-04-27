@@ -71,13 +71,8 @@ public class Main {
     }
 //  throws FileNotFoundException
     public void cargaArchivoPublicaciones(){
-
-        System.out.println("main - hola 1");
         LinkedList<Publicacion> listaP;
-
-        System.out.println("main - hola 2");
         listaP = cargaListaPublicacion();
-        System.out.println("main - hola 3");
         String verPublicaciones;
         Album albumPublicaciones = new Album(listaP);
 
@@ -90,8 +85,6 @@ public class Main {
         }
         System.out.println();
         System.out.println();
-
-
     }
 
     public static void main(String[] args) {

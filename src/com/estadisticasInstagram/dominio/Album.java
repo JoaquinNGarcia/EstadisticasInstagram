@@ -30,14 +30,11 @@ public class Album {
 
 
         for (int i = 0; i < listaPublicacion.size(); i++) {
-            System.out.println("------------------------------------------------------");
-            System.out.println("------------Publicacion------------");
+            System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
             System.out.println("Nombre : " + listaPublicacion.get(i).getNombre());
             System.out.println("Fecha de subida: " + listaPublicacion.get(i).getFechaSubida());
             System.out.println("Etiquetas - Hashtags: " + listaPublicacion.get(i).getEtiquetasHashtags());
             System.out.println("Cantidad de me gustas: " + listaPublicacion.get(i).getCantidadMG());
-
-            System.out.println("------------------------");
         }
 
     }

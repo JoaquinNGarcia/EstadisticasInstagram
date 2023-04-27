@@ -27,7 +27,7 @@ public class readPublicaciones {
         Scanner s;
         try {
             s = new Scanner(f);
-            while (s.hasNextLine()){
+            while (s.hasNextLine()) {
                 String linea = s.nextLine();
                 Scanner sl = new Scanner(linea);
                 sl.useDelimiter("\\s*-\\s*");
@@ -62,19 +62,14 @@ public class readPublicaciones {
                 ancho = Integer.parseInt(sl.next());
                 alto = Integer.parseInt(sl.next());
                 publi = new Imagen(nombre, fechaSubida, etiquetasHashtags, cantidadMG, resolucion, ancho, alto);
-                System.out.println("readPublicaciones - hola 3");
                 listaPublicacion.add(publi);
-                System.out.println("readPublicaciones - hola 4");
                 sl.close();
             }
-            System.out.println("readPublicaciones - hola 1");
             s.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("readPublicaciones - aca?");
             throw new RuntimeException(ex);
             // ex.printStackTrace();
         }
-        System.out.println("readPublicaciones - hola 2");
         return listaPublicacion;
     }
 }
