@@ -21,6 +21,9 @@ public class readPublicaciones {
         //Audio
         int velocidadBits;
 
+        //Sumar al archivoPublicaciones los tipos y los voy leyendo con GetClass
+
+
         LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
         Publicacion publi = null;
         File f = new File("archivoPublicaciones.txt");
@@ -35,7 +38,8 @@ public class readPublicaciones {
                 fechaSubida = sl.next();
                 etiquetasHashtags = sl.next();
                 cantidadMG = Integer.parseInt(sl.next());
-                /*tipo = sl.next();
+                /*
+                tipo = sl.next();
                 switch (tipo){
                     case "Video":{
                         duracion = Float.parseFloat(sl.next());
@@ -57,7 +61,8 @@ public class readPublicaciones {
                         publi = new Audio(nombre, fechaSubida, etiquetasHashtags, cantidadMG, duracion, velocidadBits);
                         break;
                     }
-                }*/
+                }
+                */
                 resolucion = Float.parseFloat(sl.next());
                 ancho = Integer.parseInt(sl.next());
                 alto = Integer.parseInt(sl.next());

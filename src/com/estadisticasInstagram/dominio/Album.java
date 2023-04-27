@@ -1,11 +1,13 @@
 package com.estadisticasInstagram.dominio;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class Album {
     LinkedList<Publicacion> listaPublicacion;
-
+//Sumar una lista de albunes
     public Album(LinkedList<Publicacion> listaPublicacion) {
         this.listaPublicacion = listaPublicacion;
     }
@@ -28,15 +30,33 @@ public class Album {
         // LinkedList<Publicacion> listaP;
         // listaP = alb.getListaPublicacion();
 
-
+        System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
         for (int i = 0; i < listaPublicacion.size(); i++) {
-            System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
             System.out.println("Nombre : " + listaPublicacion.get(i).getNombre());
             System.out.println("Fecha de subida: " + listaPublicacion.get(i).getFechaSubida());
             System.out.println("Etiquetas - Hashtags: " + listaPublicacion.get(i).getEtiquetasHashtags());
             System.out.println("Cantidad de me gustas: " + listaPublicacion.get(i).getCantidadMG());
-        }
+/*
+            switch (listaPublicacion.get(i).getTipo()){
+                case "Video":{
+                    System.out.println("Duracion: " + listaPublicacion.get(i).);
+                    System.out.println("Resolucion: " + listaPublicacion.get(i).getCantidadMG());
+                    System.out.println("cantidadDeCuadros: " + listaPublicacion.get(i).getCantidadMG());
 
+
+                    break;
+                }
+                case "Imagen":{
+                    break;
+                }
+                case "Audio":{
+
+                    break;
+                }
+            }
+*/
+            System.out.println("\033[0;1m" + "=====================================================================");
+        }
     }
 
     /*
@@ -57,15 +77,15 @@ public class Album {
         return cant;
     }
 
-    public Map<Class<?>,Integer> cantPublicacionesTipo() { // POSIBLE FUNCION
-        Map<Class<?>, Integer> mapa = new HashMap<Class<?>,Integer>(); // creo el mapa que va a guardar la cantidad
-        for (Publicacion publicacion : publicacionList) {
-            Class<?> clase = publicacion.getClass(); // creo el objeto "clase" que puede ser de cualquier tipo y obtengo de que clase es
+ */
+    public Map<Class<Publicacion>,Integer> cantPublicacionesTipo() { // POSIBLE FUNCION
+        Map<Class<Publicacion>, Integer> mapa = new HashMap<Class<Publicacion>,Integer>(); // creo el mapa que va a guardar la cantidad
+        for (Publicacion publicacion : listaPublicacion) {
+            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede ser de cualquier tipo y obtengo de que clase es
             if (mapa.containsKey(clase)) // se fija si ya esta la clase en el mapa
                 mapa.put(clase,mapa.get(clase) + 1); // si esta incrementa {.put asigna clave/valor} {.get recupera el valor asignado a una clave}
             else
                 mapa.put(clase,1); // si no esta inicia el contador en 1;
-
         }
         return mapa;
 
@@ -75,5 +95,4 @@ public class Album {
         // para imprimir el mapa en otra funcion y mostrar la cantidad de cada tipo
     }
 
- */
 }

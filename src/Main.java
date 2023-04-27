@@ -39,11 +39,11 @@ public class Main {
 
 
         do {
-            System.out.println("\033[0;1m" + "\n========================================================================");
+            System.out.println("\033[0;1m" + "========================================================================");
             System.out.println("\033[0;1m" + "============================" +  " MENÚ PRINCIPAL " +  "\033[0;1m" + "============================");
             System.out.println("\033[0;1m" + "========================================================================\n");
             System.out.println("\033[0;1m" + "1" +  " - ABM de las publicaciones y albumes del perfil.\n" +
-                    "\033[0;1m" + "2" + " - Consultar publicaciones.\n" +
+                    "\033[0;1m" + "2" + " - Consultar cantidad de publicaciones.\n" +
                     "\033[0;1m" + "3" +  " - Generar estadisticas.\n" +
                     "\033[0;1m" + "4" +  " - Generar reportes.\n" +
                     "\033[0;1m" + "5" +  " - Cargar archivos de publicaciones.\n" +
@@ -54,7 +54,8 @@ public class Main {
                     System.out.println("Eligio el ABM de las publicaciones y albumes del perfil");
                     break;
                 case "2":
-                    System.out.println("Eligio Consultar publicaciones.");
+                    System.out.println("Eligio Consultar cantidad de publicaciones.");
+                    cantidadDePublicaciones();
                     break;
                 case "3":
                     System.out.println("Eligio Generar estadisticas.");
@@ -70,7 +71,10 @@ public class Main {
         }while (!option.equals("0"));
     }
 //  throws FileNotFoundException
-    public void cargaArchivoPublicaciones(){
+
+    //CREAR UNA CLASE MENU Y METER TODOS LOS METODOS EN ESA CLASE
+
+    public void cargaArchivoPublicaciones() {
         LinkedList<Publicacion> listaP;
         listaP = cargaListaPublicacion();
         String verPublicaciones;
@@ -82,6 +86,20 @@ public class Main {
         if(verPublicaciones.equals("si")) {
             System.out.println();
             albumPublicaciones.muestraLista();
+        }
+        System.out.println();
+        System.out.println();
+    }
+
+    public void cantidadDePublicaciones(){
+        LinkedList<Publicacion> listaP;
+        listaP = cargaListaPublicacion();
+        Album albumPublicaciones = new Album(listaP);
+
+        Map<Class<Publicacion>, Integer> mapa;
+        mapa = albumPublicaciones.cantPublicacionesTipo();
+        for (Map.Entry<Class<Publicacion>, Integer> entry : mapa.entrySet()) {
+            System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
         }
         System.out.println();
         System.out.println();
