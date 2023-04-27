@@ -1,11 +1,48 @@
 package com.estadisticasInstagram.dominio;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Album {
-    private ArrayList<Publicacion> publicacionList = new ArrayList<>();
+    LinkedList<Publicacion> listaPublicacion;
+
+    public Album(LinkedList<Publicacion> listaPublicacion) {
+        this.listaPublicacion = listaPublicacion;
+    }
+
+    public LinkedList<Publicacion> getListaPublicacion() {
+        return listaPublicacion;
+    }
+
+    public void setListaPublicacion(LinkedList<Publicacion> listaPublicacion) {
+        this.listaPublicacion = listaPublicacion;
+    }
+
+    public void muestraLista() {
+
+        Iterator<Publicacion> it = listaPublicacion.iterator();
+        Publicacion pub = it.next();
+        // while(it.hasNext()) {
+            // System.out.println(it.next().toString() + "\n");
+        // }
+        // LinkedList<Publicacion> listaP;
+        // listaP = alb.getListaPublicacion();
+
+
+        for (int i = 0; i < listaPublicacion.size(); i++) {
+            System.out.println("------------------------------------------------------");
+            System.out.println("------------Publicacion------------");
+            System.out.println("Nombre : " + listaPublicacion.get(i).getNombre());
+            System.out.println("Fecha de subida: " + listaPublicacion.get(i).getFechaSubida());
+            System.out.println("Etiquetas - Hashtags: " + listaPublicacion.get(i).getEtiquetasHashtags());
+            System.out.println("Cantidad de me gustas: " + listaPublicacion.get(i).getCantidadMG());
+
+            System.out.println("------------------------");
+        }
+
+    }
+
+    /*
     private ArrayList<Album> albumList = new ArrayList<>();
 
     public int cantMgAcumulada() {
@@ -40,4 +77,6 @@ public class Album {
         //  }
         // para imprimir el mapa en otra funcion y mostrar la cantidad de cada tipo
     }
+
+ */
 }

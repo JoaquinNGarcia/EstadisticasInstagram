@@ -1,9 +1,9 @@
 package com.estadisticasInstagram.controladora;
 
-import java.util.*;
-
 import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;
+
+import java.util.*;
 
 public class PerfilInstagram {
     private ArrayList<Publicacion>  publicacionList = new ArrayList<Publicacion>();

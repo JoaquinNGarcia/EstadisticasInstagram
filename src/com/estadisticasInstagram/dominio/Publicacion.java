@@ -1,18 +1,15 @@
 package com.estadisticasInstagram.dominio;
 
-import java.util.ArrayList;
-
 public class Publicacion {
     private String nombre, fechaSubida, etiquetasHashtags;
-    ArrayList<String> comentarios = new ArrayList<>();
     private int cantidadMG;
+   // ArrayList<String> comentarios = new ArrayList<>();
 
 
-    public Publicacion(String nombre, String fechaSubida, String etiquetasHashtags, String comentarios, int cantidadMG) {
+    public Publicacion(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG) {
         this.nombre = nombre;
         this.fechaSubida = fechaSubida;
         this.etiquetasHashtags = etiquetasHashtags;
-        this.comentarios = comentarios;
         this.cantidadMG = cantidadMG;
     }
 
@@ -40,13 +37,6 @@ public class Publicacion {
         this.etiquetasHashtags = etiquetasHashtags;
     }
 
-    public String getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
-    }
 
     public int getCantidadMG() {
         return cantidadMG;
@@ -56,5 +46,3 @@ public class Publicacion {
         this.cantidadMG = cantidadMG;
     }
 }
-
-
