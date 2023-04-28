@@ -1,12 +1,14 @@
 package com.estadisticasInstagram.dominio;
 
+import java.time.LocalDate;
+
 public class Audio extends Publicacion {
     private float duracion;
     private int velocidadBits;
     //avanzar, detener;
 
 
-    public Audio(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG, float duracion, int velocidadBits) {
+    public Audio(String nombre, LocalDate fechaSubida, String etiquetasHashtags, int cantidadMG, float duracion, int velocidadBits) {
         super(nombre, fechaSubida, etiquetasHashtags, cantidadMG);
         this.duracion = duracion;
         this.velocidadBits = velocidadBits;

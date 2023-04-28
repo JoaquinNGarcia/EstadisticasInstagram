@@ -5,13 +5,16 @@ import com.estadisticasInstagram.dominio.Publicacion;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class readPublicaciones {
     public static LinkedList<Publicacion> cargaListaPublicacion() {
-        String nombre, fechaSubida, etiquetasHashtags, tipo;
+        String nombre, etiquetasHashtags, tipo;
         // ArrayList<String> comentarios = new ArrayList<>();
+        LocalDate fechaSubida;
         int cantidadMG;
         // Video
         float duracion, resolucion;
@@ -26,6 +29,7 @@ public class readPublicaciones {
 
         LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
         Publicacion publi = null;
+        String fechaTexto;
         File f = new File("archivoPublicaciones.txt");
         Scanner s;
         try {
@@ -35,7 +39,7 @@ public class readPublicaciones {
                 Scanner sl = new Scanner(linea);
                 sl.useDelimiter("\\s*-\\s*");
                 nombre = sl.next();
-                fechaSubida = sl.next();
+                fechaTexto = sl.next();
                 etiquetasHashtags = sl.next();
                 cantidadMG = Integer.parseInt(sl.next());
                 /*
@@ -66,6 +70,8 @@ public class readPublicaciones {
                 resolucion = Float.parseFloat(sl.next());
                 ancho = Integer.parseInt(sl.next());
                 alto = Integer.parseInt(sl.next());
+                DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                fechaSubida = LocalDate.parse(fechaTexto, formato);
                 publi = new Imagen(nombre, fechaSubida, etiquetasHashtags, cantidadMG, resolucion, ancho, alto);
                 listaPublicacion.add(publi);
                 sl.close();

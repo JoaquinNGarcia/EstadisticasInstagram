@@ -1,12 +1,14 @@
 package com.estadisticasInstagram.dominio;
 
+import java.time.LocalDate;
+
 public class Imagen extends Publicacion {
     private float resolucion;
     private int ancho, alto;
     // Aplicar filtros
 
 
-    public Imagen(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG, float resolucion, int ancho, int alto) {
+    public Imagen(String nombre, LocalDate fechaSubida, String etiquetasHashtags, int cantidadMG, float resolucion, int ancho, int alto) {
         super(nombre, fechaSubida, etiquetasHashtags, cantidadMG);
         this.resolucion = resolucion;
         this.ancho = ancho;

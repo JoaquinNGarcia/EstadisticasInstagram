@@ -1,14 +1,17 @@
 package com.estadisticasInstagram.dominio;
 
+import java.time.LocalDate;
+
 public abstract class Publicacion { // NO VA A HABER instancias, va a ser abstracta
     // Hacer fecha con una metodo propio de java https://www.aluracursos.com/blog/como-convertir-string-para-date-en-java
-    private String nombre, fechaSubida, etiquetasHashtags;
+    private String nombre, etiquetasHashtags;
+    private LocalDate fechaSubida;
     //private String tipo;
     private int cantidadMG;
    // ArrayList<String> comentarios = new ArrayList<>();
 
 
-    public Publicacion(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG) {
+    public Publicacion(String nombre, LocalDate fechaSubida, String etiquetasHashtags, int cantidadMG) {
         this.nombre = nombre;
         this.fechaSubida = fechaSubida;
         this.etiquetasHashtags = etiquetasHashtags;
@@ -23,11 +26,11 @@ public abstract class Publicacion { // NO VA A HABER instancias, va a ser abstra
         this.nombre = nombre;
     }
 
-    public String getFechaSubida() {
+    public LocalDate getFechaSubida() {
         return fechaSubida;
     }
 
-    public void setFechaSubida(String fechaSubida) {
+    public void setFechaSubida(LocalDate fechaSubida) {
         this.fechaSubida = fechaSubida;
     }
 
