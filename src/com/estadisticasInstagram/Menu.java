@@ -1,19 +1,22 @@
+package com.estadisticasInstagram;
+
 import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;
 
 import java.util.LinkedList;
-import java.util.*;
+import java.util.Map;
+import java.util.Scanner;
 
 import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPublicacion;
 
-public class Main {
+public class Menu {
     // private PerfilInstagram perfilInstagram;
-    // public Main() {
+    // public com.estadisticasInstagram.Main() {
     //    this.perfilInstagram = new PerfilInstagram();
     // }
 
     /**
-     * Método que invoca al Menu
+     * Método que invoca al com.estadisticasInstagram.Menu
      */
 
     public void start() {
@@ -103,10 +106,5 @@ public class Main {
         }
         System.out.println();
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        Main menu = new Main();
-        menu.start();
     }
 }
