@@ -1,7 +1,9 @@
 package com.estadisticasInstagram.archivos;
 
+import com.estadisticasInstagram.dominio.Audio;
 import com.estadisticasInstagram.dominio.Imagen;
 import com.estadisticasInstagram.dominio.Publicacion;
+import com.estadisticasInstagram.dominio.Video;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,9 +23,6 @@ public class readPublicaciones {
         //Audio
         int velocidadBits;
 
-        //Sumar al archivoPublicaciones los tipos y los voy leyendo con GetClass
-
-
         LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
         Publicacion publi = null;
         File f = new File("archivoPublicaciones.txt");
@@ -38,36 +37,34 @@ public class readPublicaciones {
                 fechaSubida = sl.next();
                 etiquetasHashtags = sl.next();
                 cantidadMG = Integer.parseInt(sl.next());
-                /*
                 tipo = sl.next();
                 switch (tipo){
                     case "Video":{
                         duracion = Float.parseFloat(sl.next());
                         resolucion = Float.parseFloat(sl.next());
                         cantidadDeCuadros = Integer.parseInt(sl.next());
-                        publi = new Video(nombre, fechaSubida, etiquetasHashtags, cantidadMG, duracion, resolucion, cantidadDeCuadros);
+                        Video video = new Video(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG, duracion, resolucion, cantidadDeCuadros);
+                        listaPublicacion.add(video);
                         break;
                     }
                     case "Imagen":{
                         resolucion = Float.parseFloat(sl.next());
                         ancho = Integer.parseInt(sl.next());
                         alto = Integer.parseInt(sl.next());
-                        publi = new Imagen(nombre, fechaSubida, etiquetasHashtags, cantidadMG, resolucion, ancho, alto);
+                        Imagen imagen = new Imagen(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG, resolucion, ancho, alto);
+                        listaPublicacion.add(imagen);
                         break;
                     }
                     case "Audio":{
                         duracion = Float.parseFloat(sl.next());
                         velocidadBits = Integer.parseInt(sl.next());
-                        publi = new Audio(nombre, fechaSubida, etiquetasHashtags, cantidadMG, duracion, velocidadBits);
+                        Audio audio = new Audio(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG, duracion, velocidadBits);
+                        listaPublicacion.add(audio);
                         break;
                     }
+                    default:
+                        System.out.println("Tipo de publicación no reconocido.");
                 }
-                */
-                resolucion = Float.parseFloat(sl.next());
-                ancho = Integer.parseInt(sl.next());
-                alto = Integer.parseInt(sl.next());
-                publi = new Imagen(nombre, fechaSubida, etiquetasHashtags, cantidadMG, resolucion, ancho, alto);
-                listaPublicacion.add(publi);
                 sl.close();
             }
             s.close();

@@ -6,8 +6,8 @@ public class Imagen extends Publicacion {
     // Aplicar filtros
 
 
-    public Imagen(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG, float resolucion, int ancho, int alto) {
-        super(nombre, fechaSubida, etiquetasHashtags, cantidadMG);
+    public Imagen(String nombre, String fechaSubida, String etiquetasHashtags, String tipo, int cantidadMG, float resolucion, int ancho, int alto) {
+        super(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG);
         this.resolucion = resolucion;
         this.ancho = ancho;
         this.alto = alto;

@@ -7,8 +7,9 @@ public class Video extends Publicacion {
 
     // Avanzar, detener, aplicar filtro
 
-    public Video(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG, float duracion, float resolucion, int cantidadDeCuadros) {
-        super(nombre, fechaSubida, etiquetasHashtags, cantidadMG);
+
+    public Video(String nombre, String fechaSubida, String etiquetasHashtags, String tipo, int cantidadMG, float duracion, float resolucion, int cantidadDeCuadros) {
+        super(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG);
         this.duracion = duracion;
         this.resolucion = resolucion;
         this.cantidadDeCuadros = cantidadDeCuadros;

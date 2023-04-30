@@ -1,7 +1,6 @@
 package com.estadisticasInstagram.dominio;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -21,40 +20,27 @@ public class Album {
     }
 
     public void muestraLista() {
-
-        Iterator<Publicacion> it = listaPublicacion.iterator();
-        Publicacion pub = it.next();
-        // while(it.hasNext()) {
-            // System.out.println(it.next().toString() + "\n");
-        // }
-        // LinkedList<Publicacion> listaP;
-        // listaP = alb.getListaPublicacion();
-
         System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
-        for (int i = 0; i < listaPublicacion.size(); i++) {
-            System.out.println("Nombre : " + listaPublicacion.get(i).getNombre());
-            System.out.println("Fecha de subida: " + listaPublicacion.get(i).getFechaSubida());
-            System.out.println("Etiquetas - Hashtags: " + listaPublicacion.get(i).getEtiquetasHashtags());
-            System.out.println("Cantidad de me gustas: " + listaPublicacion.get(i).getCantidadMG());
-/*
-            switch (listaPublicacion.get(i).getTipo()){
-                case "Video":{
-                    System.out.println("Duracion: " + listaPublicacion.get(i).);
-                    System.out.println("Resolucion: " + listaPublicacion.get(i).getCantidadMG());
-                    System.out.println("cantidadDeCuadros: " + listaPublicacion.get(i).getCantidadMG());
-
-
-                    break;
-                }
-                case "Imagen":{
-                    break;
-                }
-                case "Audio":{
-
-                    break;
-                }
+        for (Publicacion publicacion : listaPublicacion) {
+            System.out.println("Nombre : " +  publicacion.getNombre());
+            System.out.println("Fecha de subida: " + publicacion.getFechaSubida());
+            System.out.println("Etiquetas - Hashtags: " + publicacion.getEtiquetasHashtags());
+            System.out.println("Cantidad de me gustas: " + publicacion.getCantidadMG());
+            if (publicacion instanceof Video) {
+                Video video = (Video) publicacion;
+                System.out.println("Duración del video: " + video.getDuracion());
+                System.out.println("Resolución del video: " + video.getResolucion());
+                System.out.println("Cantidad de cuadros: " + video.getCantidadDeCuadros());
+            } else if (publicacion instanceof Imagen) {
+                Imagen imagen = (Imagen) publicacion;
+                System.out.println("Resolución de la imagen: " + imagen.getResolucion());
+                System.out.println("Ancho de la imagen: " + imagen.getAncho());
+                System.out.println("Alto de la imagen: " + imagen.getAlto());
+            } else if (publicacion instanceof Audio) {
+                Audio audio = (Audio) publicacion;
+                System.out.println("Duración del audio: " + audio.getDuracion());
+                System.out.println("Velocidad de bits: " + audio.getVelocidadBits());
             }
-*/
             System.out.println("\033[0;1m" + "=====================================================================");
         }
     }

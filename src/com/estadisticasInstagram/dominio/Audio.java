@@ -6,8 +6,8 @@ public class Audio extends Publicacion {
     //avanzar, detener;
 
 
-    public Audio(String nombre, String fechaSubida, String etiquetasHashtags, int cantidadMG, float duracion, int velocidadBits) {
-        super(nombre, fechaSubida, etiquetasHashtags, cantidadMG);
+    public Audio(String nombre, String fechaSubida, String etiquetasHashtags, String tipo, int cantidadMG, float duracion, int velocidadBits) {
+        super(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG);
         this.duracion = duracion;
         this.velocidadBits = velocidadBits;
     }
