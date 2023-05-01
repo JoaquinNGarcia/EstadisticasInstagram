@@ -1,6 +1,7 @@
 package com.estadisticasInstagram.dominio;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Publicacion { // NO VA A HABER instancias
     private String nombre, etiquetasHashtags, tipo;
@@ -8,6 +9,7 @@ public abstract class Publicacion { // NO VA A HABER instancias
     private int cantidadMG;
    // ArrayList<String> comentarios = new ArrayList<>();
 
+   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public Publicacion(String nombre, String etiquetasHashtags, String tipo, LocalDate fechaSubida, int cantidadMG) {
         this.nombre = nombre;
@@ -56,4 +58,6 @@ public abstract class Publicacion { // NO VA A HABER instancias
     public void setCantidadMG(int cantidadMG) {
         this.cantidadMG = cantidadMG;
     }
+
+    public void aplicarFiltro(){};
 }

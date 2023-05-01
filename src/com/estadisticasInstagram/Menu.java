@@ -1,9 +1,7 @@
 package com.estadisticasInstagram;
 
-
-import com.estadisticasInstagram.dominio.Album;
+import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.Publicacion;
-
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,9 +11,9 @@ import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPub
 
 public class Menu {
 
-    // private PerfilInstagram perfilInstagram;
+    // private com.estadisticasInstagram.controlador.PerfilInstagram perfilInstagram;
     // public com.estadisticasInstagram.Main() {
-    //    this.perfilInstagram = new PerfilInstagram();
+    //    this.perfilInstagram = new com.estadisticasInstagram.controlador.PerfilInstagram();
     // }
 
     /**
@@ -40,11 +38,11 @@ public class Menu {
             System.out.println("\033[0;1m" + "========================================================================");
             System.out.println("\033[0;1m" + "============================" +  " MENÚ PRINCIPAL " +  "\033[0;1m" + "============================");
             System.out.println("\033[0;1m" + "========================================================================\n");
-            System.out.println("\033[0;1m" + "1" +  " - ABM de las publicaciones y albumes del perfil.\n" +
-                    "\033[0;1m" + "2" + " - Consultar cantidad de publicaciones.\n" +
+            System.out.println("\033[0;1m" + "1" +  " - Cargar archivos de publicaciones.\n" +
+                    "\033[0;1m" + "2" + " - Consultar cantidad de publicaciones por tipo y total.\n" +
                     "\033[0;1m" + "3" +  " - Generar estadisticas.\n" +
                     "\033[0;1m" + "4" +  " - Generar reportes.\n" +
-                    "\033[0;1m" + "5" +  " - Cargar archivos de publicaciones.\n" +
+                    "\033[0;1m" + "5" +  " -  ABM de las publicaciones y albumes del perfil.\n" +
                     "\033[0;1m" + "0" +  " - Salir\n");
             option = render.nextLine().trim();
             switch(option) {
@@ -53,7 +51,7 @@ public class Menu {
                     cargaArchivoPublicaciones();
                     break;
                 case "2":
-                    System.out.println("Eligio Consultar cantidad de publicaciones.\n");
+                    System.out.println("Eligio Consultar cantidad de publicaciones por tipo y total.\n");
                     cantidadDePublicaciones();
                     break;
                 case "3":
@@ -73,14 +71,14 @@ public class Menu {
         LinkedList<Publicacion> listaP;
         listaP = cargaListaPublicacion();
         String verPublicaciones;
-        Album albumPublicaciones = new Album(listaP);
+        PerfilInstagram listaPublicaciones = new PerfilInstagram(listaP);
 
         System.out.println("Desea ver la lista de las publicaciones? (si - no)");
         Scanner leerPublicaciones = new Scanner(System.in);
         verPublicaciones = leerPublicaciones.nextLine();
         if(verPublicaciones.equals("si")) {
             System.out.println();
-            albumPublicaciones.muestraLista();
+            listaPublicaciones.muestraLista();
         }
         System.out.println();
         System.out.println();
@@ -89,13 +87,16 @@ public class Menu {
     public static void cantidadDePublicaciones(){
         LinkedList<Publicacion> listaP;
         listaP = cargaListaPublicacion();
-        Album albumPublicaciones = new Album(listaP);
+        PerfilInstagram albumPublicaciones = new PerfilInstagram(listaP);
 
         Map<Class<Publicacion>, Integer> mapa;
         mapa = albumPublicaciones.cantPublicacionesTipo();
+        int totalPublicaciones = 0;
         for (Map.Entry<Class<Publicacion>, Integer> entry : mapa.entrySet()) {
             System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
+            totalPublicaciones += entry.getValue();
         }
+        System.out.println("El total de publicaciones es de: " + totalPublicaciones);
         System.out.println();
         System.out.println();
     }

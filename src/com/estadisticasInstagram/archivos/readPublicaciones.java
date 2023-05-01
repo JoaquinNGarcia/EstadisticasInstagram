@@ -28,8 +28,7 @@ public class readPublicaciones {
         int velocidadBits;
 
         LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
-        Publicacion publi = null;
-
+        
         File f = new File("archivoPublicaciones.txt");
         Scanner s;
         try {
