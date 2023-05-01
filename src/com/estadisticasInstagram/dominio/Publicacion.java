@@ -1,16 +1,19 @@
 package com.estadisticasInstagram.dominio;
 
-public abstract class Publicacion { // NO VA A HABER instancias, va a ser abstracta
-    // Hacer fecha con una metodo propio de java https://www.aluracursos.com/blog/como-convertir-string-para-date-en-java
-    private String nombre, fechaSubida, etiquetasHashtags, tipo;
+import java.time.LocalDate;
+
+public abstract class Publicacion { // NO VA A HABER instancias
+    private String nombre, etiquetasHashtags, tipo;
+    private LocalDate fechaSubida;
     private int cantidadMG;
    // ArrayList<String> comentarios = new ArrayList<>();
 
-    public Publicacion(String nombre, String fechaSubida, String etiquetasHashtags, String tipo, int cantidadMG) {
+
+    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LocalDate fechaSubida, int cantidadMG) {
         this.nombre = nombre;
-        this.fechaSubida = fechaSubida;
         this.etiquetasHashtags = etiquetasHashtags;
         this.tipo = tipo;
+        this.fechaSubida = fechaSubida;
         this.cantidadMG = cantidadMG;
     }
 
@@ -20,14 +23,6 @@ public abstract class Publicacion { // NO VA A HABER instancias, va a ser abstra
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getFechaSubida() {
-        return fechaSubida;
-    }
-
-    public void setFechaSubida(String fechaSubida) {
-        this.fechaSubida = fechaSubida;
     }
 
     public String getEtiquetasHashtags() {
@@ -44,6 +39,14 @@ public abstract class Publicacion { // NO VA A HABER instancias, va a ser abstra
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public LocalDate getFechaSubida() {
+        return fechaSubida;
+    }
+
+    public void setFechaSubida(LocalDate fechaSubida) {
+        this.fechaSubida = fechaSubida;
     }
 
     public int getCantidadMG() {

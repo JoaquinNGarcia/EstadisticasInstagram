@@ -7,13 +7,17 @@ import com.estadisticasInstagram.dominio.Video;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class readPublicaciones {
     public static LinkedList<Publicacion> cargaListaPublicacion() {
-        String nombre, fechaSubida, etiquetasHashtags, tipo;
+        String nombre, etiquetasHashtags, tipo;
         // ArrayList<String> comentarios = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaSubida;
         int cantidadMG;
         // Video
         float duracion, resolucion;
@@ -25,6 +29,7 @@ public class readPublicaciones {
 
         LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
         Publicacion publi = null;
+
         File f = new File("archivoPublicaciones.txt");
         Scanner s;
         try {
@@ -35,6 +40,7 @@ public class readPublicaciones {
                 sl.useDelimiter("\\s*-\\s*");
                 nombre = sl.next();
                 fechaSubida = sl.next();
+                LocalDate fecha = LocalDate.parse(fechaSubida, formatter);
                 etiquetasHashtags = sl.next();
                 cantidadMG = Integer.parseInt(sl.next());
                 tipo = sl.next();
@@ -43,7 +49,7 @@ public class readPublicaciones {
                         duracion = Float.parseFloat(sl.next());
                         resolucion = Float.parseFloat(sl.next());
                         cantidadDeCuadros = Integer.parseInt(sl.next());
-                        Video video = new Video(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG, duracion, resolucion, cantidadDeCuadros);
+                        Video video = new Video(nombre, etiquetasHashtags, tipo, fecha, cantidadMG, duracion, resolucion, cantidadDeCuadros);
                         listaPublicacion.add(video);
                         break;
                     }
@@ -51,14 +57,14 @@ public class readPublicaciones {
                         resolucion = Float.parseFloat(sl.next());
                         ancho = Integer.parseInt(sl.next());
                         alto = Integer.parseInt(sl.next());
-                        Imagen imagen = new Imagen(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG, resolucion, ancho, alto);
+                        Imagen imagen = new Imagen(nombre, etiquetasHashtags, tipo, fecha, cantidadMG, resolucion, ancho, alto);
                         listaPublicacion.add(imagen);
                         break;
                     }
                     case "Audio":{
                         duracion = Float.parseFloat(sl.next());
                         velocidadBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(nombre, fechaSubida, etiquetasHashtags, tipo, cantidadMG, duracion, velocidadBits);
+                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, fecha, cantidadMG, duracion, velocidadBits);
                         listaPublicacion.add(audio);
                         break;
                     }

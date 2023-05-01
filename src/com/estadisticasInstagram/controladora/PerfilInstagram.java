@@ -1,4 +1,4 @@
-package com.estadisticasInstagram.controladora;
+
 
 import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;

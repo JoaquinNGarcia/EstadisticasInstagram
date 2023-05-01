@@ -1,7 +1,9 @@
 package com.estadisticasInstagram;
 
+
 import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;
+
 
 import java.util.LinkedList;
 import java.util.Map;
@@ -11,7 +13,17 @@ import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPub
 
 public class Menu {
 
-    public static void menuPrincipal() {
+    // private PerfilInstagram perfilInstagram;
+    // public com.estadisticasInstagram.Main() {
+    //    this.perfilInstagram = new PerfilInstagram();
+    // }
+
+    /**
+     * Método que invoca al com.estadisticasInstagram.Menu
+     */
+
+
+    public void menuPrincipal() {
         String option = "";
         Scanner render = new Scanner(System.in); //Acoplamiento con interfaz (lectura!!)
         System.out.println("\n\n   ##     ##   ##   #####   ######     ##       ####   ######     ##     ##   ##" +
@@ -23,17 +35,17 @@ public class Menu {
                 "   ##     ##   ##  ##   ##    ##     ##  ##    ##  ##   ##  ##  ##  ##   ##   ##\n" +
                 "  ####    ##   ##   #####    ####    ##  ##     #####  #### ##  ##  ##   ##   ##\n" +
                 "\n\n");
+
         do {
             System.out.println("\033[0;1m" + "========================================================================");
             System.out.println("\033[0;1m" + "============================" +  " MENÚ PRINCIPAL " +  "\033[0;1m" + "============================");
             System.out.println("\033[0;1m" + "========================================================================\n");
-            System.out.println("\033[0;1m" + "1" +  " - Cargar archivos de publicaciones.\n" +
+            System.out.println("\033[0;1m" + "1" +  " - ABM de las publicaciones y albumes del perfil.\n" +
                     "\033[0;1m" + "2" + " - Consultar cantidad de publicaciones.\n" +
                     "\033[0;1m" + "3" +  " - Generar estadisticas.\n" +
                     "\033[0;1m" + "4" +  " - Generar reportes.\n" +
-                    "\033[0;1m" + "5" +  " - ABM de las publicaciones y albumes del perfil.\n" +
+                    "\033[0;1m" + "5" +  " - Cargar archivos de publicaciones.\n" +
                     "\033[0;1m" + "0" +  " - Salir\n");
-
             option = render.nextLine().trim();
             switch(option) {
                 case "1":
@@ -87,4 +99,6 @@ public class Menu {
         System.out.println();
         System.out.println();
     }
+
+
 }
