@@ -46,7 +46,7 @@ public class PerfilInstagram { // NO VA A HABER instancias
         }
     }
 
-    public Map<Class<Publicacion>,Integer> cantPublicacionesTipo() { // POSIBLE FUNCION
+    public Map<Class<Publicacion>,Integer> cantPublicacionesTipo() {
         Map<Class<Publicacion>, Integer> mapa = new HashMap<Class<Publicacion>,Integer>(); // creo el mapa que va a guardar la cantidad
         for (Publicacion publicacion : listaPublicacion) {
             Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede ser de cualquier tipo y obtengo de que clase es
@@ -61,5 +61,13 @@ public class PerfilInstagram { // NO VA A HABER instancias
         //            System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
         //  }
         // para imprimir el mapa en otra funcion y mostrar la cantidad de cada tipo
+    }
+
+    public int cantDeMeGusta() {
+        int totalMeGusta = 0;
+        for (Publicacion publicacion : listaPublicacion) {
+            totalMeGusta += publicacion.getCantidadMG();
+        }
+        return totalMeGusta;
     }
 }
