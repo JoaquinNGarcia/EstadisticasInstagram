@@ -1,6 +1,7 @@
 package com.estadisticasInstagram.dominio;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 public class Audio extends Publicacion {
     private float duracion;
@@ -8,8 +9,8 @@ public class Audio extends Publicacion {
     //avanzar, detener;
 
 
-    public Audio(String nombre, String etiquetasHashtags, String tipo, LocalDate fechaSubida, int cantidadMG, float duracion, int velocidadBits) {
-        super(nombre, etiquetasHashtags, tipo, fechaSubida, cantidadMG);
+    public Audio(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG, float duracion, int velocidadBits) {
+        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG);
         this.duracion = duracion;
         this.velocidadBits = velocidadBits;
     }

@@ -3,6 +3,7 @@ package com.estadisticasInstagram.dominio;
 public class Album {
 //Sumar una lista de albunes
 
+
     /*
     private ArrayList<Album> albumList = new ArrayList<>();
 

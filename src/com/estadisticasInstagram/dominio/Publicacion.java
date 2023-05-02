@@ -1,20 +1,25 @@
 package com.estadisticasInstagram.dominio;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 
 public abstract class Publicacion { // NO VA A HABER instancias
     private String nombre, etiquetasHashtags, tipo;
+    private LinkedList<String> listaAlbumes;
+
     private LocalDate fechaSubida;
     private int cantidadMG;
-   // ArrayList<String> comentarios = new ArrayList<>();
 
-   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LocalDate fechaSubida, int cantidadMG) {
+    // private LinkedList<Album> listaAlbum;
+    // ArrayList<String> comentarios = new ArrayList<>();
+
+
+    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG) {
         this.nombre = nombre;
         this.etiquetasHashtags = etiquetasHashtags;
         this.tipo = tipo;
+        this.listaAlbumes = listaAlbumes;
         this.fechaSubida = fechaSubida;
         this.cantidadMG = cantidadMG;
     }
@@ -41,6 +46,14 @@ public abstract class Publicacion { // NO VA A HABER instancias
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public LinkedList<String> getListaAlbumes() {
+        return listaAlbumes;
+    }
+
+    public void setListaAlbumes(LinkedList<String> listaAlbumes) {
+        this.listaAlbumes = listaAlbumes;
     }
 
     public LocalDate getFechaSubida() {

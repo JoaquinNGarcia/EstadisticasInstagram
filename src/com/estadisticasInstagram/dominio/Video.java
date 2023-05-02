@@ -1,17 +1,17 @@
 package com.estadisticasInstagram.dominio;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 public class Video extends Publicacion {
     private float duracion, resolucion;
     private int cantidadDeCuadros;
 
-
     // Avanzar, detener, aplicar filtro
 
 
-    public Video(String nombre, String etiquetasHashtags, String tipo, LocalDate fechaSubida, int cantidadMG, float duracion, float resolucion, int cantidadDeCuadros) {
-        super(nombre, etiquetasHashtags, tipo, fechaSubida, cantidadMG);
+    public Video(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG, float duracion, float resolucion, int cantidadDeCuadros) {
+        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG);
         this.duracion = duracion;
         this.resolucion = resolucion;
         this.cantidadDeCuadros = cantidadDeCuadros;

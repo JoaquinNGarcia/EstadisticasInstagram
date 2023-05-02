@@ -27,6 +27,12 @@ public class PerfilInstagram { // NO VA A HABER instancias
             System.out.println("Fecha de subida: " + publicacion.getFechaSubida());
             System.out.println("Etiquetas - Hashtags: " + publicacion.getEtiquetasHashtags());
             System.out.println("Cantidad de me gustas: " + publicacion.getCantidadMG());
+            // Imprimir cada elemento de la lista de albumes
+            System.out.print("Pertenece a los siguiente albumes: ");
+            for (String elem : publicacion.getListaAlbumes()) {
+                System.out.print(elem + " ");
+            }
+            System.out.println();
             if (publicacion instanceof Video) {
                 Video video = (Video) publicacion;
                 System.out.println("Duración del video: " + video.getDuracion());
