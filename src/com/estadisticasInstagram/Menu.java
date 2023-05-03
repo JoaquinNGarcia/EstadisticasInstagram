@@ -18,6 +18,7 @@ public class Menu {
 
     public void menuPrincipal() {
         LinkedList<Publicacion> listaP = null;
+        boolean cargoArchivo = false;
         PerfilInstagram perfilDePublicaciones = new PerfilInstagram(listaP);
         String option = "";
         Scanner render = new Scanner(System.in); //Acoplamiento con interfaz (lectura!!)
@@ -35,42 +36,67 @@ public class Menu {
             System.out.println("\033[0;1m" + "========================================================================");
             System.out.println("\033[0;1m" + "============================" +  " MENÚ PRINCIPAL " +  "\033[0;1m" + "============================");
             System.out.println("\033[0;1m" + "========================================================================\n");
-            System.out.println("\033[0;1m" + "1" +  " - Cargar archivos de publicaciones.\n" +
+            System.out.println("" +
+                    "\033[0;1m" + "1" + " - Cargar archivos de publicaciones.\n" +
                     "\033[0;1m" + "2" + " - Mostrar las publicaciones.\n" +
                     "\033[0;1m" + "3" + " - Consultar cantidad de publicaciones por tipo y total.\n" +
-                    "\033[0;1m" + "4" +  " - Cantidad de Me Gusta por publicacion.\n" +
-                    "\033[0;1m" + "5" +  " - Generar reportes.\n" +
-                    "\033[0;1m" + "6" +  " - ABM de las publicaciones y albumes del perfil.\n" +
-                    "\033[0;1m" + "7" +  " - Generar estadisticas.\n" +
-                    "\033[0;1m" + "0" +  " - Salir\n");
+                    "\033[0;1m" + "4" + " - Cantidad de Me Gusta por publicacion.\n" +
+                    "\033[0;1m" + "5" + " - Generar reportes.\n" +
+                    "\033[0;1m" + "6" + " - ABM de las publicaciones y albumes del perfil.\n" +
+                    "\033[0;1m" + "7" + " - Generar estadisticas.\n" +
+                    "\033[0;1m" + "0" + " - Salir\n");
             option = render.nextLine().trim();
             switch(option) {
                 case "1":
-                    System.out.println("Eligio Cargar archivos de publicaciones.\n");
+                    System.out.println("\033[0;1m" + "============================" +  " Cargar archivos de publicaciones " +  "\033[0;1m" + "============================\n\n");
+                    cargoArchivo = true;
                     listaP = cargaListaPublicacion();
                     perfilDePublicaciones.setListaPublicacion(listaP);
                     break;
                 case "2":
-                    System.out.println("Eligio Mostrar las publicaciones.\n");
-                    cargaArchivoPublicaciones(perfilDePublicaciones);
-                    // hacer la excepcion try cath
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" +  " Mostrar las publicaciones " +  "\033[0;1m" + "============================");
+                        cargaArchivoPublicaciones(perfilDePublicaciones);
+                    } else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
                     break;
                 case "3":
-                    System.out.println("Eligio Consultar cantidad de publicaciones por tipo y total.\n");
-                    cantidadDePublicaciones(perfilDePublicaciones);
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" +  " Consultar cantidad de publicaciones por tipo y total " +  "\033[0;1m" + "============================");
+                        cantidadDePublicaciones(perfilDePublicaciones);
+                    } else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
                     break;
                 case "4":
-                    System.out.println("Eligio Cantidad de Me Gusta por publicacion.\n");
-                    cantDeMeGustaPublicacion(perfilDePublicaciones);
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" +  " Cantidad de Me Gusta por publicacion " +  "\033[0;1m" + "============================");
+                        cantDeMeGustaPublicacion(perfilDePublicaciones);
+                    } else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
                     break;
                 case "5":
-                    System.out.println("Eligio Generar reportes.\n");
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" +  " Generar reportes " +  "\033[0;1m" + "============================");
+                    } else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
                     break;
                 case "6":
-                    System.out.println("Eligio el ABM de las publicaciones y albumes del perfil.\n");
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" +  " ABM de las publicaciones y albumes del perfil " +  "\033[0;1m" + "============================");
+                    } else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
                     break;
                 case "7":
-                    System.out.println("Eligio Generar estadisticas.\n");
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" +  " Generar estadisticas " +  "\033[0;1m" + "============================");
+                    } else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
                     break;
             }
         }while (!option.equals("0"));
@@ -97,7 +123,7 @@ public class Menu {
     }
 
     public static void cantDeMeGustaPublicacion(PerfilInstagram listaPublicacionPerfil){
-        System.out.println("El total de publicaciones es de: " + listaPublicacionPerfil.cantDeMeGusta());
+        System.out.println("El total de 'me gustas' es de: " + listaPublicacionPerfil.cantDeMeGusta());
         System.out.println();
         System.out.println();
     }
