@@ -1,23 +1,23 @@
 package com.estadisticasInstagram;
 
 import com.estadisticasInstagram.controlador.PerfilInstagram;
+import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPublicacion;
 
 public class Menu {
 
     // private com.estadisticasInstagram.controlador.PerfilInstagram perfilInstagram;
-    // public com.estadisticasInstagram.Main() {
+    // public com.estadisticasInstagram.com.estadisticasInstagram.Main() {
     //    this.perfilInstagram = new com.estadisticasInstagram.controlador.PerfilInstagram();
     // }
 
     public void menuPrincipal() {
         LinkedList<Publicacion> listaP = null;
+        Album raiz = new Album("ALBUMES:");
         boolean cargoArchivo = false;
         PerfilInstagram perfilDePublicaciones = new PerfilInstagram(listaP);
         String option = "";
@@ -44,6 +44,7 @@ public class Menu {
                     "\033[0;1m" + "5" + " - Generar reportes.\n" +
                     "\033[0;1m" + "6" + " - ABM de las publicaciones y albumes del perfil.\n" +
                     "\033[0;1m" + "7" + " - Generar estadisticas.\n" +
+                    "\033[0;1m" + "8" + " - Gestor de Albumes.\n" +
                     "\033[0;1m" + "0" + " - Salir\n");
             option = render.nextLine().trim();
             switch(option) {
@@ -94,10 +95,26 @@ public class Menu {
                 case "7":
                     if (cargoArchivo) {
                         System.out.println("\033[0;1m" + "============================" +  " Generar estadisticas " +  "\033[0;1m" + "============================");
+                        perfilDePublicaciones.muestraLista();
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
                     }
                     break;
+                case "8":
+                    if (cargoArchivo) {
+                        System.out.println("\033[0;1m" + "============================" + " Gestor de álbumes " + "\033[0;1m" + "============================");
+                        MenuAlbumes menuAlbumes = new MenuAlbumes();
+                        menuAlbumes.startMenuAlbumes(raiz);
+
+                        // CREO QUE SERIA ASI INSERTAR TODA LA LISTA AL PERFIL DE INSTAGRAM
+                        LinkedList<Album> albumesPerfil = new LinkedList<Album>();
+                        albumesPerfil.add(raiz);
+                        perfilDePublicaciones.setListaAlbumes(albumesPerfil);
+                        //
+                    }
+                    else {
+                        System.out.println("Primero debe cargar el archivo.\n");
+                    }
             }
         }while (!option.equals("0"));
     }

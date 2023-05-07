@@ -6,7 +6,7 @@ import java.util.*;
 
 public class PerfilInstagram { // NO VA A HABER instancias
     private LinkedList<Publicacion> listaPublicacion;
-    // private TreeSet<Album> albumTree = new TreeSet<Album>(); // podemos hacer tree o el list
+    private LinkedList<Album> listaAlbumes = new LinkedList<>(); // podemos hacer tree o el list
 
     public PerfilInstagram(LinkedList<Publicacion> listaPublicacion) {
         this.listaPublicacion = listaPublicacion;
@@ -18,6 +18,14 @@ public class PerfilInstagram { // NO VA A HABER instancias
 
     public void setListaPublicacion(LinkedList<Publicacion> listaPublicacion) {
         this.listaPublicacion = listaPublicacion;
+    }
+
+    public LinkedList<Album> getListaAlbumes() {
+        return listaAlbumes;
+    }
+
+    public void setListaAlbumes(LinkedList<Album> listaAlbumes) {
+        this.listaAlbumes = listaAlbumes;
     }
 
     public void muestraLista() {

@@ -1,3 +1,5 @@
+package com.estadisticasInstagram;
+
 import com.estadisticasInstagram.Menu;
 
 public class Main {
