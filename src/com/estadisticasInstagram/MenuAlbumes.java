@@ -41,7 +41,7 @@ public class MenuAlbumes {
                     AgregarPublicacion(raiz, perfil);
                     break;
                 case 5:
-                    EliminarAlbum(raiz);
+                    EliminarAlbum(raiz,perfil);
                     break;
                 case 6:
                     salir = true;
@@ -144,7 +144,7 @@ public class MenuAlbumes {
         }
     }
 
-    public void EliminarAlbum(Album albumeliminar) {
+    public void EliminarAlbum(Album albumeliminar,PerfilInstagram perfil) {
         if (albumeliminar.getAlbumList().isEmpty())
             System.out.println("No hay álbumes existentes");
         else {
@@ -159,11 +159,13 @@ public class MenuAlbumes {
             int opcion = scanner.nextInt();
             scanner.nextLine();
             if (opcion == 1) {
+                //perfil.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
+                //perfil.eliminarAlbumDePublicacion(albumeliminar.getAlbumList().get(albumindice).getNombre());
                 albumeliminar.eliminarPublicaciones();
                 albumeliminar.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
             }
             else
-                EliminarAlbum((albumeliminar.getAlbumList().get(albumindice)));
+                EliminarAlbum((albumeliminar.getAlbumList().get(albumindice)),perfil);
         }
     }
 
@@ -187,3 +189,4 @@ public class MenuAlbumes {
             AgregarPublicacion(albumSeleccionado,publicacion);
     }
 }
+

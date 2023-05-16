@@ -84,5 +84,4 @@ public abstract class Publicacion { // NO VA A HABER instancias
         this.id = id;
     }
 
-
 }

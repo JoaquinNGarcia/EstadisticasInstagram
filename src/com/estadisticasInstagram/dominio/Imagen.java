@@ -44,3 +44,4 @@ public class Imagen extends Publicacion {
         System.out.println("Se aplico filtro en imagen");
     }
 }
+

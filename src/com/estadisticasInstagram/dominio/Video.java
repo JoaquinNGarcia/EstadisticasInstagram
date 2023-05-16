@@ -41,3 +41,4 @@ public class Video extends Publicacion {
         this.cantidadDeCuadros = cantidadDeCuadros;
     }
 }
+
