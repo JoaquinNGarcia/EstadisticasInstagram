@@ -28,9 +28,9 @@ public class PerfilInstagram { // NO VA A HABER instancias
         this.listaAlbumes = listaAlbumes;
     }
 
-    /*public void actualizarListaPublicacion (int indicePub,int indiceAlb,Publicacion publicacion,String nombreNuevo) {
+    public void actualizarListaPublicacion (int indicePub,int indiceAlb,Publicacion publicacion,String nombreNuevo) {
         this.listaPublicacion.get(indicePub).getListaAlbumes().set(indiceAlb,nombreNuevo);
-    }*/
+    }
 
     public void muestraLista() {
         System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");

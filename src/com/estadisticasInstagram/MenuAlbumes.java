@@ -124,19 +124,19 @@ public class MenuAlbumes {
             if (opcion == 1) {
                 System.out.println("Ingrese el nuevo nombre para el álbum");
                 String nombreNuevo = scanner.nextLine();
-                /*int j;
-                    if (!(albumcambiado.getPublicaciones().isEmpty())) {
+                int j;
+                    if (!albumcambiado.getAlbumList().get(albumindice).getPublicaciones().isEmpty()) {
                         for (int i = 0; i < albumcambiado.getAlbumList().get(albumindice).getPublicaciones().size(); i++) {
                             j = 0;
                             while (j < albumcambiado.getAlbumList().get(albumindice).getPublicaciones().get(i).getListaAlbumes().size()) {
                                 if (albumcambiado.getAlbumList().get(albumindice).getPublicaciones().get(i).getListaAlbumes().get(j) == albumcambiado.getAlbumList().get(albumindice).getNombre()) {
-                                    albumcambiado.getAlbumList().get(albumindice).getPublicaciones().get(i).getListaAlbumes().set(j,nombreNuevo);
-                                    perfil.actualizarListaPublicacion(i,j,albumcambiado.getAlbumList().get(albumindice).getPublicaciones().get(i),nombreNuevo);
+                                    albumcambiado.getAlbumList().get(albumindice).getPublicaciones().get(i).getListaAlbumes().set(j, nombreNuevo);
+                                    perfil.actualizarListaPublicacion(i, j, albumcambiado.getAlbumList().get(albumindice).getPublicaciones().get(i), nombreNuevo);
                                 }
                                 j++;
                             }
                         }
-                    }*/
+                    }
                 albumcambiado.getAlbumList().get(albumindice).setNombre(nombreNuevo);
             }
             else
@@ -159,7 +159,6 @@ public class MenuAlbumes {
             int opcion = scanner.nextInt();
             scanner.nextLine();
             if (opcion == 1) {
-                // ACA FALTA ELIMINAR DE LA LISTA DE ALBUMES QUE TIENE CADA PUBLICACION DEL ALBUM
                 albumeliminar.eliminarPublicaciones();
                 albumeliminar.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
             }
