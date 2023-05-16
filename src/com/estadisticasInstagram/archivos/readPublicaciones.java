@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class readPublicaciones {
     public static LinkedList<Publicacion> cargaListaPublicacion() {
-        String nombre, etiquetasHashtags, tipo, albumesPertenecientes;
+        String nombre, etiquetasHashtags, tipo, albumesPertenecientes,id;
         // ArrayList<String> comentarios = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaSubida;
@@ -37,6 +37,7 @@ public class readPublicaciones {
                 String linea = s.nextLine();
                 Scanner sl = new Scanner(linea);
                 sl.useDelimiter("\\s*-\\s*");
+                id = sl.next();
                 nombre = sl.next();
                 fechaSubida = sl.next();
                 LocalDate fecha = LocalDate.parse(fechaSubida, formatter);
@@ -55,7 +56,7 @@ public class readPublicaciones {
                         duracion = Float.parseFloat(sl.next());
                         resolucion = Float.parseFloat(sl.next());
                         cantidadDeCuadros = Integer.parseInt(sl.next());
-                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, duracion, resolucion, cantidadDeCuadros);
+                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG,id, duracion, resolucion, cantidadDeCuadros);
                         listaPublicacion.add(video);
                         break;
                     }
@@ -63,14 +64,14 @@ public class readPublicaciones {
                         resolucion = Float.parseFloat(sl.next());
                         ancho = Integer.parseInt(sl.next());
                         alto = Integer.parseInt(sl.next());
-                        Imagen imagen = new Imagen(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, resolucion, ancho, alto);
+                        Imagen imagen = new Imagen(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,resolucion, ancho, alto);
                         listaPublicacion.add(imagen);
                         break;
                     }
                     case "Audio":{
                         duracion = Float.parseFloat(sl.next());
                         velocidadBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, duracion, velocidadBits);
+                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,duracion, velocidadBits);
                         listaPublicacion.add(audio);
                         break;
                     }

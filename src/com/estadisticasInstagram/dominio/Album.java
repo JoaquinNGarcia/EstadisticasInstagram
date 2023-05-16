@@ -8,9 +8,12 @@ public class Album {
     private String nombre;
     private List<Album> subAlbumes; //hijos del album
 
+    private List<Publicacion> publicaciones;
+
     public Album(String nombre) {
         this.nombre = nombre;
         this.subAlbumes = new ArrayList<>();
+        this.publicaciones = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -29,15 +32,18 @@ public class Album {
         this.subAlbumes = albumList;
     }
 
+    public List<Publicacion> getPublicaciones() { return publicaciones;}
+
+    public void setPublicaciones(List<Publicacion> publicaciones) { this.publicaciones = publicaciones;}
+
+    public void agregarPublicacion(Publicacion publicacion) {publicaciones.add(publicacion);}
+
+    public void eliminarPublicaciones() {publicaciones.clear();}
     public void agregarAlbum (Album hijo) {
         subAlbumes.add(hijo);
     }
 
     public void eliminarAlbum (Album hijo) {
-        subAlbumes.remove(hijo);
-    }
-
-    public void eliminarAlbumPadre (Album padre) { // se elimina toda la lista
         subAlbumes.clear();
     }
     @Override

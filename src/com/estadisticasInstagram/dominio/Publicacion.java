@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public abstract class Publicacion { // NO VA A HABER instancias
-    private String nombre, etiquetasHashtags, tipo;
+    private String nombre, etiquetasHashtags, tipo,id;
     private LinkedList<String> listaAlbumes;
 
     private LocalDate fechaSubida;
@@ -15,13 +15,14 @@ public abstract class Publicacion { // NO VA A HABER instancias
     // ArrayList<String> comentarios = new ArrayList<>();
 
 
-    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG) {
+    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG,String id) {
         this.nombre = nombre;
         this.etiquetasHashtags = etiquetasHashtags;
         this.tipo = tipo;
         this.listaAlbumes = listaAlbumes;
         this.fechaSubida = fechaSubida;
         this.cantidadMG = cantidadMG;
+        this.id = id;
     }
 
     public String getNombre() {
@@ -56,6 +57,7 @@ public abstract class Publicacion { // NO VA A HABER instancias
         this.listaAlbumes = listaAlbumes;
     }
 
+    public void agregarAlbum (Album album) {listaAlbumes.add(album.getNombre());}
     public LocalDate getFechaSubida() {
         return fechaSubida;
     }
@@ -73,4 +75,14 @@ public abstract class Publicacion { // NO VA A HABER instancias
     }
 
     public void aplicarFiltro(){};
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 }
