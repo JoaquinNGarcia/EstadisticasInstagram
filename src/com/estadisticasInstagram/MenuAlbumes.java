@@ -159,8 +159,8 @@ public class MenuAlbumes {
             int opcion = scanner.nextInt();
             scanner.nextLine();
             if (opcion == 1) {
-                //perfil.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
-                //perfil.eliminarAlbumDePublicacion(albumeliminar.getAlbumList().get(albumindice).getNombre());
+                perfil.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
+                perfil.eliminarAlbumDePublicacion(albumeliminar.getAlbumList().get(albumindice).getNombre());
                 albumeliminar.eliminarPublicaciones();
                 albumeliminar.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
             }

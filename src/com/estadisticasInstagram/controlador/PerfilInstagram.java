@@ -99,12 +99,10 @@ public class PerfilInstagram { // NO VA A HABER instancias
         this.listaAlbumes.remove(album);
     }
 
-    /*public void eliminarAlbumDePublicacion (String nombreEliminar) {
-        for (int i=0; i<listaPublicacion.size();i++) {
-            for (int j=0; j)
-            if (listaPublicacion.get(i).getListaAlbumes().)
-        }
-    }*/
+    public void eliminarAlbumDePublicacion (String nombreEliminar) {
+        for (int i=0; i<listaPublicacion.size();i++)
+            listaPublicacion.get(i).getListaAlbumes().remove(nombreEliminar);
+    }
 
     public Map<Class<Publicacion>,Integer> cantPublicacionesTipo() {
         Map<Class<Publicacion>, Integer> mapa = new HashMap<Class<Publicacion>,Integer>(); // creo el mapa que va a guardar la cantidad
