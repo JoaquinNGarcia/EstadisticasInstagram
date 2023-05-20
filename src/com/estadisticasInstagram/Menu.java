@@ -104,13 +104,11 @@ public class Menu {
                     if (cargoArchivo) {
                         System.out.println("\033[0;1m" + "============================" + " Gestor de álbumes " + "\033[0;1m" + "============================");
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
-                        menuAlbumes.startMenuAlbumes(raiz);
+                        menuAlbumes.startMenuAlbumes(raiz,perfilDePublicaciones);
 
-                        // CREO QUE SERIA ASI INSERTAR TODA LA LISTA AL PERFIL DE INSTAGRAM
                         LinkedList<Album> albumesPerfil = new LinkedList<Album>();
                         albumesPerfil.add(raiz);
                         perfilDePublicaciones.setListaAlbumes(albumesPerfil);
-                        //
                     }
                     else {
                         System.out.println("Primero debe cargar el archivo.\n");
@@ -145,3 +143,4 @@ public class Menu {
         System.out.println();
     }
 }
+
