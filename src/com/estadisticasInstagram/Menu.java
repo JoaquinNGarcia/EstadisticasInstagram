@@ -11,7 +11,7 @@ import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPub
 public class Menu {
 
     // private com.estadisticasInstagram.controlador.PerfilInstagram perfilInstagram;
-    // public com.estadisticasInstagram.com.estadisticasInstagram.Main() {
+    // public com.estadisticasInstagram.Main() {
     //    this.perfilInstagram = new com.estadisticasInstagram.controlador.PerfilInstagram();
     // }
 
