@@ -12,6 +12,7 @@ public class MenuAlbumes {
     private static Scanner scanner = new Scanner(System.in);
     private int opcionSubMenu;
     private int albumindice;
+    private int publicacionindice;
     private boolean estaVacio;
 
     public void startMenuAlbumes(Album raiz, PerfilInstagram perfil) { // HACER EL MENU MAS LINDO
@@ -20,10 +21,12 @@ public class MenuAlbumes {
             System.out.println("1. Agregar álbum");
             System.out.println("2. Mostrar álbumes");
             System.out.println("3. Cambiar nombre a un álbum");
-            System.out.println("4. Agregar publicacion a un álbum ");
-            System.out.println("5. Mostrar Publicaciones de un álbum ");
-            System.out.println("6. Eliminar album");
-            System.out.println("7. Salir");
+            System.out.println("4. Agregar publicación a un álbum ");
+            System.out.println("5. Mostrar publicaciones de un álbum ");
+            System.out.println("6. Eliminar publicación de un álbum especifico");
+            System.out.println("7. Eliminar publicación de todos los álbumes");
+            System.out.println("8. Eliminar album");
+            System.out.println("0. Salir");
 
             int opcion = scanner.nextInt();
             scanner.nextLine();
@@ -48,9 +51,15 @@ public class MenuAlbumes {
                     MostrarPublicacionesAlbum(raiz);
                     break;
                 case 6:
-                    EliminarAlbum(raiz,perfil);
+                    EliminarPublicacionAlbum(raiz,perfil);
                     break;
                 case 7:
+                    EliminarPublicacionTodosAlbumes(raiz,perfil);
+                    break;
+                case 8:
+                    EliminarAlbum(raiz,perfil);
+                    break;
+                case 0:
                     salir = true;
                     break;
                 default:
@@ -144,7 +153,6 @@ public class MenuAlbumes {
                 CambiarNombre((albumcambiado.getAlbumList().get(albumindice)), perfil);
         }
     }
-
     public void MostrarPublicacionesAlbum (Album albumSeleccionado) {
         NavejarPorAlbumes(albumSeleccionado);
         if (estaVacio == false) {
@@ -175,11 +183,46 @@ public class MenuAlbumes {
         }
     }
 
+    public void EliminarPublicacionTodosAlbumes (Album raiz,PerfilInstagram publicacion) {
+        System.out.println("Elija la publicacion a eliminar");
+        for (int i = 0; i < publicacion.getListaPublicacion().size(); i++)
+            System.out.println((i + 1) + ". " + publicacion.getListaPublicacion().get(i).getId());
+        publicacionindice = scanner.nextInt() - 1;
+        scanner.nextLine();
+        publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionindice));
+        System.out.println("Desea eliminar esta publicacion al album?");
+        System.out.println("1.Confirmar");
+        System.out.println("2.Cancelar");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
+        if (opcion == 1) {
+            int j = 0;
+            int publicacionesEliminadas = 0;
+            String nombrePublicacionEliminar = publicacion.getListaPublicacion().get(publicacionindice).getId();
+            for (int i = 0; i<raiz.getAlbumList().size();i++) {
+                while (j < raiz.getAlbumList().get(i).getPublicaciones().size())
+                if (raiz.getAlbumList().get(i).getPublicaciones().get(j).getId() == nombrePublicacionEliminar) {
+                    raiz.getAlbumList().get(i).getPublicaciones().remove(j);
+                    publicacion.getListaPublicacion().get(publicacionindice).getListaAlbumes().remove(raiz.getAlbumList().get(i).getNombre());
+                    publicacionesEliminadas++;
+                j++;
+                }
+                j = 0;
+            }
+            if (publicacionesEliminadas == 0)
+                System.out.println("La publicación no estaba en ningun álbum");
+            else
+                System.out.println("La publicación ha sido eliminada");
+        }
+        else
+            EliminarPublicacionTodosAlbumes(raiz,publicacion);
+    }
+
     public void AgregarPublicacion(Album albumSeleccionado, PerfilInstagram publicacion) {
         System.out.println("Elija la publicación que quiere insertar en un álbum");
         for (int i = 0; i < publicacion.getListaPublicacion().size(); i++)
             System.out.println((i + 1) + ". " + publicacion.getListaPublicacion().get(i).getId());
-        int publicacionindice = scanner.nextInt() - 1;
+        publicacionindice = scanner.nextInt() - 1;
         scanner.nextLine();
         publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionindice));
         System.out.println("Desea agregar esta publicacion al album?");

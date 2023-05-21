@@ -104,7 +104,7 @@ public class Menu {
                     if (cargoArchivo) {
                         System.out.println("\033[0;1m" + "============================" + " Gestor de álbumes " + "\033[0;1m" + "============================");
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
-                        menuAlbumes.startMenuAlbumes(raiz,perfilDePublicaciones);
+                        menuAlbumes.startMenuAlbumes(raiz, perfilDePublicaciones);
 
                         LinkedList<Album> albumesPerfil = new LinkedList<Album>();
                         albumesPerfil.add(raiz);
