@@ -51,7 +51,7 @@ public class MenuAlbumes {
                     MostrarPublicacionesAlbum(raiz);
                     break;
                 case 6:
-                    EliminarPublicacionAlbum(raiz,perfil);
+                    //EliminarPublicacionAlbum(raiz,perfil);
                     break;
                 case 7:
                     EliminarPublicacionTodosAlbumes(raiz,perfil);
@@ -184,38 +184,41 @@ public class MenuAlbumes {
     }
 
     public void EliminarPublicacionTodosAlbumes (Album raiz,PerfilInstagram publicacion) {
-        System.out.println("Elija la publicacion a eliminar");
-        for (int i = 0; i < publicacion.getListaPublicacion().size(); i++)
-            System.out.println((i + 1) + ". " + publicacion.getListaPublicacion().get(i).getId());
-        publicacionindice = scanner.nextInt() - 1;
-        scanner.nextLine();
-        publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionindice));
-        System.out.println("Desea eliminar esta publicacion al album?");
-        System.out.println("1.Confirmar");
-        System.out.println("2.Cancelar");
-        int opcion = scanner.nextInt();
-        scanner.nextLine();
-        if (opcion == 1) {
-            int j = 0;
-            int publicacionesEliminadas = 0;
-            String nombrePublicacionEliminar = publicacion.getListaPublicacion().get(publicacionindice).getId();
-            for (int i = 0; i<raiz.getAlbumList().size();i++) {
-                while (j < raiz.getAlbumList().get(i).getPublicaciones().size())
-                if (raiz.getAlbumList().get(i).getPublicaciones().get(j).getId() == nombrePublicacionEliminar) {
-                    raiz.getAlbumList().get(i).getPublicaciones().remove(j);
-                    publicacion.getListaPublicacion().get(publicacionindice).getListaAlbumes().remove(raiz.getAlbumList().get(i).getNombre());
-                    publicacionesEliminadas++;
-                j++;
+        if (!raiz.getAlbumList().isEmpty()) {
+            System.out.println("Elija la publicacion a eliminar");
+            for (int i = 0; i < publicacion.getListaPublicacion().size(); i++)
+                System.out.println((i + 1) + ". " + publicacion.getListaPublicacion().get(i).getId());
+            publicacionindice = scanner.nextInt() - 1;
+            scanner.nextLine();
+            publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionindice));
+            System.out.println("Desea eliminar esta publicacion al album?");
+            System.out.println("1.Confirmar");
+            System.out.println("2.Cancelar");
+            int opcion = scanner.nextInt();
+            scanner.nextLine();
+            if (opcion == 1) {
+                int j = 0;
+                int publicacionesEliminadas = 0;
+                String nombrePublicacionEliminar = publicacion.getListaPublicacion().get(publicacionindice).getId();
+                for (int i = 0; i < raiz.getAlbumList().size(); i++) {
+                    while (j < raiz.getAlbumList().get(i).getPublicaciones().size())
+                        if (raiz.getAlbumList().get(i).getPublicaciones().get(j).getId() == nombrePublicacionEliminar) {
+                            raiz.getAlbumList().get(i).getPublicaciones().remove(j);
+                            publicacion.getListaPublicacion().get(publicacionindice).getListaAlbumes().remove(raiz.getAlbumList().get(i).getNombre());
+                            publicacionesEliminadas++;
+                            j++;
+                        }
+                    j = 0;
                 }
-                j = 0;
-            }
-            if (publicacionesEliminadas == 0)
-                System.out.println("La publicación no estaba en ningun álbum");
-            else
-                System.out.println("La publicación ha sido eliminada");
+                if (publicacionesEliminadas == 0)
+                    System.out.println("La publicación no estaba en ningun álbum");
+                else
+                    System.out.println("La publicación ha sido eliminada");
+            } else
+                EliminarPublicacionTodosAlbumes(raiz, publicacion);
         }
         else
-            EliminarPublicacionTodosAlbumes(raiz,publicacion);
+            System.out.println("No hay albumes existentes");
     }
 
     public void AgregarPublicacion(Album albumSeleccionado, PerfilInstagram publicacion) {
