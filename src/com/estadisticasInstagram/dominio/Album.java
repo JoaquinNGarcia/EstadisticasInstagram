@@ -43,9 +43,7 @@ public class Album {
         subAlbumes.add(hijo);
     }
 
-    public void eliminarAlbum (Album hijo) {
-        subAlbumes.clear();
-    }
+    public void eliminarAlbum (int indiceEliminar) {subAlbumes.remove(indiceEliminar);}
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
