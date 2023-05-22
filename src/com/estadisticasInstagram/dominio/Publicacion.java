@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public abstract class Publicacion { // NO VA A HABER instancias
-    private String nombre, etiquetasHashtags, tipo,id;
+    private String nombre, etiquetasHashtags, tipo, id;
     private LinkedList<String> listaAlbumes;
 
     private LocalDate fechaSubida;
@@ -15,7 +15,7 @@ public abstract class Publicacion { // NO VA A HABER instancias
     // ArrayList<String> comentarios = new ArrayList<>();
 
 
-    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG,String id) {
+    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG, String id) {
         this.nombre = nombre;
         this.etiquetasHashtags = etiquetasHashtags;
         this.tipo = tipo;

@@ -56,7 +56,7 @@ public class readPublicaciones {
                         duracion = Float.parseFloat(sl.next());
                         resolucion = Float.parseFloat(sl.next());
                         cantidadDeCuadros = Integer.parseInt(sl.next());
-                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG,id, duracion, resolucion, cantidadDeCuadros);
+                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id, duracion, resolucion, cantidadDeCuadros);
                         listaPublicacion.add(video);
                         break;
                     }
@@ -71,7 +71,7 @@ public class readPublicaciones {
                     case "Audio":{
                         duracion = Float.parseFloat(sl.next());
                         velocidadBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,duracion, velocidadBits);
+                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id, duracion, velocidadBits);
                         listaPublicacion.add(audio);
                         break;
                     }

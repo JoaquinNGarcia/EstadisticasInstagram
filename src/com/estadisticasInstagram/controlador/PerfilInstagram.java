@@ -35,6 +35,7 @@ public class PerfilInstagram { // NO VA A HABER instancias
     public void muestraLista() {
         System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
         for (Publicacion publicacion : listaPublicacion) {
+            // Collections.sort(publicacion);
             System.out.println("ID: " +  publicacion.getId());
             System.out.println("Nombre : " +  publicacion.getNombre());
             System.out.println("Fecha de subida: " + publicacion.getFechaSubida());

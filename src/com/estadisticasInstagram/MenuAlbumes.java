@@ -10,7 +10,6 @@ import java.util.Scanner;
 public class MenuAlbumes {
     private static Scanner scanner = new Scanner(System.in);
 
-
     public void startMenuAlbumes(Album raiz, PerfilInstagram perfil) { // HACER EL MENU MAS LINDO
         boolean salir = false;
         while (!salir) {
@@ -35,7 +34,7 @@ public class MenuAlbumes {
                     System.out.println(raiz.toString());
                     break;
                 case 3:
-                    CambiarNombre(raiz,perfil);
+                    CambiarNombre(raiz, perfil);
                     break;
                 case 4:
                     AgregarPublicacion(raiz, perfil);
@@ -163,9 +162,9 @@ public class MenuAlbumes {
                 perfil.eliminarAlbumDePublicacion(albumeliminar.getAlbumList().get(albumindice).getNombre());
                 albumeliminar.eliminarPublicaciones();
                 albumeliminar.eliminarAlbum(albumeliminar.getAlbumList().get(albumindice));
+            } else {
+                EliminarAlbum((albumeliminar.getAlbumList().get(albumindice)), perfil);
             }
-            else
-                EliminarAlbum((albumeliminar.getAlbumList().get(albumindice)),perfil);
         }
     }
 
