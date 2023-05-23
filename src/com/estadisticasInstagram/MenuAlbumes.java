@@ -25,7 +25,7 @@ public class MenuAlbumes {
             System.out.println("7. Eliminar publicación de todos los álbumes");
             System.out.println("8. Eliminar album");
             System.out.println("9. Cantidad de me gustas acumulados de un álbum");
-            System.out.println("10. Cantidad de me gustas acumulados de un álbum");
+            System.out.println("10. Cantidad de publicaciones total y por tipo");
             System.out.println("0. Salir");
 
             int opcion = scanner.nextInt();
@@ -87,7 +87,7 @@ public class MenuAlbumes {
                 break;
             case 2:
                 if (padre.getAlbumList().isEmpty()) {
-                    System.out.println("No hay albumes para crear un sub-álbum");
+                    System.out.println("No hay álbumes para crear un sub-álbum");
                 } else {
                     System.out.println("Seleccione un sub-álbum:");
                     for (int i = 0; i < padre.getAlbumList().size(); i++) {
@@ -124,28 +124,33 @@ public class MenuAlbumes {
             scanner.nextLine();
         }
     }
-    public void CambiarNombre(Album albumcambiado,PerfilInstagram perfil) { // si se quiere se pueden hacer variables locales para no tener tantos .get.get.get.......
+    public void CambiarNombre(Album albumcambiado,PerfilInstagram perfil) {
         NavejarPorAlbumes(albumcambiado);
         if (estaVacio == false) {
             if (opcionSubMenu == 1) {
                 System.out.println("Ingrese el nuevo nombre para el álbum");
                 String nombreNuevo = scanner.nextLine();
-                int j;
-                List<Publicacion> listaPublicaciones = albumcambiado.getAlbumList().get(albumindice).getPublicaciones();
-                if (!listaPublicaciones.isEmpty()) {
-                    for (int i = 0; i < listaPublicaciones.size(); i++) {
-                        j = 0;
-                        while (j < listaPublicaciones.get(i).getListaAlbumes().size()) {
-                            if (listaPublicaciones.get(i).getListaAlbumes().get(j) == albumcambiado.getAlbumList().get(albumindice).getNombre()) {
-                                listaPublicaciones.get(i).getListaAlbumes().set(j, nombreNuevo);
-                                perfil.actualizarListaPublicacion(i, j, listaPublicaciones.get(i), nombreNuevo);
+                if (albumcambiado.getAlbumList().get(albumindice).getNombre().equals(nombreNuevo))
+                    System.out.println("El álbum ya tiene ese nombre");
+                else {
+                    int j;
+                    List<Publicacion> listaPublicaciones = albumcambiado.getAlbumList().get(albumindice).getPublicaciones();
+                    if (!listaPublicaciones.isEmpty()) {
+                        for (int i = 0; i < listaPublicaciones.size(); i++) {
+                            j = 0;
+                            while (j < listaPublicaciones.get(i).getListaAlbumes().size()) {
+                                if (listaPublicaciones.get(i).getListaAlbumes().get(j).equals(albumcambiado.getAlbumList().get(albumindice).getNombre())) {
+                                    listaPublicaciones.get(i).getListaAlbumes().set(j, nombreNuevo);
+                                    perfil.actualizarListaPublicacion(i, j, listaPublicaciones.get(i), nombreNuevo);
+                                }
+                                j++;
                             }
-                            j++;
                         }
                     }
+                    albumcambiado.getAlbumList().get(albumindice).setNombre(nombreNuevo);
                 }
-                albumcambiado.getAlbumList().get(albumindice).setNombre(nombreNuevo);
-            } else
+            }
+            else
                 CambiarNombre((albumcambiado.getAlbumList().get(albumindice)), perfil);
         }
     }
@@ -182,7 +187,7 @@ public class MenuAlbumes {
         NavejarPorAlbumes(albumSeleccionado);
         if (estaVacio == false) {
             if (opcionSubMenu == 1) {
-                System.out.println("Elija la publicacion a eliminar");
+                System.out.println("Elija la publicación a eliminar");
                 for (int i = 0; i < albumSeleccionado.getAlbumList().get(albumindice).getPublicaciones().size(); i++)
                     System.out.println((i + 1) + ". " + albumSeleccionado.getAlbumList().get(albumindice).getPublicaciones().get(i).getId());
                 publicacionindice = scanner.nextInt() - 1;
@@ -193,7 +198,7 @@ public class MenuAlbumes {
                         publicacionindiceperfil = i;
                 }
                 publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionindiceperfil));
-                System.out.println("Desea eliminar esta publicacion del album?");
+                System.out.println("Desea eliminar esta publicación del album?");
                 System.out.println("1.Confirmar");
                 System.out.println("2.Cancelar");
                 int opcion = scanner.nextInt();
@@ -216,13 +221,13 @@ public class MenuAlbumes {
     }
     public void EliminarPublicacionTodosAlbumes (Album raiz,PerfilInstagram publicacion) {
         if (!raiz.getAlbumList().isEmpty()) {
-            System.out.println("Elija la publicacion a eliminar");
+            System.out.println("Elija la publicación a eliminar");
             for (int i = 0; i < publicacion.getListaPublicacion().size(); i++)
                 System.out.println((i + 1) + ". " + publicacion.getListaPublicacion().get(i).getId());
             publicacionindice = scanner.nextInt() - 1;
             scanner.nextLine();
             publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionindice));
-            System.out.println("Desea eliminar esta publicacion de todos los albumes?");
+            System.out.println("Desea eliminar esta publicación de todos los albumes?");
             System.out.println("1.Confirmar");
             System.out.println("2.Cancelar");
             int opcion = scanner.nextInt();
@@ -303,6 +308,7 @@ public class MenuAlbumes {
         NavejarPorAlbumes((albumSeleccionado));
         if (estaVacio == false) {
             if (opcionSubMenu == 1) {
+                System.out.println("Cantidad de me gustas acumulados: ");
                 System.out.println(albumSeleccionado.getAlbumList().get(albumindice).cantMgAcumulada());
             } else
                 CantidadMGAcumuladosAlbum(albumSeleccionado.getAlbumList().get(albumindice));
@@ -312,12 +318,13 @@ public class MenuAlbumes {
         NavejarPorAlbumes((albumSeleccionado));
         if (estaVacio == false) {
             if (opcionSubMenu == 1) {
-                System.out.println("Cantidad de publicaciones total: ");
-                System.out.println(albumSeleccionado.getAlbumList().get(albumindice).cantPublicacionesTotal());
-                System.out.println("Cantidad de publicaciones por tipo: ");
+                System.out.println("Cantidad de publicaciones total: " + albumSeleccionado.getAlbumList().get(albumindice).cantPublicacionesTotal());
+                System.out.print("Cantidad de publicaciones por tipo: ");
                 Map<Class<Publicacion>, Integer> mapa = albumSeleccionado.getAlbumList().get(albumindice).cantPublicacionesTipo();
-                if (mapa.isEmpty())
+                if (mapa.isEmpty()) {
                     System.out.println("0");
+                    //System.out.println(" ");
+                }
                 else
                     for (Map.Entry<Class<Publicacion>, Integer> entry : mapa.entrySet()) {
                         System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
