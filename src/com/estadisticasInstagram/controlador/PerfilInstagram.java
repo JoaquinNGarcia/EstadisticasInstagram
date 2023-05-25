@@ -5,7 +5,7 @@ import com.estadisticasInstagram.dominio.*;
 import java.util.*;
 
 public class PerfilInstagram { // NO VA A HABER instancias
-    private LinkedList<Publicacion> listaPublicacion;
+    private static LinkedList<Publicacion> listaPublicacion;
     private LinkedList<Album> listaAlbumes = new LinkedList<>(); // podemos hacer tree o el list
 
     public PerfilInstagram(LinkedList<Publicacion> listaPublicacion) {
@@ -28,14 +28,15 @@ public class PerfilInstagram { // NO VA A HABER instancias
         this.listaAlbumes = listaAlbumes;
     }
 
-    public void actualizarListaPublicacion (int indicePub,int indiceAlb,Publicacion publicacion,String nombreNuevo) {
-        this.listaPublicacion.get(indicePub).getListaAlbumes().set(indiceAlb,nombreNuevo);
+    public void actualizarListaPublicacion (int indicePub, int indiceAlb, Publicacion publicacion, String nombreNuevo) {
+        this.listaPublicacion.get(indicePub).getListaAlbumes().set(indiceAlb, nombreNuevo);
     }
 
     public void muestraLista() {
         System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
+        listaPublicacion.sort(Comparator.comparing(Publicacion::getNombre));
         for (Publicacion publicacion : listaPublicacion) {
-            // Collections.sort(publicacion);
+            // Collections.sort(publicacion, new sortByName());
             System.out.println("ID: " +  publicacion.getId());
             System.out.println("Nombre : " +  publicacion.getNombre());
             System.out.println("Fecha de subida: " + publicacion.getFechaSubida());
@@ -101,7 +102,7 @@ public class PerfilInstagram { // NO VA A HABER instancias
     }
 
     public void eliminarAlbumDePublicacion (String nombreEliminar) {
-        for (int i=0; i<listaPublicacion.size();i++)
+        for (int i=0; i<listaPublicacion.size(); i++)
             listaPublicacion.get(i).getListaAlbumes().remove(nombreEliminar);
     }
 

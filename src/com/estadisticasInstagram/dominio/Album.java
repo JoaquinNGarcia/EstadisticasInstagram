@@ -1,7 +1,9 @@
 package com.estadisticasInstagram.dominio;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Album {
 //Sumar una lista de albunes
@@ -43,9 +45,8 @@ public class Album {
         subAlbumes.add(hijo);
     }
 
-    public void eliminarAlbum (Album hijo) {
-        subAlbumes.clear();
-    }
+    public void eliminarAlbum (int indiceEliminar) {subAlbumes.remove(indiceEliminar);}
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -65,23 +66,34 @@ public class Album {
         }
     }
 
-    /*
-
     public int cantMgAcumulada() {
         int sum = 0;
-        for (Publicacion publicacion : publicacionList) {
-            sum += publicacion.getCantidadMG();
-        }
+        for (int i = 0 ; i < publicaciones.size(); i++)
+            sum += publicaciones.get(i).getCantidadMG();
         return sum;
+    }
+    public Map<Class<Publicacion>,Integer> cantPublicacionesTipo() {
+        Map<Class<Publicacion>, Integer> mapa = new HashMap<>(); // creo el mapa que va a guardar la cantidad
+        for (Publicacion publicacion : publicaciones) {
+            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede ser de cualquier tipo y obtengo de que clase es
+            if (mapa.containsKey(clase)) // se fija si ya esta la clase en el mapa
+                mapa.put(clase,mapa.get(clase) + 1); // si esta incrementa {.put asigna clave/valor} {.get recupera el valor asignado a una clave}
+            else
+                mapa.put(clase, 1); // si no esta inicia el contador en 1;
+        }
+        return mapa;
+
+        // for (Map.Entry<Class<?>, Integer> entry : mapa.entrySet()) {
+        //            System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
+        //  }
+        // para imprimir el mapa en otra funcion y mostrar la cantidad de cada tipo
     }
     public int cantPublicacionesTotal() {
         int cant = 0;
-        for (Publicacion publicacion : publicacionList) {
+        for (Publicacion publicacion : publicaciones) {
             cant++;
         }
         return cant;
     }
-
- */
 }
 

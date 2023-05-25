@@ -41,7 +41,7 @@ public class Imagen extends Publicacion {
     }
 
     public void aplicarFiltro() {
-        System.out.println("Se aplico filtro en imagen");
+        // System.out.println("Se aplico filtro en imagen");
     }
 }
 

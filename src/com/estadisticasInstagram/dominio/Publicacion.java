@@ -10,7 +10,6 @@ public abstract class Publicacion { // NO VA A HABER instancias
     private LocalDate fechaSubida;
     private int cantidadMG;
 
-
     // private LinkedList<Album> listaAlbum;
     // ArrayList<String> comentarios = new ArrayList<>();
 
@@ -57,7 +56,6 @@ public abstract class Publicacion { // NO VA A HABER instancias
         this.listaAlbumes = listaAlbumes;
     }
 
-    public void agregarAlbum (Album album) {listaAlbumes.add(album.getNombre());}
     public LocalDate getFechaSubida() {
         return fechaSubida;
     }
@@ -73,9 +71,7 @@ public abstract class Publicacion { // NO VA A HABER instancias
     public void setCantidadMG(int cantidadMG) {
         this.cantidadMG = cantidadMG;
     }
-
-    public void aplicarFiltro(){};
-
+    
     public String getId() {
         return id;
     }
@@ -84,4 +80,7 @@ public abstract class Publicacion { // NO VA A HABER instancias
         this.id = id;
     }
 
+    public void agregarAlbum (Album album) {listaAlbumes.add(album.getNombre());}
+
+    public void aplicarFiltro(){};
 }

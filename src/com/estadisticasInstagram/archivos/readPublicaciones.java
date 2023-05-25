@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class readPublicaciones {
     public static LinkedList<Publicacion> cargaListaPublicacion() {
-        String nombre, etiquetasHashtags, tipo, albumesPertenecientes,id;
+        String nombre, etiquetasHashtags, tipo, albumesPertenecientes, id;
         // ArrayList<String> comentarios = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String fechaSubida;
@@ -51,7 +51,7 @@ public class readPublicaciones {
                     listaAlbumes.add(elemento);
                 }
                 tipo = sl.next();
-                switch (tipo){
+                switch (tipo) {
                     case "Video":{
                         duracion = Float.parseFloat(sl.next());
                         resolucion = Float.parseFloat(sl.next());
