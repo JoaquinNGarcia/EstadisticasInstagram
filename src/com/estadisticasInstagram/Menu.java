@@ -42,7 +42,7 @@ public class Menu {
                     "\033[0;1m" + "3" + " - Consultar cantidad de publicaciones por tipo y total.\n" +
                     "\033[0;1m" + "4" + " - Cantidad de Me Gusta por publicacion.\n" +
                     "\033[0;1m" + "5" + " - Generar reportes.\n" +
-                    "\033[0;1m" + "6" + " - ABM de las publicaciones y albumes del perfil.\n" +
+                    "\033[0;1m" + "6" + " - Gestor de reproducion de contenido.\n" +
                     "\033[0;1m" + "7" + " - Generar estadisticas.\n" +
                     "\033[0;1m" + "8" + " - Gestor de Albumes.\n" +
                     "\033[0;1m" + "0" + " - Salir\n");
@@ -88,6 +88,7 @@ public class Menu {
                 case "6":
                     if (cargoArchivo) {
                         System.out.println("\033[0;1m" + "============================" +  " ABM de las publicaciones y albumes del perfil " +  "\033[0;1m" + "============================");
+
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
                     }
@@ -141,5 +142,7 @@ public class Menu {
         System.out.println();
         System.out.println();
     }
+
+    
 }
 
