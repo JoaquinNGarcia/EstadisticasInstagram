@@ -87,8 +87,28 @@ public class Menu {
                     break;
                 case "6":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " ABM de las publicaciones y albumes del perfil " +  "\033[0;1m" + "============================");
-
+                        System.out.println("\033[0;1m" + "============================" +  " Gestor de reproducion de contenido " +  "\033[0;1m" + "============================");
+                        System.out.println("Ingrese el tipo de contenido que desea reproducir: \n");
+                        do {
+                            System.out.println("" +
+                                    "\033[0;1m" + "1" + " - Audio\n" +
+                                    "\033[0;1m" + "2" + " - Imagen\n" +
+                                    "\033[0;1m" + "3" + " - Video\n" +
+                                    "\033[0;1m" + "0" + " - Salir\n");
+                            option = render.nextLine().trim();
+                            switch(option) {
+                                case "1":
+                                    System.out.println("\033[0;1m" + "============================" +  " Listado de Audios " +  "\033[0;1m" + "============================\n\n");
+                                    break;
+                                case "2":
+                                    System.out.println("\033[0;1m" + "============================" +  " Listado de Imagenes " +  "\033[0;1m" + "============================\n\n");
+                                    break;
+                                case "3":
+                                    System.out.println("\033[0;1m" + "============================" +  " Listado de Videos " +  "\033[0;1m" + "============================\n\n");
+                                    break;
+                            }
+                        } while (!option.equals("0"));
+                        simulateProgressBar(100, 50, 500);
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
                     }
@@ -143,6 +163,36 @@ public class Menu {
         System.out.println();
     }
 
-    
-}
+    public static void simulateProgressBar(int total, int width, long delayMillis) {
+        int progress = 0;
+        int prevProgress = -1;
 
+        while (progress <= total) {
+            int currentWidth = (int) (((double) progress / total) * width);
+            if (progress != prevProgress) {
+                String progressBar = buildProgressBar(currentWidth, width);
+                System.out.print("\r" + progressBar + " " + progress + "%");
+                prevProgress = progress;
+            }
+            try {
+                Thread.sleep(delayMillis);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            progress++;
+        }
+        System.out.println("\nCarga completada!");
+    }
+
+    private static String buildProgressBar(int currentWidth, int totalWidth) {
+        StringBuilder progressBar = new StringBuilder("[");
+        for (int i = 0; i < currentWidth; i++) {
+            progressBar.append("=");
+        }
+        for (int i = currentWidth; i < totalWidth; i++) {
+            progressBar.append(" ");
+        }
+        progressBar.append("]");
+        return progressBar.toString();
+    }
+}
