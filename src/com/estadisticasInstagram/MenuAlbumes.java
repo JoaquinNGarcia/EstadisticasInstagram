@@ -334,4 +334,5 @@ public class MenuAlbumes {
                 CantidadPublicaciones(albumSeleccionado.getAlbumList().get(albumIndice));
         }
     }
+
 }
