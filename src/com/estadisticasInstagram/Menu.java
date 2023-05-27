@@ -10,9 +10,11 @@ import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPub
 
 public class Menu {
 
-    // private com.estadisticasInstagram.controlador.PerfilInstagram perfilInstagram;
+    // private com.estadisticasInstagram.controlador.PerfilInstagram
+    // perfilInstagram;
     // public com.estadisticasInstagram.Main() {
-    //    this.perfilInstagram = new com.estadisticasInstagram.controlador.PerfilInstagram();
+    // this.perfilInstagram = new
+    // com.estadisticasInstagram.controlador.PerfilInstagram();
     // }
 
     public void menuPrincipal() {
@@ -21,7 +23,7 @@ public class Menu {
         boolean cargoArchivo = false;
         PerfilInstagram perfilDePublicaciones = new PerfilInstagram(listaP);
         String option = "";
-        Scanner render = new Scanner(System.in); //Acoplamiento con interfaz (lectura!!)
+        Scanner render = new Scanner(System.in); // Acoplamiento con interfaz (lectura!!)
         System.out.println("\n\n   ##     ##   ##   #####   ######     ##       ####   ######     ##     ##   ##" +
                 "\n" +
                 "   ##     ###  ##  ##   ##  # ## #    ####     ##  ##   ##  ##   ####    ### ###\n" +
@@ -33,9 +35,12 @@ public class Menu {
                 "\n\n");
 
         do {
-            System.out.println("\033[0;1m" + "========================================================================");
-            System.out.println("\033[0;1m" + "============================" +  " MENÚ PRINCIPAL " +  "\033[0;1m" + "============================");
-            System.out.println("\033[0;1m" + "========================================================================\n");
+            System.out
+                    .println("\033[0;1m" + "========================================================================");
+            System.out.println("\033[0;1m" + "============================" + " MENÚ PRINCIPAL " + "\033[0;1m"
+                    + "============================");
+            System.out.println(
+                    "\033[0;1m" + "========================================================================\n");
             System.out.println("" +
                     "\033[0;1m" + "1" + " - Cargar archivos de publicaciones.\n" +
                     "\033[0;1m" + "2" + " - Mostrar las publicaciones.\n" +
@@ -47,16 +52,18 @@ public class Menu {
                     "\033[0;1m" + "8" + " - Gestor de Albumes.\n" +
                     "\033[0;1m" + "0" + " - Salir\n");
             option = render.nextLine().trim();
-            switch(option) {
+            switch (option) {
                 case "1":
-                    System.out.println("\033[0;1m" + "============================" +  " Cargar archivos de publicaciones " +  "\033[0;1m" + "============================\n\n");
+                    System.out.println("\033[0;1m" + "============================"
+                            + " Cargar archivos de publicaciones " + "\033[0;1m" + "============================\n\n");
                     cargoArchivo = true;
                     listaP = cargaListaPublicacion();
                     perfilDePublicaciones.setListaPublicacion(listaP);
                     break;
                 case "2":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " Mostrar las publicaciones " +  "\033[0;1m" + "============================");
+                        System.out.println("\033[0;1m" + "============================" + " Mostrar las publicaciones "
+                                + "\033[0;1m" + "============================");
                         cargaArchivoPublicaciones(perfilDePublicaciones);
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
@@ -64,7 +71,9 @@ public class Menu {
                     break;
                 case "3":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " Consultar cantidad de publicaciones por tipo y total " +  "\033[0;1m" + "============================");
+                        System.out.println("\033[0;1m" + "============================"
+                                + " Consultar cantidad de publicaciones por tipo y total " + "\033[0;1m"
+                                + "============================");
                         cantidadDePublicaciones(perfilDePublicaciones);
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
@@ -72,7 +81,9 @@ public class Menu {
                     break;
                 case "4":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " Cantidad de Me Gusta por publicacion " +  "\033[0;1m" + "============================");
+                        System.out.println(
+                                "\033[0;1m" + "============================" + " Cantidad de Me Gusta por publicacion "
+                                        + "\033[0;1m" + "============================");
                         cantDeMeGustaPublicacion(perfilDePublicaciones);
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
@@ -80,14 +91,17 @@ public class Menu {
                     break;
                 case "5":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " Generar reportes " +  "\033[0;1m" + "============================");
+                        System.out.println("\033[0;1m" + "============================" + " Generar reportes "
+                                + "\033[0;1m" + "============================");
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
                     }
                     break;
                 case "6":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " Gestor de reproducion de contenido " +  "\033[0;1m" + "============================");
+                        System.out.println(
+                                "\033[0;1m" + "============================" + " Gestor de reproducion de contenido "
+                                        + "\033[0;1m" + "============================");
                         System.out.println("Ingrese el tipo de contenido que desea reproducir: \n");
                         do {
                             System.out.println("" +
@@ -96,16 +110,19 @@ public class Menu {
                                     "\033[0;1m" + "3" + " - Video\n" +
                                     "\033[0;1m" + "0" + " - Salir\n");
                             option = render.nextLine().trim();
-                            switch(option) {
+                            switch (option) {
                                 case "1":
                                     System.out.println("\033[0;1m" + "============================" +  " Listado de Audios " +  "\033[0;1m" + "============================\n\n");
                                     reproducirContenido(perfilDePublicaciones);
                                     break;
                                 case "2":
-                                    System.out.println("\033[0;1m" + "============================" +  " Listado de Imagenes " +  "\033[0;1m" + "============================\n\n");
+                                    System.out.println(
+                                            "\033[0;1m" + "============================" + " Listado de Imagenes "
+                                                    + "\033[0;1m" + "============================\n\n");
                                     break;
                                 case "3":
-                                    System.out.println("\033[0;1m" + "============================" +  " Listado de Videos " +  "\033[0;1m" + "============================\n\n");
+                                    System.out.println("\033[0;1m" + "============================"
+                                            + " Listado de Videos " + "\033[0;1m" + "============================\n\n");
                                     break;
                             }
                         } while (!option.equals("0"));
@@ -116,7 +133,8 @@ public class Menu {
                     break;
                 case "7":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" +  " Generar estadisticas " +  "\033[0;1m" + "============================");
+                        System.out.println("\033[0;1m" + "============================" + " Generar estadisticas "
+                                + "\033[0;1m" + "============================");
                         perfilDePublicaciones.muestraLista();
                     } else {
                         System.out.println("Primero debe cargar el archivo.\n");
@@ -124,7 +142,8 @@ public class Menu {
                     break;
                 case "8":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" + " Gestor de álbumes " + "\033[0;1m" + "============================");
+                        System.out.println("\033[0;1m" + "============================" + " Gestor de álbumes "
+                                + "\033[0;1m" + "============================");
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
                         menuAlbumes.startMenuAlbumes(raiz, perfilDePublicaciones);
 
@@ -152,7 +171,7 @@ public class Menu {
         System.out.println();
     }
 
-    public static void cantidadDePublicaciones(PerfilInstagram listaPublicacionPerfil){
+    public static void cantidadDePublicaciones(PerfilInstagram listaPublicacionPerfil) {
         Map<Class<Publicacion>, Integer> mapa;
         mapa = listaPublicacionPerfil.cantPublicacionesTipo();
         int totalPublicaciones = 0;
@@ -165,7 +184,7 @@ public class Menu {
         System.out.println();
     }
 
-    public static void cantDeMeGustaPublicacion(PerfilInstagram listaPublicacionPerfil){
+    public static void cantDeMeGustaPublicacion(PerfilInstagram listaPublicacionPerfil) {
         System.out.println("El total de 'me gustas' es de: " + listaPublicacionPerfil.cantDeMeGusta());
         System.out.println();
         System.out.println();

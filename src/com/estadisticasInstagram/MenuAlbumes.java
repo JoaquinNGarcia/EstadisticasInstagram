@@ -3,336 +3,398 @@ package com.estadisticasInstagram;
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
 
+import javax.swing.*;
 import java.util.*;
 
+import static com.estadisticasInstagram.ColoresConsola.*;
 
 public class MenuAlbumes {
     private static Scanner scanner = new Scanner(System.in);
-    private int opcionSubMenu;
-    private int albumIndice;
-    private int publicacionIndice;
-    private boolean estaVacio;
+    private String optionSubMenu;
+    private int albumIndex;
+    private int publicationIndex;
+    private boolean itsEmpty;
 
-    public void startMenuAlbumes(Album raiz, PerfilInstagram perfil) { // HACER EL MENU MAS LINDO
-        boolean salir = false;
-        while (!salir) {
-            System.out.println("1. Agregar álbum");
-            System.out.println("2. Mostrar álbumes");
-            System.out.println("3. Cambiar nombre a un álbum");
-            System.out.println("4. Agregar publicación a un álbum ");
-            System.out.println("5. Mostrar publicaciones de un álbum ");
-            System.out.println("6. Eliminar publicación de un álbum especifico");
-            System.out.println("7. Eliminar publicación de todos los álbumes");
-            System.out.println("8. Eliminar album");
-            System.out.println("9. Cantidad de me gustas acumulados de un álbum");
-            System.out.println("10. Cantidad de publicaciones total y por tipo de un álbum");
-            System.out.println("0. Salir");
+    public void startMenuAlbumes(Album root, PerfilInstagram profile) { // HACER EL MENU MAS LINDO
+        String option = "";
+        do {
+            itsEmpty = root.getAlbumList().isEmpty();
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
+            System.out.println(BOLD + "1. Agregar álbum");
+            System.out.println(BOLD + "2. Mostrar álbumes");
+            System.out.println(BOLD + "3. Cambiar nombre a un álbum" + RESET);
+            System.out.println(BOLD + "4. Agregar publicación a un álbum " + RESET);
+            System.out.println(BOLD + "5. Mostrar publicaciones de un álbum " + RESET);
+            System.out.println(BOLD + "6. Eliminar publicación de un álbum especifico" + RESET);
+            System.out.println(BOLD + "7. Eliminar publicación de todos los álbumes" + RESET);
+            System.out.println(BOLD + "8. Eliminar album" + RESET);
+            System.out.println(BOLD + "9. Cantidad de me gustas acumulados de un álbum" + RESET);
+            System.out.println(BOLD + "10. Cantidad de publicaciones total y por tipo" + RESET);
+            System.out.println(BOLD + "0. Salir" + RESET);
 
-            switch (opcion) {
-                case 1:
-                    System.out.println("Ingrese el nombre del álbum:");
-                    String nombre = scanner.nextLine();
-                    Album albumCreado = new Album(nombre);
-                    SubMenuAlbumes(albumCreado, raiz);
-                    break;
-                case 2:
-                    System.out.println(raiz.toString());
-                    break;
-                case 3:
-                    CambiarNombre(raiz, perfil);
-                    break;
-                case 4:
-                    AgregarPublicacion(raiz, perfil);
-                    break;
-                case 5:
-                    MostrarPublicacionesAlbum(raiz);
-                    break;
-                case 6:
-                    EliminarPublicacionAlbum(raiz, perfil);
-                    break;
-                case 7:
-                    EliminarPublicacionTodosAlbumes(raiz, perfil);
-                    break;
-                case 8:
-                    EliminarAlbum(raiz, perfil);
-                    break;
-                case 9:
-                    CantidadMGAcumuladosAlbum(raiz);
-                    break;
-                case 10:
-                    CantidadPublicaciones(raiz);
-                    break;
-                case 0:
-                    salir = true;
-                    break;
-                default:
-                    System.out.println("Opción no válida");
-            }
-        }
-    }
-    private static void SubMenuAlbumes(Album albumCreado, Album padre) {
-        System.out.println("1. Confirmar");
-        System.out.println("2. Agregar como sub-álbum");
-        System.out.println("3. Cancelar");
+            option = scanner.nextLine().trim();
 
-        int opcion = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (opcion) {
-            case 1:
-                padre.agregarAlbum(albumCreado);
-                break;
-            case 2:
-                if (padre.getAlbumList().isEmpty()) {
-                    System.out.println("No hay álbumes para crear un sub-álbum");
-                } else {
-                    System.out.println("Seleccione un sub-álbum:");
-                    for (int i = 0; i < padre.getAlbumList().size(); i++) {
-                        System.out.println((i + 1) + ". " + padre.getAlbumList().get(i).getNombre());
-                    }
-
-                    int albumIndice = scanner.nextInt() - 1;
-                    scanner.nextLine();
-                    SubMenuAlbumes(albumCreado, padre.getAlbumList().get(albumIndice));
+            switch (option) {
+                case "1" -> {
+                    System.out.println(BOLD + "Ingrese el nombre del álbum:" + RESET);
+                    String name = scanner.nextLine();
+                    Album albumCreated = new Album(name);
+                    addAlbum(albumCreated, root);
                 }
-                break;
-            case 3:
-                break;
-            default:
-                System.out.println("Opción no válida");
+                case "2" -> System.out.println(root);
+                case "3" -> Rename(root, profile);
+                case "4" -> addPublication(root, profile);
+                case "5" -> showPublications(root);
+                case "6" -> RemovePublication(root, profile);
+                case "7" -> RemovePublicationAllAlbums(root, profile);
+                case "8" -> Remove(root, profile);
+                case "9" -> TotalAcummulatedLikes(root);
+                case "10" -> TotalPublications(root);
+                case "0" -> System.out.println(BOLD + BLUE + "Ha salido del gestor de álbumes" + RESET);
+            }
+        } while (!option.equals("0"));
+    }
+
+    private void addAlbum(Album albumCreated, Album father) {
+        String option;
+        System.out.println(BOLD + GREEN + "1. Confirmar" + RESET);
+        System.out.println(BOLD + "2. Agregar como sub-álbum" + RESET);
+        System.out.println(BOLD + RED + "3. Cancelar" + RESET);
+
+        option = scanner.nextLine().trim();
+
+        switch (option) {
+            case "1" -> {
+                father.agregarAlbum(albumCreated);
+                System.out.println(BOLD + GREEN + "El álbum ha sido agregado" + RESET);
+            }
+            case "2" -> {
+                if (father.getAlbumList().isEmpty()) {
+                    System.out.println(BOLD + RED + "No hay álbumes para crear un sub-álbum\n" + RESET);
+                } else {
+                    System.out.println(BOLD + "Seleccione un sub-álbum:");
+                    for (int i = 0; i < father.getAlbumList().size(); i++) {
+                        System.out.println((i + 1) + ". " + father.getAlbumList().get(i).getNombre());
+                    }
+                    try {
+                        albumIndex = scanner.nextInt() - 1;
+                        scanner.nextLine();
+                        if (albumIndex >= 0 && albumIndex < father.getAlbumList().size())
+                            addAlbum(albumCreated, father.getAlbumList().get(albumIndex));
+                        else
+                            System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                    } catch (InputMismatchException error) {
+                        System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                    }
+                }
+            }
+            case "3" -> {
+            }
+            default -> System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
     }
 
-    public void NavegarPorAlbumes (Album albumSeleccionado) {
-        if (albumSeleccionado.getAlbumList().isEmpty()) {
-            estaVacio = true;
-            System.out.println("No hay álbumes existentes");
-        }
+    public void SubMenuAlbum(Album albumSelected) {
+        if (albumSelected.getAlbumList().isEmpty())
+            System.out.println(BOLD + RED + "No hay álbumes existentes" + RESET);
         else {
-            System.out.println("Seleccione un álbum:");
-            for (int i = 0; i < albumSeleccionado.getAlbumList().size(); i++) {
-                System.out.println((i + 1) + ". " + albumSeleccionado.getAlbumList().get(i).getNombre());
+            System.out.println(BOLD + "Seleccione un álbum:");
+            for (int i = 0; i < albumSelected.getAlbumList().size(); i++) {
+                System.out.println((i + 1) + ". " + albumSelected.getAlbumList().get(i).getNombre());
             }
-            albumIndice = scanner.nextInt() - 1;
-            scanner.nextLine();
-            System.out.println("1.Confirmar");
-            System.out.println("2.Seguir seleccionando");
-            opcionSubMenu = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                albumIndex = scanner.nextInt() - 1;
+                scanner.nextLine();
+                System.out.println(BOLD + "1.Confirmar" + RESET);
+                System.out.println(BOLD + "2.Buscar sub-álbum" + RESET);
+                if (albumIndex >= 0 && albumIndex < albumSelected.getAlbumList().size())
+                    optionSubMenu = scanner.nextLine();
+                else
+                    optionSubMenu = "-1";
+            } catch (InputMismatchException error) {
+                optionSubMenu = "-1";
+                scanner.nextLine();
+            }
         }
     }
-    public void CambiarNombre(Album albumCambiado, PerfilInstagram perfil) { // si se quiere se pueden hacer variables locales para no tener tantos .get.get.get.......
-        NavegarPorAlbumes(albumCambiado);
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
-                System.out.println("Ingrese el nuevo nombre para el álbum");
-                String nombreNuevo = scanner.nextLine();
-                if (albumCambiado.getAlbumList().get(albumIndice).getNombre().equals(nombreNuevo))
-                    System.out.println("El álbum ya tiene ese nombre");
+
+    public void Rename(Album albumChanged, PerfilInstagram profile) {
+        SubMenuAlbum(albumChanged);
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
+                System.out.println(BOLD + "Ingrese el nuevo nombre para el álbum" + RESET);
+                String newName = scanner.nextLine();
+                if (albumChanged.getAlbumList().get(albumIndex).getNombre().equals(newName))
+                    System.out.println(BOLD + RED + "El álbum ya tiene ese nombre" + RESET);
                 else {
                     int j;
-                    List<Publicacion> listaPublicaciones = albumCambiado.getAlbumList().get(albumIndice).getPublicaciones();
+                    List<Publicacion> listaPublicaciones = albumChanged.getAlbumList().get(albumIndex)
+                            .getPublicaciones();
                     if (!listaPublicaciones.isEmpty()) {
                         for (int i = 0; i < listaPublicaciones.size(); i++) {
                             j = 0;
                             while (j < listaPublicaciones.get(i).getListaAlbumes().size()) {
-                                if (listaPublicaciones.get(i).getListaAlbumes().get(j).equals(albumCambiado.getAlbumList().get(albumIndice).getNombre())) {
-                                    listaPublicaciones.get(i).getListaAlbumes().set(j, nombreNuevo);
-                                    perfil.actualizarListaPublicacion(i, j, listaPublicaciones.get(i), nombreNuevo);
+                                if (listaPublicaciones.get(i).getListaAlbumes().get(j)
+                                        .equals(albumChanged.getAlbumList().get(albumIndex).getNombre())) {
+                                    listaPublicaciones.get(i).getListaAlbumes().set(j, newName);
+                                    profile.actualizarListaPublicacion(i, j, listaPublicaciones.get(i), newName);
                                 }
                                 j++;
                             }
                         }
                     }
-                    albumCambiado.getAlbumList().get(albumIndice).setNombre(nombreNuevo);
+                    System.out.println(BOLD + GREEN + "El álbum ha sido cambiado de nombre" + RESET);
+                    albumChanged.getAlbumList().get(albumIndex).setNombre(newName);
                 }
-            }
+            } else if (optionSubMenu.equals("2"))
+                Rename((albumChanged.getAlbumList().get(albumIndex)), profile);
             else
-                CambiarNombre((albumCambiado.getAlbumList().get(albumIndice)), perfil);
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
     }
-    public void MostrarPublicacionesAlbum (Album albumSeleccionado) {
-        NavegarPorAlbumes(albumSeleccionado);
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
-                List<Publicacion> publicacionesList = albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones();
+
+    public void showPublications(Album albumSelected) {
+        SubMenuAlbum(albumSelected);
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
+                List<Publicacion> publicacionesList = albumSelected.getAlbumList().get(albumIndex).getPublicaciones();
                 if (publicacionesList.isEmpty())
-                    System.out.println("No hay publicaciones en el álbum para mostrar");
+                    System.out.println(BOLD + RED + "No hay publicaciones en el álbum para mostrar" + RESET);
                 else {
                     LinkedList<Publicacion> publicacionesLinkedList = new LinkedList<>(publicacionesList);
                     PerfilInstagram listaPublicaciones = new PerfilInstagram(publicacionesLinkedList);
                     listaPublicaciones.muestraLista();
                 }
-            } else
-                MostrarPublicacionesAlbum((albumSeleccionado.getAlbumList().get((albumIndice))));
-        }
-    }
-    public void EliminarAlbum(Album albumEliminar,PerfilInstagram perfil) {
-        NavegarPorAlbumes((albumEliminar));
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
-                perfil.eliminarAlbum(albumEliminar.getAlbumList().get(albumIndice));
-                perfil.eliminarAlbumDePublicacion(albumEliminar.getAlbumList().get(albumIndice).getNombre());
-                albumEliminar.eliminarPublicaciones();
-                albumEliminar.eliminarAlbum(albumIndice);
-
-            } else
-                EliminarAlbum((albumEliminar.getAlbumList().get(albumIndice)), perfil);
-        }
-    }
-    public void EliminarPublicacionAlbum (Album albumSeleccionado, PerfilInstagram publicacion) {
-        NavegarPorAlbumes(albumSeleccionado);
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
-                System.out.println("Elija la publicación a eliminar");
-                for (int i = 0; i < albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().size(); i++)
-                    System.out.println((i + 1) + ". " + albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().get(i).getId());
-                publicacionIndice = scanner.nextInt() - 1;
-                scanner.nextLine();
-                int publicacionIndiceperfil = 0;
-                for (int i = 0; i < publicacion.getListaPublicacion().size(); i++) {
-                    if (publicacion.getListaPublicacion().get(i).getId() == albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().get(publicacionIndice).getId())
-                        publicacionIndiceperfil = i;
-                }
-                publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionIndiceperfil));
-                System.out.println("Desea eliminar esta publicación del album?");
-                System.out.println("1.Confirmar");
-                System.out.println("2.Cancelar");
-                int opcion = scanner.nextInt();
-                scanner.nextLine();
-                if (opcion == 1) {
-                    if (albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().isEmpty())
-                        System.out.println("El álbum no tiene publicaciones");
-                    else {
-                        albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().remove(publicacionIndice);
-                        publicacion.getListaPublicacion().get(publicacionIndiceperfil).getListaAlbumes().remove(albumSeleccionado.getAlbumList().get(albumIndice).getNombre());
-                        System.out.println("La publicación ha sido eliminada del álbum");
-                    }
-                }
-                else
-                    EliminarPublicacionAlbum(albumSeleccionado, publicacion);
-            }
+            } else if (optionSubMenu.equals("2"))
+                showPublications((albumSelected.getAlbumList().get((albumIndex))));
             else
-                EliminarPublicacionAlbum((albumSeleccionado.getAlbumList().get(albumIndice)), publicacion);
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
-    }
-    public void EliminarPublicacionTodosAlbumes (Album raiz, PerfilInstagram publicacion) {
-        if (!raiz.getAlbumList().isEmpty()) {
-            System.out.println("Elija la publicación a eliminar");
-            for (int i = 0; i < publicacion.getListaPublicacion().size(); i++)
-                System.out.println((i + 1) + ". " + publicacion.getListaPublicacion().get(i).getId());
-            publicacionIndice = scanner.nextInt() - 1;
-            scanner.nextLine();
-            publicacion.MuestraPublicacion(publicacion.getListaPublicacion().get(publicacionIndice));
-            System.out.println("Desea eliminar esta publicación de todos los albumes?");
-            System.out.println("1.Confirmar");
-            System.out.println("2.Cancelar");
-            int opcion = scanner.nextInt();
-            scanner.nextLine();
-            if (opcion == 1) {
-                int j = 0;
-                int publicacionesEliminadas = 0;
-                String nombrePublicacionEliminar = publicacion.getListaPublicacion().get(publicacionIndice).getId();
-                for (int i = 0; i < raiz.getAlbumList().size(); i++) {
-                    while (j < raiz.getAlbumList().get(i).getPublicaciones().size()) {
-                        if (raiz.getAlbumList().get(i).getPublicaciones().get(j).getId() == nombrePublicacionEliminar) {
-                            raiz.getAlbumList().get(i).getPublicaciones().remove(j);
-                            publicacion.getListaPublicacion().get(publicacionIndice).getListaAlbumes().remove(raiz.getAlbumList().get(i).getNombre());
-                            publicacionesEliminadas++;
-                        }
-                        j++;
-                    }
-                    j = 0;
-                }
-                if (publicacionesEliminadas == 0)
-                    System.out.println("La publicación no estaba en ningun álbum");
-                else
-                    System.out.println("La publicación ha sido eliminada de todos los albumes");
-            } else
-                EliminarPublicacionTodosAlbumes(raiz, publicacion);
-        }
-        else
-            System.out.println("No hay albumes existentes");
     }
 
-    public void Agrega(Album albumSeleccionado, Publicacion publicacion) {
-        NavegarPorAlbumes(albumSeleccionado);
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
+    public void Remove(Album albumRemove, PerfilInstagram profile) {
+        SubMenuAlbum((albumRemove));
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
+                System.out.println(BOLD + "Desea eliminar esta publicación de todos los albumes?");
+                System.out.println(BOLD + GREEN + "1.Confirmar" + RESET);
+                System.out.println(BOLD + RED + "2.Cancelar" + RESET);
+                optionSubMenu = scanner.nextLine();
+                if (optionSubMenu.equals("1")) {
+                    profile.eliminarAlbum(albumRemove.getAlbumList().get(albumIndex));
+                    profile.eliminarAlbumDePublicacion(albumRemove.getAlbumList().get(albumIndex).getNombre());
+                    albumRemove.eliminarPublicaciones();
+                    albumRemove.eliminarAlbum(albumIndex);
+                    System.out.println(BOLD + GREEN + "El álbum ha sido eliminado" + RESET);
+                } else if (optionSubMenu.equals("2"))
+                    Remove(albumRemove, profile);
+                else
+                    System.out.println(BOLD + RED + "Opción inválida" + RESET);
+            } else if (optionSubMenu.equals("2"))
+                Remove((albumRemove.getAlbumList().get(albumIndex)), profile);
+            else
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
+        }
+    }
+
+    public void RemovePublication(Album albumSelected, PerfilInstagram profile) {
+        SubMenuAlbum(albumSelected);
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
+                if (albumSelected.getAlbumList().get(albumIndex).getPublicaciones().isEmpty())
+                    System.out.println(BOLD + RED + "No hay publicaciones para eliminar" + RESET);
+                else {
+                    System.out.println(BOLD + "Elija la publicación a eliminar" + RESET);
+                    for (int i = 0; i < albumSelected.getAlbumList().get(albumIndex).getPublicaciones().size(); i++)
+                        System.out.println((i + 1) + ". "
+                                + albumSelected.getAlbumList().get(albumIndex).getPublicaciones().get(i).getId());
+                    try {
+                        publicationIndex = scanner.nextInt() - 1;
+                        scanner.nextLine();
+                        if (publicationIndex >= 0 && publicationIndex < albumSelected.getAlbumList().get(albumIndex)
+                                .getPublicaciones().size()) {
+                            int publicationIndexProfile = 0;
+                            for (int i = 0; i < profile.getListaPublicacion().size(); i++) {
+                                if (profile.getListaPublicacion().get(i).getId().equals(albumSelected.getAlbumList()
+                                        .get(albumIndex).getPublicaciones().get(publicationIndex).getId()))
+                                    publicationIndexProfile = i;
+                            }
+                            profile.MuestraPublicacion(profile.getListaPublicacion().get(publicationIndexProfile));
+                            System.out.println(BOLD + "Desea eliminar esta publicación del album?" + RESET);
+                            System.out.println(BOLD + GREEN + "1.Confirmar" + RESET);
+                            System.out.println(BOLD + RED + "2.Cancelar" + RESET);
+                            String option = scanner.nextLine();
+                            scanner.nextLine();
+                            if (option.equals("1")) {
+                                if (albumSelected.getAlbumList().get(albumIndex).getPublicaciones().isEmpty())
+                                    System.out.println(BOLD + RED + "El álbum no tiene publicaciones" + RESET);
+                                else {
+                                    albumSelected.getAlbumList().get(albumIndex).getPublicaciones()
+                                            .remove(publicationIndex);
+                                    profile.getListaPublicacion().get(publicationIndexProfile).getListaAlbumes()
+                                            .remove(albumSelected.getAlbumList().get(albumIndex).getNombre());
+                                    System.out.println(
+                                            BOLD + GREEN + "La publicación ha sido eliminada del álbum" + RESET);
+                                }
+                            } else if (option.equals("2"))
+                                RemovePublication(albumSelected, profile);
+                            else
+                                System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                        } else
+                            System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                    } catch (InputMismatchException error) {
+                        System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                        scanner.nextLine();
+                    }
+                }
+            } else if (optionSubMenu.equals("2"))
+                RemovePublication((albumSelected.getAlbumList().get(albumIndex)), profile);
+            else
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
+        }
+    }
+
+    public void RemovePublicationAllAlbums(Album root, PerfilInstagram profile) {
+        if (!itsEmpty) {
+            System.out.println(BOLD + "Elija la publicación a eliminar" + RESET);
+            for (int i = 0; i < profile.getListaPublicacion().size(); i++)
+                System.out.println((i + 1) + ". " + profile.getListaPublicacion().get(i).getId());
+            try {
+                publicationIndex = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (publicationIndex >= 0 && publicationIndex < profile.getListaPublicacion().size()) {
+                    profile.MuestraPublicacion(profile.getListaPublicacion().get(publicationIndex));
+                    System.out.println(BOLD + "Desea eliminar esta publicación de todos los albumes?" + RESET);
+                    System.out.println(BOLD + GREEN + "1.Confirmar" + RESET);
+                    System.out.println(BOLD + RED + "2.Cancelar" + RESET);
+                    optionSubMenu = scanner.nextLine();
+                    if (optionSubMenu.equals("1")) {
+                        int j = 0;
+                        int publicacionesEliminadas = 0;
+                        String nombrePublicacionEliminar = profile.getListaPublicacion().get(publicationIndex).getId();
+                        for (int i = 0; i < root.getAlbumList().size(); i++) {
+                            while (j < root.getAlbumList().get(i).getPublicaciones().size()) {
+                                if (root.getAlbumList().get(i).getPublicaciones().get(j).getId()
+                                        .equals(nombrePublicacionEliminar)) {
+                                    root.getAlbumList().get(i).getPublicaciones().remove(j);
+                                    profile.getListaPublicacion().get(publicationIndex).getListaAlbumes()
+                                            .remove(root.getAlbumList().get(i).getNombre());
+                                    publicacionesEliminadas++;
+                                }
+                                j++;
+                            }
+                            j = 0;
+                        }
+                        if (publicacionesEliminadas == 0)
+                            System.out.println(BOLD + RED + "La publicación no estaba en ningun álbum" + RESET);
+                        else
+                            System.out.println(
+                                    BOLD + GREEN + "La publicación ha sido eliminada de todos los albumes" + RESET);
+                    } else if (optionSubMenu.equals("2"))
+                        RemovePublicationAllAlbums(root, profile);
+                    else
+                        System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                } else
+                    System.out.println(BOLD + RED + "Opción inválida" + RESET);
+            } catch (InputMismatchException error) {
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                scanner.nextLine();
+            }
+        } else
+            System.out.println(BOLD + RED + "No hay albumes existentes" + RESET);
+    }
+
+    public void add(Album albumSelected, Publicacion publication) {
+        SubMenuAlbum(albumSelected);
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
                 int i = 0;
                 boolean encontre = false;
-                while(i < albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().size() && encontre == false) {
-                    if (albumSeleccionado.getAlbumList().get(albumIndice).getPublicaciones().get(i).getId() == publicacion.getId())
-                        encontre = true;
+                while (i < albumSelected.getAlbumList().get(albumIndex).getPublicaciones().size() && !encontre) {
+                    encontre = albumSelected.getAlbumList().get(albumIndex).getPublicaciones().get(i).getId()
+                            .equals(publication.getId());
                     i++;
                 }
-                System.out.println(i);
-                if (encontre == true)
-                    System.out.println("Ya se encuentra la publicación en el álbum");
+                if (encontre)
+                    System.out.println(BOLD + RED + "Ya se encuentra la publicación en el álbum" + RESET);
                 else {
-                    publicacion.agregarAlbum(albumSeleccionado.getAlbumList().get(albumIndice));
-                    albumSeleccionado.getAlbumList().get(albumIndice).agregarPublicacion(publicacion);
+                    publication.agregarAlbum(albumSelected.getAlbumList().get(albumIndex));
+                    albumSelected.getAlbumList().get(albumIndex).agregarPublicacion(publication);
                 }
-            }
+            } else if (optionSubMenu.equals("2"))
+                add((albumSelected.getAlbumList().get(albumIndex)), publication);
             else
-                Agrega((albumSeleccionado.getAlbumList().get(albumIndice)), publicacion);
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
-    }
-    public void AgregarPublicacion(Album albumSeleccionado, PerfilInstagram perfil) {
-        System.out.println("Elija la publicación que quiere insertar en un álbum");
-        for (int i = 0; i < perfil.getListaPublicacion().size(); i++)
-            System.out.println((i + 1) + ". " + perfil.getListaPublicacion().get(i).getId());
-        publicacionIndice = scanner.nextInt() - 1;
-        scanner.nextLine();
-        perfil.MuestraPublicacion(perfil.getListaPublicacion().get(publicacionIndice));
-        System.out.println("Desea agregar esta publicacion al album?");
-        System.out.println("1.Confirmar");
-        System.out.println("2.Cancelar");
-        int opcion = scanner.nextInt();
-        scanner.nextLine();
-        if (opcion == 1) {
-            System.out.println("A que álbum desea agregar la publicación?");
-            if (albumSeleccionado.getAlbumList().isEmpty())
-                System.out.println("No hay álbumes existentes");
-            else
-                Agrega(albumSeleccionado, perfil.getListaPublicacion().get(publicacionIndice));
-        }
-        else
-            AgregarPublicacion(albumSeleccionado,perfil);
     }
 
-    public void CantidadMGAcumuladosAlbum (Album albumSeleccionado) {
-        NavegarPorAlbumes((albumSeleccionado));
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
-                System.out.println("Cantidad de me gustas acumulados: ");
-                System.out.println(albumSeleccionado.getAlbumList().get(albumIndice).cantMgAcumulada());
-            } else
-                CantidadMGAcumuladosAlbum(albumSeleccionado.getAlbumList().get(albumIndice));
+    public void addPublication(Album albumSelected, PerfilInstagram profile) {
+        if (!itsEmpty) {
+            System.out.println(BOLD + "Elija la publicación que quiere insertar en un álbum" + RESET);
+            for (int i = 0; i < profile.getListaPublicacion().size(); i++)
+                System.out.println((i + 1) + ". " + profile.getListaPublicacion().get(i).getId());
+            try {
+                publicationIndex = scanner.nextInt() - 1;
+                scanner.nextLine();
+                if (publicationIndex >= 0 && publicationIndex < profile.getListaPublicacion().size()) {
+                    profile.MuestraPublicacion(profile.getListaPublicacion().get(publicationIndex));
+                    System.out.println(BOLD + "Desea agregar esta publicacion al album?" + RESET);
+                    System.out.println(BOLD + GREEN + "1.Confirmar" + RESET);
+                    System.out.println(BOLD + RED + "2.Cancelar" + RESET);
+
+                    optionSubMenu = scanner.nextLine();
+                    if (optionSubMenu.equals("1")) {
+                        System.out.println(BOLD + "A que álbum desea agregar la publicación?" + RESET);
+                        if (albumSelected.getAlbumList().isEmpty())
+                            System.out.println(BOLD + RED + "No hay álbumes existentes" + RESET);
+                        else
+                            add(albumSelected, profile.getListaPublicacion().get(publicationIndex));
+                    } else if (optionSubMenu.equals("2"))
+                        addPublication(albumSelected, profile);
+                    else
+                        System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                } else
+                    System.out.println(BOLD + RED + "Opción inválida" + RESET);
+            } catch (InputMismatchException error) {
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
+                scanner.nextLine();
+            }
+        } else
+            System.out.println(BOLD + RED + "No hay albumes existentes" + RESET);
+    }
+
+    public void TotalAcummulatedLikes(Album albumSelected) {
+        SubMenuAlbum((albumSelected));
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
+                System.out.println(BOLD + "Cantidad de me gustas acumulados: " + RESET);
+                System.out.println(albumSelected.getAlbumList().get(albumIndex).cantMgAcumulada());
+            } else if (optionSubMenu.equals("2"))
+                TotalAcummulatedLikes(albumSelected.getAlbumList().get(albumIndex));
+            else
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
     }
-    public void CantidadPublicaciones(Album albumSeleccionado) {
-        NavegarPorAlbumes((albumSeleccionado));
-        if (estaVacio == false) {
-            if (opcionSubMenu == 1) {
-                System.out.println("Cantidad de publicaciones total: " + albumSeleccionado.getAlbumList().get(albumIndice).cantPublicacionesTotal());
-                System.out.print("Cantidad de publicaciones por tipo: ");
-                Map<Class<Publicacion>, Integer> mapa = albumSeleccionado.getAlbumList().get(albumIndice).cantPublicacionesTipo();
-                if (mapa.isEmpty()) {
+
+    public void TotalPublications(Album albumSelected) {
+        SubMenuAlbum((albumSelected));
+        if (!itsEmpty) {
+            if (optionSubMenu.equals("1")) {
+                System.out.println(BOLD + "Cantidad de publicaciones total: "
+                        + albumSelected.getAlbumList().get(albumIndex).cantPublicacionesTotal() + RESET);
+                System.out.print(BOLD + "Cantidad de publicaciones por tipo: " + RESET);
+                Map<Class<Publicacion>, Integer> mapa = albumSelected.getAlbumList().get(albumIndex)
+                        .cantPublicacionesTipo();
+                if (mapa.isEmpty())
                     System.out.println("0");
-                    //System.out.println(" ");
-                }
                 else
                     for (Map.Entry<Class<Publicacion>, Integer> entry : mapa.entrySet()) {
                         System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
                     }
-            }
+            } else if (optionSubMenu.equals("2"))
+                TotalPublications(albumSelected.getAlbumList().get(albumIndex));
             else
-                CantidadPublicaciones(albumSeleccionado.getAlbumList().get(albumIndice));
+                System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
     }
-
 }

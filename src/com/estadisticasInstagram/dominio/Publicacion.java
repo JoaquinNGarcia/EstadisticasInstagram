@@ -13,8 +13,8 @@ public abstract class Publicacion { // NO VA A HABER instancias
     // private LinkedList<Album> listaAlbum;
     // ArrayList<String> comentarios = new ArrayList<>();
 
-
-    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG, String id) {
+    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
+            LocalDate fechaSubida, int cantidadMG, String id) {
         this.nombre = nombre;
         this.etiquetasHashtags = etiquetasHashtags;
         this.tipo = tipo;
@@ -71,7 +71,7 @@ public abstract class Publicacion { // NO VA A HABER instancias
     public void setCantidadMG(int cantidadMG) {
         this.cantidadMG = cantidadMG;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -80,7 +80,10 @@ public abstract class Publicacion { // NO VA A HABER instancias
         this.id = id;
     }
 
-    public void agregarAlbum (Album album) {listaAlbumes.add(album.getNombre());}
+    public void agregarAlbum(Album album) {
+        listaAlbumes.add(album.getNombre());
+    }
 
-    public void aplicarFiltro(){};
+    public void aplicarFiltro() {
+    };
 }

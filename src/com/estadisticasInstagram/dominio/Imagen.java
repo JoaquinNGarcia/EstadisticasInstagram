@@ -8,9 +8,9 @@ public class Imagen extends Publicacion {
     private int ancho, alto;
     // Aplicar filtros
 
-
-    public Imagen(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG,String id, float resolucion, int ancho, int alto) {
-        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG,id);
+    public Imagen(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
+            LocalDate fechaSubida, int cantidadMG, String id, float resolucion, int ancho, int alto) {
+        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG, id);
         this.resolucion = resolucion;
         this.ancho = ancho;
         this.alto = alto;
@@ -44,4 +44,3 @@ public class Imagen extends Publicacion {
         // System.out.println("Se aplico filtro en imagen");
     }
 }
-

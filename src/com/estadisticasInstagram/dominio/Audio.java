@@ -6,11 +6,11 @@ import java.util.LinkedList;
 public class Audio extends Publicacion {
     private float duracion;
     private int velocidadBits;
-    //avanzar, detener;
+    // avanzar, detener;
 
-
-    public Audio(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG,String id, float duracion, int velocidadBits) {
-        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG,id);
+    public Audio(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
+            LocalDate fechaSubida, int cantidadMG, String id, float duracion, int velocidadBits) {
+        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG, id);
         this.duracion = duracion;
         this.velocidadBits = velocidadBits;
     }
@@ -31,4 +31,3 @@ public class Audio extends Publicacion {
         this.velocidadBits = velocidadBits;
     }
 }
-

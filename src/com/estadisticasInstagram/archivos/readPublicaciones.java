@@ -22,9 +22,9 @@ public class readPublicaciones {
         // Video
         float duracion, resolucion;
         int cantidadDeCuadros;
-        //Imagen
+        // Imagen
         int ancho, alto;
-        //Audio
+        // Audio
         int velocidadBits;
 
         LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
@@ -52,26 +52,29 @@ public class readPublicaciones {
                 }
                 tipo = sl.next();
                 switch (tipo) {
-                    case "Video":{
+                    case "Video": {
                         duracion = Float.parseFloat(sl.next());
                         resolucion = Float.parseFloat(sl.next());
                         cantidadDeCuadros = Integer.parseInt(sl.next());
-                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id, duracion, resolucion, cantidadDeCuadros);
+                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,
+                                duracion, resolucion, cantidadDeCuadros);
                         listaPublicacion.add(video);
                         break;
                     }
-                    case "Imagen":{
+                    case "Imagen": {
                         resolucion = Float.parseFloat(sl.next());
                         ancho = Integer.parseInt(sl.next());
                         alto = Integer.parseInt(sl.next());
-                        Imagen imagen = new Imagen(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,resolucion, ancho, alto);
+                        Imagen imagen = new Imagen(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,
+                                resolucion, ancho, alto);
                         listaPublicacion.add(imagen);
                         break;
                     }
-                    case "Audio":{
+                    case "Audio": {
                         duracion = Float.parseFloat(sl.next());
                         velocidadBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id, duracion, velocidadBits);
+                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,
+                                duracion, velocidadBits);
                         listaPublicacion.add(audio);
                         break;
                     }
@@ -88,4 +91,3 @@ public class readPublicaciones {
         return listaPublicacion;
     }
 }
-
