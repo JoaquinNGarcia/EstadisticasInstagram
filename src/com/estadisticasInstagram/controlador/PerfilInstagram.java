@@ -28,17 +28,18 @@ public class PerfilInstagram { // NO VA A HABER instancias
         this.listaAlbumes = listaAlbumes;
     }
 
-    public void actualizarListaPublicacion (int indicePub, int indiceAlb, Publicacion publicacion, String nombreNuevo) {
+    public void actualizarListaPublicacion(int indicePub, int indiceAlb, Publicacion publicacion, String nombreNuevo) {
         this.listaPublicacion.get(indicePub).getListaAlbumes().set(indiceAlb, nombreNuevo);
     }
 
     public void muestraLista() {
-        System.out.println("\033[0;1m" + "============================" +  " PUBLICACION " +  "\033[0;1m" + "============================");
+        System.out.println("\033[0;1m" + "============================" + " PUBLICACION " + "\033[0;1m"
+                + "============================");
         listaPublicacion.sort(Comparator.comparing(Publicacion::getNombre));
         for (Publicacion publicacion : listaPublicacion) {
             // Collections.sort(publicacion, new sortByName());
-            System.out.println("ID: " +  publicacion.getId());
-            System.out.println("Nombre : " +  publicacion.getNombre());
+            System.out.println("ID: " + publicacion.getId());
+            System.out.println("Nombre : " + publicacion.getNombre());
             System.out.println("Fecha de subida: " + publicacion.getFechaSubida());
             System.out.println("Etiquetas - Hashtags: " + publicacion.getEtiquetasHashtags());
             System.out.println("Cantidad de me gustas: " + publicacion.getCantidadMG());
@@ -67,9 +68,9 @@ public class PerfilInstagram { // NO VA A HABER instancias
         }
     }
 
-    public void MuestraPublicacion (Publicacion publicacion) {
-        System.out.println("ID: " +  publicacion.getId());
-        System.out.println("Nombre: " +  publicacion.getNombre());
+    public void MuestraPublicacion(Publicacion publicacion) {
+        System.out.println("ID: " + publicacion.getId());
+        System.out.println("Nombre: " + publicacion.getNombre());
         System.out.println("Fecha de subida: " + publicacion.getFechaSubida());
         System.out.println("Etiquetas - Hashtags: " + publicacion.getEtiquetasHashtags());
         System.out.println("Cantidad de me gustas: " + publicacion.getCantidadMG());
@@ -97,29 +98,33 @@ public class PerfilInstagram { // NO VA A HABER instancias
         System.out.println("\033[0;1m" + "=====================================================================");
     }
 
-    public void eliminarAlbum (Album album) {
+    public void eliminarAlbum(Album album) {
         this.listaAlbumes.remove(album);
     }
 
-    public void eliminarAlbumDePublicacion (String nombreEliminar) {
-        for (int i=0; i<listaPublicacion.size(); i++)
+    public void eliminarAlbumDePublicacion(String nombreEliminar) {
+        for (int i = 0; i < listaPublicacion.size(); i++)
             listaPublicacion.get(i).getListaAlbumes().remove(nombreEliminar);
     }
 
-    public Map<Class<Publicacion>,Integer> cantPublicacionesTipo() {
-        Map<Class<Publicacion>, Integer> mapa = new HashMap<Class<Publicacion>,Integer>(); // creo el mapa que va a guardar la cantidad
+    public Map<Class<Publicacion>, Integer> cantPublicacionesTipo() {
+        Map<Class<Publicacion>, Integer> mapa = new HashMap<Class<Publicacion>, Integer>(); // creo el mapa que va a
+                                                                                            // guardar la cantidad
         for (Publicacion publicacion : listaPublicacion) {
-            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede ser de cualquier tipo y obtengo de que clase es
+            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede
+                                                                                    // ser de cualquier tipo y obtengo
+                                                                                    // de que clase es
             if (mapa.containsKey(clase)) // se fija si ya esta la clase en el mapa
-                mapa.put(clase,mapa.get(clase) + 1); // si esta incrementa {.put asigna clave/valor} {.get recupera el valor asignado a una clave}
+                mapa.put(clase, mapa.get(clase) + 1); // si esta incrementa {.put asigna clave/valor} {.get recupera el
+                                                      // valor asignado a una clave}
             else
                 mapa.put(clase, 1); // si no esta inicia el contador en 1;
         }
         return mapa;
 
         // for (Map.Entry<Class<?>, Integer> entry : mapa.entrySet()) {
-        //            System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
-        //  }
+        // System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
+        // }
         // para imprimir el mapa en otra funcion y mostrar la cantidad de cada tipo
     }
 
@@ -131,4 +136,3 @@ public class PerfilInstagram { // NO VA A HABER instancias
         return totalMeGusta;
     }
 }
-

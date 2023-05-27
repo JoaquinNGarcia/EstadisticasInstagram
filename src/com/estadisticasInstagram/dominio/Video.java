@@ -9,9 +9,9 @@ public class Video extends Publicacion {
 
     // Avanzar, detener, aplicar filtro
 
-
-    public Video(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes, LocalDate fechaSubida, int cantidadMG,String id, float duracion, float resolucion, int cantidadDeCuadros) {
-        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG,id);
+    public Video(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
+            LocalDate fechaSubida, int cantidadMG, String id, float duracion, float resolucion, int cantidadDeCuadros) {
+        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG, id);
         this.duracion = duracion;
         this.resolucion = resolucion;
         this.cantidadDeCuadros = cantidadDeCuadros;
@@ -41,4 +41,3 @@ public class Video extends Publicacion {
         this.cantidadDeCuadros = cantidadDeCuadros;
     }
 }
-
