@@ -99,6 +99,7 @@ public class Menu {
                             switch(option) {
                                 case "1":
                                     System.out.println("\033[0;1m" + "============================" +  " Listado de Audios " +  "\033[0;1m" + "============================\n\n");
+                                    reproducirContenido(perfilDePublicaciones);
                                     break;
                                 case "2":
                                     System.out.println("\033[0;1m" + "============================" +  " Listado de Imagenes " +  "\033[0;1m" + "============================\n\n");
@@ -135,6 +136,13 @@ public class Menu {
                     }
             }
         } while (!option.equals("0"));
+    }
+
+    public static void reproducirContenido(PerfilInstagram listaPublicacionPerfil) {
+
+        for (int i = 0; i < listaPublicacionPerfil.getListaPublicacion().size(); i++)
+            System.out.println((i + 1) + ". " + listaPublicacionPerfil.getListaPublicacion().get(i).getId());
+
     }
 
     public static void cargaArchivoPublicaciones(PerfilInstagram listaPublicacionPerfil) {
