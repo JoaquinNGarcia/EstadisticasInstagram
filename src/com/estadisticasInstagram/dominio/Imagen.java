@@ -39,8 +39,4 @@ public class Imagen extends Publicacion {
     public void setAlto(int alto) {
         this.alto = alto;
     }
-
-    public void aplicarFiltro() {
-        // System.out.println("Se aplico filtro en imagen");
-    }
 }

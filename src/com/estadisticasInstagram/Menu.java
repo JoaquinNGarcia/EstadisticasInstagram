@@ -4,8 +4,11 @@ import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
 
+import static com.estadisticasInstagram.ColoresConsola.*;
 import static com.estadisticasInstagram.archivos.readPublicaciones.cargaListaPublicacion;
 
 public class Menu {
@@ -20,6 +23,7 @@ public class Menu {
     public void menuPrincipal() {
         LinkedList<Publicacion> listaP = null;
         Album raiz = new Album("ALBUMES:");
+        //LinkedList<Publicacion> publicacionesAReproducir = new LinkedList<>();
         boolean cargoArchivo = false;
         PerfilInstagram perfilDePublicaciones = new PerfilInstagram(listaP);
         String option = "";
@@ -44,182 +48,97 @@ public class Menu {
             System.out.println("" +
                     "\033[0;1m" + "1" + " - Cargar archivos de publicaciones.\n" +
                     "\033[0;1m" + "2" + " - Mostrar las publicaciones.\n" +
-                    "\033[0;1m" + "3" + " - Consultar cantidad de publicaciones por tipo y total.\n" +
-                    "\033[0;1m" + "4" + " - Cantidad de Me Gusta por publicacion.\n" +
-                    "\033[0;1m" + "5" + " - Generar reportes.\n" +
-                    "\033[0;1m" + "6" + " - Gestor de reproducion de contenido.\n" +
-                    "\033[0;1m" + "7" + " - Generar estadisticas.\n" +
-                    "\033[0;1m" + "8" + " - Gestor de Albumes.\n" +
+                    "\033[0;1m" + "3" + " - Generar reportes.\n" +
+                    "\033[0;1m" + "4" + " - Gestor de reproducion de contenido.\n" +
+                    "\033[0;1m" + "5" + " - Gestor de Albumes.\n" +
                     "\033[0;1m" + "0" + " - Salir\n");
             option = render.nextLine().trim();
             switch (option) {
                 case "1":
-                    System.out.println("\033[0;1m" + "============================"
-                            + " Cargar archivos de publicaciones " + "\033[0;1m" + "============================\n\n");
-                    cargoArchivo = true;
-                    listaP = cargaListaPublicacion();
-                    perfilDePublicaciones.setListaPublicacion(listaP);
+                    if (cargoArchivo) {
+                        System.out.println(BOLD + RED + "\t\t\t\t\tEl archivo ya fue cargado.\n" + RESET);
+                    } else {
+                        System.out.println("\033[0;1m" + BOLD + GREEN + "\t\t\t\t\tEl archivo fue cargado con exito. \n\n" + RESET);
+                        cargoArchivo = true;
+                        listaP = cargaListaPublicacion();
+                        perfilDePublicaciones.setListaPublicacion(listaP);
+                    }
                     break;
                 case "2":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" + " Mostrar las publicaciones "
-                                + "\033[0;1m" + "============================");
                         cargaArchivoPublicaciones(perfilDePublicaciones);
                     } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
+                        System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
                     break;
                 case "3":
                     if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================"
-                                + " Consultar cantidad de publicaciones por tipo y total " + "\033[0;1m"
-                                + "============================");
+                        System.out.println("\033[0;1m" + "============================" + " Generar reportes "
+                                + "\033[0;1m" + "============================");
                         cantidadDePublicaciones(perfilDePublicaciones);
+                        cantDeMeGustaPublicacion(perfilDePublicaciones);
                     } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
+                        System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
                     break;
                 case "4":
                     if (cargoArchivo) {
-                        System.out.println(
-                                "\033[0;1m" + "============================" + " Cantidad de Me Gusta por publicacion "
-                                        + "\033[0;1m" + "============================");
-                        cantDeMeGustaPublicacion(perfilDePublicaciones);
+                        MenuReproduccionMultimedia menuReproduccionMultimedia = new MenuReproduccionMultimedia();
+                        menuReproduccionMultimedia.startReproduccionMultimedia(perfilDePublicaciones);
+
+                        //LinkedList<Publicacion> listaPublicacionesAReproducir = new LinkedList<>();
+
+                        //LinkedList<Album> albumesPerfil = new LinkedList<Album>();
+                        //listaPublicacionesAReproducir.add(publicacionesAReproducir);
+                        //perfilDePublicaciones.setListaAlbumes(albumesPerfil);
                     } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
+                        System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
                     break;
                 case "5":
-                    if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" + " Generar reportes "
-                                + "\033[0;1m" + "============================");
-                    } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
-                    }
-                    break;
-                case "6":
-                    if (cargoArchivo) {
-                        System.out.println(
-                                "\033[0;1m" + "============================" + " Gestor de reproducion de contenido "
-                                        + "\033[0;1m" + "============================");
-                        System.out.println("Ingrese el tipo de contenido que desea reproducir: \n");
-                        do {
-                            System.out.println("" +
-                                    "\033[0;1m" + "1" + " - Audio\n" +
-                                    "\033[0;1m" + "2" + " - Imagen\n" +
-                                    "\033[0;1m" + "3" + " - Video\n" +
-                                    "\033[0;1m" + "0" + " - Salir\n");
-                            option = render.nextLine().trim();
-                            switch (option) {
-                                case "1":
-                                    System.out.println("\033[0;1m" + "============================" +  " Listado de Audios " +  "\033[0;1m" + "============================\n\n");
-                                    reproducirContenido(perfilDePublicaciones);
-                                    break;
-                                case "2":
-                                    System.out.println(
-                                            "\033[0;1m" + "============================" + " Listado de Imagenes "
-                                                    + "\033[0;1m" + "============================\n\n");
-                                    break;
-                                case "3":
-                                    System.out.println("\033[0;1m" + "============================"
-                                            + " Listado de Videos " + "\033[0;1m" + "============================\n\n");
-                                    break;
-                            }
-                        } while (!option.equals("0"));
-                        simulateProgressBar(100, 50, 500);
-                    } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
-                    }
-                    break;
-                case "7":
-                    if (cargoArchivo) {
-                        System.out.println("\033[0;1m" + "============================" + " Generar estadisticas "
-                                + "\033[0;1m" + "============================");
-                        perfilDePublicaciones.muestraLista();
-                    } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
-                    }
-                    break;
-                case "8":
                     if (cargoArchivo) {
                         System.out.println("\033[0;1m" + "============================" + " Gestor de álbumes "
                                 + "\033[0;1m" + "============================");
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
                         menuAlbumes.startMenuAlbumes(raiz, perfilDePublicaciones);
 
-                        LinkedList<Album> albumesPerfil = new LinkedList<Album>();
+                        LinkedList<Album> albumesPerfil = new LinkedList<>();
                         albumesPerfil.add(raiz);
                         perfilDePublicaciones.setListaAlbumes(albumesPerfil);
                     } else {
-                        System.out.println("Primero debe cargar el archivo.\n");
+                        System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
+                    break;
+                case "0": System.out.println(BOLD + BLUE + "Ha salido del menu" + RESET);
             }
         } while (!option.equals("0"));
     }
 
-    public static void reproducirContenido(PerfilInstagram listaPublicacionPerfil) {
-
-        for (int i = 0; i < listaPublicacionPerfil.getListaPublicacion().size(); i++)
-            System.out.println((i + 1) + ". " + listaPublicacionPerfil.getListaPublicacion().get(i).getId());
-
-    }
-
-    public static void cargaArchivoPublicaciones(PerfilInstagram listaPublicacionPerfil) {
+    public void cargaArchivoPublicaciones(PerfilInstagram listaPublicacionPerfil) {
         System.out.println();
         listaPublicacionPerfil.muestraLista();
         System.out.println();
         System.out.println();
     }
 
-    public static void cantidadDePublicaciones(PerfilInstagram listaPublicacionPerfil) {
+    public void cantidadDePublicaciones(PerfilInstagram listaPublicacionPerfil) {
+        System.out.println("\033[0;1m" + BOLD + "\nPublicaciones por tipo y total de todas las publicaciones. \n" + RESET);
         Map<Class<Publicacion>, Integer> mapa;
         mapa = listaPublicacionPerfil.cantPublicacionesTipo();
         int totalPublicaciones = 0;
         for (Map.Entry<Class<Publicacion>, Integer> entry : mapa.entrySet()) {
-            System.out.println(entry.getKey().getSimpleName() + ": " + entry.getValue());
+            System.out.println( BOLD + "\t" + entry.getKey().getSimpleName() + ": " + entry.getValue() + RESET);
             totalPublicaciones += entry.getValue();
         }
-        System.out.println("El total de publicaciones es de: " + totalPublicaciones);
+        System.out.println( BOLD + "\tEl total de publicaciones es de: " + totalPublicaciones + RESET);
         System.out.println();
         System.out.println();
     }
 
-    public static void cantDeMeGustaPublicacion(PerfilInstagram listaPublicacionPerfil) {
+    public void cantDeMeGustaPublicacion(PerfilInstagram listaPublicacionPerfil) {
+        System.out.println("\033[0;1m" + BOLD + "\nCantidad de Me Gusta por publicacion. \n" + RESET);
         System.out.println("El total de 'me gustas' es de: " + listaPublicacionPerfil.cantDeMeGusta());
         System.out.println();
         System.out.println();
-    }
-
-    public static void simulateProgressBar(int total, int width, long delayMillis) {
-        int progress = 0;
-        int prevProgress = -1;
-
-        while (progress <= total) {
-            int currentWidth = (int) (((double) progress / total) * width);
-            if (progress != prevProgress) {
-                String progressBar = buildProgressBar(currentWidth, width);
-                System.out.print("\r" + progressBar + " " + progress + "%");
-                prevProgress = progress;
-            }
-            try {
-                Thread.sleep(delayMillis);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            progress++;
-        }
-        System.out.println("\nCarga completada!");
-    }
-
-    private static String buildProgressBar(int currentWidth, int totalWidth) {
-        StringBuilder progressBar = new StringBuilder("[");
-        for (int i = 0; i < currentWidth; i++) {
-            progressBar.append("=");
-        }
-        for (int i = currentWidth; i < totalWidth; i++) {
-            progressBar.append(" ");
-        }
-        progressBar.append("]");
-        return progressBar.toString();
     }
 }

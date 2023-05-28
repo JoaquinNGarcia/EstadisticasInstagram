@@ -1,9 +1,6 @@
 package com.estadisticasInstagram.dominio;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Album {
     // Sumar una lista de albunes
@@ -11,6 +8,7 @@ public class Album {
     private List<Album> subAlbumes; // hijos del album
 
     private List<Publicacion> publicaciones;
+    // private static LinkedList<Publicacion> publicaciones; no deberia ser linkedList?
 
     public Album(String nombre) {
         this.nombre = nombre;

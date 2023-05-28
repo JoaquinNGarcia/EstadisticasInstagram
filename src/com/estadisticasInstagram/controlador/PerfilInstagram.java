@@ -67,7 +67,6 @@ public class PerfilInstagram { // NO VA A HABER instancias
             System.out.println("\033[0;1m" + "=====================================================================");
         }
         listaPublicacion.sort(Comparator.comparing(Publicacion::getId));
-
     }
 
     public void MuestraPublicacion(Publicacion publicacion) {
