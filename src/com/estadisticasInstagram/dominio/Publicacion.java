@@ -4,72 +4,67 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public abstract class Publicacion { // NO VA A HABER instancias
-    private String nombre, etiquetasHashtags, tipo, id;
-    private LinkedList<String> listaAlbumes;
+    private String name, Hashtags, type, id;
+    private LinkedList<String> listAlbums;
 
-    private LocalDate fechaSubida;
-    private int cantidadMG;
+    private LocalDate dateUploaded;
+    private int amountLikes;
 
-    // private LinkedList<Album> listaAlbum;
-    // ArrayList<String> comentarios = new ArrayList<>();
-
-    public Publicacion(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
-            LocalDate fechaSubida, int cantidadMG, String id) {
-        this.nombre = nombre;
-        this.etiquetasHashtags = etiquetasHashtags;
-        this.tipo = tipo;
-        this.listaAlbumes = listaAlbumes;
-        this.fechaSubida = fechaSubida;
-        this.cantidadMG = cantidadMG;
+    public Publicacion(String name, String Hashtags, String type, LocalDate dateUploaded, int amountLikes, String id) {
+        this.name = name;
+        this.Hashtags = Hashtags;
+        this.type = type;
+        this.listAlbums = new LinkedList<>();
+        this.dateUploaded = dateUploaded;
+        this.amountLikes = amountLikes;
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEtiquetasHashtags() {
-        return etiquetasHashtags;
+    public String getHashtags() {
+        return Hashtags;
     }
 
-    public void setEtiquetasHashtags(String etiquetasHashtags) {
-        this.etiquetasHashtags = etiquetasHashtags;
+    public void setHashtags(String Hashtags) {
+        this.Hashtags = Hashtags;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public LinkedList<String> getAlbumList() {
+        return listAlbums;
     }
 
-    public LinkedList<String> getListaAlbumes() {
-        return listaAlbumes;
+    public void setAlbumList(LinkedList<String> listAlbums) {
+        this.listAlbums = listAlbums;
     }
 
-    public void setListaAlbumes(LinkedList<String> listaAlbumes) {
-        this.listaAlbumes = listaAlbumes;
+    public LocalDate getDateUploaded() {
+        return dateUploaded;
     }
 
-    public LocalDate getFechaSubida() {
-        return fechaSubida;
+    public void setDateUploaded(LocalDate dateUploaded) {
+        this.dateUploaded = dateUploaded;
     }
 
-    public void setFechaSubida(LocalDate fechaSubida) {
-        this.fechaSubida = fechaSubida;
+    public int getAmountLikes() {
+        return amountLikes;
     }
 
-    public int getCantidadMG() {
-        return cantidadMG;
-    }
-
-    public void setCantidadMG(int cantidadMG) {
-        this.cantidadMG = cantidadMG;
+    public void setAmountLikes(int amountLikes) {
+        this.amountLikes = amountLikes;
     }
 
     public String getId() {
@@ -80,10 +75,10 @@ public abstract class Publicacion { // NO VA A HABER instancias
         this.id = id;
     }
 
-    public void agregarAlbum(Album album) {
-        listaAlbumes.add(album.getNombre());
+    public void addAlbum(Album album) {
+        listAlbums.add(album.getName());
     }
 
-    public void aplicarFiltro() {
+    public void setFilter() {
     };
 }

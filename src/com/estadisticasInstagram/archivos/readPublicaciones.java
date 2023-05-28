@@ -13,21 +13,20 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class readPublicaciones {
-    public static LinkedList<Publicacion> cargaListaPublicacion() {
-        String nombre, etiquetasHashtags, tipo, albumesPertenecientes, id;
-        // ArrayList<String> comentarios = new ArrayList<>();
+    public static LinkedList<Publicacion> uploadPublicationList() {
+        String name, Hashtags, type,id;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String fechaSubida;
-        int cantidadMG;
+        String dateUploaded;
+        int amountLikes;
         // Video
-        float duracion, resolucion;
-        int cantidadDeCuadros;
+        float duration, resolution;
+        int totalFrames;
         // Imagen
-        int ancho, alto;
+        int width, heigth;
         // Audio
-        int velocidadBits;
+        int velocityBits;
 
-        LinkedList<Publicacion> listaPublicacion = new LinkedList<>();
+        LinkedList<Publicacion> listPublication = new LinkedList<>();
 
         File f = new File("archivoPublicaciones.txt");
         Scanner s;
@@ -38,44 +37,37 @@ public class readPublicaciones {
                 Scanner sl = new Scanner(linea);
                 sl.useDelimiter("\\s*-\\s*");
                 id = sl.next();
-                nombre = sl.next();
-                fechaSubida = sl.next();
-                LocalDate fecha = LocalDate.parse(fechaSubida, formatter);
-                etiquetasHashtags = sl.next();
-                cantidadMG = Integer.parseInt(sl.next());
-                albumesPertenecientes = sl.next();
-                LinkedList<String> listaAlbumes = new LinkedList<String>();
-                // Separar el string por espacios y agregar cada elemento a la lista
-                String[] elementos = albumesPertenecientes.split(" ");
-                for (String elemento : elementos) {
-                    listaAlbumes.add(elemento);
-                }
-                tipo = sl.next();
-                switch (tipo) {
+                name = sl.next();
+                dateUploaded = sl.next();
+                LocalDate fecha = LocalDate.parse(dateUploaded, formatter);
+                Hashtags = sl.next();
+                amountLikes = Integer.parseInt(sl.next());
+                type = sl.next();
+                switch (type) {
                     case "Video": {
-                        duracion = Float.parseFloat(sl.next());
-                        resolucion = Float.parseFloat(sl.next());
-                        cantidadDeCuadros = Integer.parseInt(sl.next());
-                        Video video = new Video(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,
-                                duracion, resolucion, cantidadDeCuadros);
-                        listaPublicacion.add(video);
+                        duration = Float.parseFloat(sl.next());
+                        resolution = Float.parseFloat(sl.next());
+                        totalFrames = Integer.parseInt(sl.next());
+                        Video video = new Video(name, Hashtags, type, fecha, amountLikes, id,
+                                duration, resolution, totalFrames);
+                        listPublication.add(video);
                         break;
                     }
                     case "Imagen": {
-                        resolucion = Float.parseFloat(sl.next());
-                        ancho = Integer.parseInt(sl.next());
-                        alto = Integer.parseInt(sl.next());
-                        Imagen imagen = new Imagen(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,
-                                resolucion, ancho, alto);
-                        listaPublicacion.add(imagen);
+                        resolution = Float.parseFloat(sl.next());
+                        width = Integer.parseInt(sl.next());
+                        heigth = Integer.parseInt(sl.next());
+                        Imagen imagen = new Imagen(name, Hashtags, type, fecha, amountLikes, id,
+                                resolution, width, heigth);
+                        listPublication.add(imagen);
                         break;
                     }
                     case "Audio": {
-                        duracion = Float.parseFloat(sl.next());
-                        velocidadBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(nombre, etiquetasHashtags, tipo, listaAlbumes, fecha, cantidadMG, id,
-                                duracion, velocidadBits);
-                        listaPublicacion.add(audio);
+                        duration = Float.parseFloat(sl.next());
+                        velocityBits = Integer.parseInt(sl.next());
+                        Audio audio = new Audio(name, Hashtags, type, fecha, amountLikes, id,
+                                duration, velocityBits);
+                        listPublication.add(audio);
                         break;
                     }
                     default:
@@ -88,6 +80,6 @@ public class readPublicaciones {
             throw new RuntimeException(ex);
             // ex.printStackTrace();
         }
-        return listaPublicacion;
+        return listPublication;
     }
 }

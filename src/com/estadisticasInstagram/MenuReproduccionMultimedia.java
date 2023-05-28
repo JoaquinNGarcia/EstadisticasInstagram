@@ -8,7 +8,7 @@ import com.estadisticasInstagram.dominio.Video;
 
 import java.util.*;
 
-import static com.estadisticasInstagram.ColoresConsola.*;
+import static com.estadisticasInstagram.ColorsConsole.*;
 
 public class MenuReproduccionMultimedia {
     private static Scanner render = new Scanner(System.in);
@@ -35,7 +35,7 @@ public class MenuReproduccionMultimedia {
         AddPublicationsToPlay(profile);
         itsEmpty = publicacionesAReproducir.isEmpty();
         if(!itsEmpty) {
-            System.out.println("\nSeleccione el tipo de contenido que desea reproducir: \n");
+            System.out.println(BOLD + "\nSeleccione el tipo de contenido que desea reproducir: \n" + RESET);
             do {
                 System.out.println(BOLD + "\t\t\t\t1. Audio" + RESET);
                 System.out.println(BOLD + "\t\t\t\t2. Imagen" + RESET);
@@ -44,18 +44,12 @@ public class MenuReproduccionMultimedia {
                 option = render.nextLine().trim();
                 switch (option) {
                     case "1":
-                        System.out.println("\033[0;1m" + "============================" + " Listado de Audios " + "\033[0;1m" + "============================\n\n");
                         reproducirContenido(publicacionesAReproducir, "Audio");
                         break;
                     case "2":
-                        System.out.println(
-                                "\033[0;1m" + "============================" + " Listado de Imagenes "
-                                        + "\033[0;1m" + "============================\n\n");
                         reproducirContenido(publicacionesAReproducir, "Imagen");
                         break;
                     case "3":
-                        System.out.println("\033[0;1m" + "============================"
-                                + " Listado de Videos " + "\033[0;1m" + "============================\n\n");
                         reproducirContenido(publicacionesAReproducir, "Video");
                         break;
                     case "0":
@@ -69,17 +63,17 @@ public class MenuReproduccionMultimedia {
     }
 
     public void aplicarFiltros(PerfilInstagram profile) {
-        if(!profile.getListaPublicacion().isEmpty()){
+        if(!profile.getPublicationList().isEmpty()){
             System.out.println(BOLD + "Elija la publicación a la cual quiere aplicar el filtro." + RESET);
-            for (int i = 0; i < profile.getListaPublicacion().size(); i++)
-                System.out.println("\t" + profile.getListaPublicacion().get(i).getId() + "\t" + profile.getListaPublicacion().get(i).getNombre());
+            for (int i = 0; i < profile.getPublicationList().size(); i++)
+                System.out.println("\t" + profile.getPublicationList().get(i).getId() + "\t" + profile.getPublicationList().get(i).getName());
             System.out.println(BOLD + "Ingrese el ID de manera exacta... Por ejemplo '10'." + RESET);
             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
             try{
                 String idSeleccionado;
                 if(!(idSeleccionado = render.nextLine()).equals("0")) {
                     boolean encontrado = false;
-                    for (Publicacion publicacion : profile.getListaPublicacion()) {
+                    for (Publicacion publicacion : profile.getPublicationList()) {
                         if (publicacion.getId().equals(idSeleccionado)) {
                             encontrado = true;
                             System.out.println(BOLD + "Puede elegir entre estos 3 filtros para colocar \n\t" + Filters.BUENOSAIRES + " " + Filters.NEWYORK + " " + Filters.TOKIO + RESET);
@@ -88,9 +82,9 @@ public class MenuReproduccionMultimedia {
                             String filtroSeleccionado;
                             if(!(filtroSeleccionado = render.nextLine()).equals("0")) {
                                 if (publicacion instanceof Imagen) {
-                                    System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en la Imagen: " + publicacion.getId() + "\t" + publicacion.getNombre() + "\n\n" + RESET);
+                                    System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en la Imagen: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
                                 } else if (publicacion instanceof Video) {
-                                    System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en el Video: " + publicacion.getId() + "\t" + publicacion.getNombre() + "\n\n" + RESET);
+                                    System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en el Video: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
                                 } else {
                                     System.out.println(BOLD + RED + "No se puede aplicar un filtro porque es un audio" + "\n\n" + RESET);
 
@@ -118,15 +112,15 @@ public class MenuReproduccionMultimedia {
     public void AddPublicationsToPlay(PerfilInstagram profile) {
         if (!itsEmpty) {
             System.out.println(BOLD + "Elija la/s publicación/es que quiere reproducir." + RESET);
-            for (int i = 0; i < profile.getListaPublicacion().size(); i++)
-                System.out.println("\t" + profile.getListaPublicacion().get(i).getId() + "\t" + profile.getListaPublicacion().get(i).getNombre());
+            for (int i = 0; i < profile.getPublicationList().size(); i++)
+                System.out.println("\t" + profile.getPublicationList().get(i).getId() + "\t" + profile.getPublicationList().get(i).getName());
             System.out.println(BOLD + "Ingrese el ID de manera exacta... Por ejemplo '10'." + RESET);
             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
             try {
                 String idSeleccionado;
                 while (!(idSeleccionado = render.nextLine()).equals("0")) {
                     boolean encontrado = false;
-                    for (Publicacion publicacion : profile.getListaPublicacion()) {
+                    for (Publicacion publicacion : profile.getPublicationList()) {
                         if (publicacion.getId().equals(idSeleccionado)) {
                             if(!(idsSeleccionados.contains(idSeleccionado))) {
                                 publicacionesAReproducir.add(publicacion);
@@ -149,7 +143,7 @@ public class MenuReproduccionMultimedia {
                         System.out.println(BOLD + RED + "No hay publicaciones seleccionadas." + RESET);
                     } else {
                         System.out.println("Publicaciones seleccionadas:");
-                        publicacionesAReproducir.forEach(profile::MuestraPublicacion);
+                        publicacionesAReproducir.forEach(profile::showPublication);
                     }
                 }
             } catch (InputMismatchException error) {
@@ -165,14 +159,14 @@ public class MenuReproduccionMultimedia {
             Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass();
             if (clase.getSimpleName().equals(tipoDeClase)) {
                 if (publicacion instanceof Audio audio) {
-                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getNombre() + RESET);
-                    simulateProgressBar(100, 50, audio.getDuracion());
+                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getName() + RESET);
+                    simulateProgressBar(100, 50, audio.getDuration());
                 } else if (publicacion instanceof Imagen) {
-                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getNombre()  + RESET);
+                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getName()  + RESET);
                     simulateProgressBar(100, 50, 100); // 10 segundos por defecto.
                 } else if (publicacion instanceof Video video) {
-                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getNombre() + RESET);
-                    simulateProgressBar(100, 50, video.getDuracion());
+                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getName() + RESET);
+                    simulateProgressBar(100, 50, video.getDuration());
                 }
             }
         }

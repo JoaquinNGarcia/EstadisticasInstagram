@@ -4,40 +4,40 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class Video extends Publicacion {
-    private float duracion, resolucion;
-    private int cantidadDeCuadros;
+    private float duration, resolution;
+    private int totalFrames;
 
     // Avanzar, detener, aplicar filtro
 
-    public Video(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
-            LocalDate fechaSubida, int cantidadMG, String id, float duracion, float resolucion, int cantidadDeCuadros) {
-        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG, id);
-        this.duracion = duracion;
-        this.resolucion = resolucion;
-        this.cantidadDeCuadros = cantidadDeCuadros;
+    public Video(String name, String Hashtags, String type,
+                 LocalDate dateUploaded, int amountLikes, String id, float duration, float resolution, int totalFrames) {
+        super(name, Hashtags, type, dateUploaded, amountLikes, id);
+        this.duration = duration;
+        this.resolution = resolution;
+        this.totalFrames = totalFrames;
     }
 
-    public float getDuracion() {
-        return duracion;
+    public float getDuration() {
+        return duration;
     }
 
-    public void setDuracion(float duracion) {
-        this.duracion = duracion;
+    public void setDuration(float duration) {
+        this.duration = duration;
     }
 
-    public float getResolucion() {
-        return resolucion;
+    public float getResolution() {
+        return resolution;
     }
 
-    public void setResolucion(float resolucion) {
-        this.resolucion = resolucion;
+    public void setResolution(float resolution) {
+        this.resolution = resolution;
     }
 
-    public int getCantidadDeCuadros() {
-        return cantidadDeCuadros;
+    public int getTotalFrames() {
+        return totalFrames;
     }
 
-    public void setCantidadDeCuadros(int cantidadDeCuadros) {
-        this.cantidadDeCuadros = cantidadDeCuadros;
+    public void setTotalFrames(int totalFrames) {
+        this.totalFrames = totalFrames;
     }
 }

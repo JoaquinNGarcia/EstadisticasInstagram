@@ -1,107 +1,109 @@
 package com.estadisticasInstagram.dominio;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Album {
     // Sumar una lista de albunes
-    private String nombre;
-    private List<Album> subAlbumes; // hijos del album
+    private String name;
+    private List<Album> subAlbums; // hijos del album
 
-    private List<Publicacion> publicaciones;
-    // private static LinkedList<Publicacion> publicaciones; no deberia ser linkedList?
+    private List<Publicacion> publications;
 
-    public Album(String nombre) {
-        this.nombre = nombre;
-        this.subAlbumes = new ArrayList<>();
-        this.publicaciones = new ArrayList<>();
+    public Album(String name) {
+        this.name = name;
+        this.subAlbums = new ArrayList<>();
+        this.publications = new ArrayList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Album> getAlbumList() {
-        return subAlbumes;
+        return subAlbums;
     }
 
     public void setAlbumList(List<Album> albumList) {
-        this.subAlbumes = albumList;
+        this.subAlbums = albumList;
     }
 
-    public List<Publicacion> getPublicaciones() {
-        return publicaciones;
+    public List<Publicacion> getPublications() {
+        return publications;
     }
 
-    public void setPublicaciones(List<Publicacion> publicaciones) {
-        this.publicaciones = publicaciones;
+    public void setPublications(List<Publicacion> publications) {
+        this.publications = publications;
     }
 
-    public void agregarPublicacion(Publicacion publicacion) {
-        publicaciones.add(publicacion);
+    public void addPublication(Publicacion publicacion) {
+        publications.add(publicacion);
     }
 
-    public void eliminarPublicaciones() {
-        publicaciones.clear();
+    public void removePublications() {
+        publications.clear();
     }
 
-    public void agregarAlbum(Album hijo) {
-        subAlbumes.add(hijo);
+    public void addAlbum(Album hijo) {
+        subAlbums.add(hijo);
     }
 
-    public void eliminarAlbum(int indiceEliminar) {
-        subAlbumes.remove(indiceEliminar);
+    public void removeAlbum(int indiceEliminar) {
+        subAlbums.remove(indiceEliminar);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(nombre).append("\n");
-        imprimirSubAlbumes(sb, subAlbumes, 0);
+        sb.append(name).append("\n");
+        showAlbums(sb, subAlbums, 0);
         return sb.toString();
     }
 
-    private void imprimirSubAlbumes(StringBuilder sb, List<Album> subAlbumes, int nivel) {
+    private void showAlbums(StringBuilder sb, List<Album> subAlbums, int nivel) {
         nivel++;
-        for (Album album : subAlbumes) {
+        for (Album album : subAlbums) {
             for (int i = 0; i < nivel; i++) {
                 sb.append("\t");
             }
-            sb.append("- ").append(album.getNombre()).append("\n");
-            imprimirSubAlbumes(sb, album.getAlbumList(), nivel);
+            sb.append("- ").append(album.getName()).append("\n");
+            showAlbums(sb, album.getAlbumList(), nivel);
         }
     }
 
-    public int cantMgAcumulada() {
+    public int totalLikes() {
         int sum = 0;
-        for (int i = 0; i < publicaciones.size(); i++)
-            sum += publicaciones.get(i).getCantidadMG();
+        for (int i = 0; i < publications.size(); i++)
+            sum += publications.get(i).getAmountLikes();
         return sum;
     }
 
-    public Map<Class<Publicacion>, Integer> cantPublicacionesTipo() {
+    public Map<Class<Publicacion>, Integer> amountPublicationsType() {
         Map<Class<Publicacion>, Integer> mapa = new HashMap<>(); // creo el mapa que va a guardar la cantidad
-        for (Publicacion publicacion : publicaciones) {
+        for (Publicacion publicacion : publications) {
             Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede
-                                                                                    // ser de cualquier tipo y obtengo
-                                                                                    // de que clase es
+            // ser de cualquier tipo y obtengo
+            // de que clase es
             if (mapa.containsKey(clase)) // se fija si ya esta la clase en el mapa
                 mapa.put(clase, mapa.get(clase) + 1); // si esta incrementa {.put asigna clave/valor} {.get recupera el
-                                                      // valor asignado a una clave}
+                // valor asignado a una clave}
             else
                 mapa.put(clase, 1); // si no esta inicia el contador en 1;
         }
         return mapa;
     }
 
-    public int cantPublicacionesTotal() {
-        int cant = 0;
-        for (Publicacion publicacion : publicaciones) {
-            cant++;
+    public int totalPublications() {
+        int amount = 0;
+        for (Publicacion publicacion : publications) {
+            amount++;
         }
-        return cant;
+        return amount;
     }
 }

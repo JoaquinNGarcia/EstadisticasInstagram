@@ -4,39 +4,43 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 
 public class Imagen extends Publicacion {
-    private float resolucion;
-    private int ancho, alto;
+    private float resolution;
+    private int width, heigth;
     // Aplicar filtros
 
-    public Imagen(String nombre, String etiquetasHashtags, String tipo, LinkedList<String> listaAlbumes,
-            LocalDate fechaSubida, int cantidadMG, String id, float resolucion, int ancho, int alto) {
-        super(nombre, etiquetasHashtags, tipo, listaAlbumes, fechaSubida, cantidadMG, id);
-        this.resolucion = resolucion;
-        this.ancho = ancho;
-        this.alto = alto;
+    public Imagen(String name, String Hashtags, String type,
+                  LocalDate dateUploaded, int amountLikes, String id, float resolution, int width, int heigth) {
+        super(name, Hashtags, type, dateUploaded, amountLikes, id);
+        this.resolution = resolution;
+        this.width = width;
+        this.heigth = heigth;
     }
 
-    public float getResolucion() {
-        return resolucion;
+    public float getResolution() {
+        return resolution;
     }
 
-    public void setResolucion(float resolucion) {
-        this.resolucion = resolucion;
+    public void setResolution(float resolution) {
+        this.resolution = resolution;
     }
 
-    public int getAncho() {
-        return ancho;
+    public int getWidth() {
+        return width;
     }
 
-    public void setAncho(int ancho) {
-        this.ancho = ancho;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public int getAlto() {
-        return alto;
+    public int getHeight() {
+        return heigth;
     }
 
-    public void setAlto(int alto) {
-        this.alto = alto;
+    public void setHeight(int heigth) {
+        this.heigth = heigth;
+    }
+
+    public void setFilter() {
+        // System.out.println("Se aplico filtro en imagen");
     }
 }
