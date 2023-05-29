@@ -1,14 +1,11 @@
 package com.estadisticasInstagram.dominio;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Album {
-    // Sumar una lista de albunes
     private String name;
-    private List<Album> subAlbums; // hijos del album
+    private List<Album> subAlbums;
 
     private List<Publicacion> publications;
 
@@ -68,6 +65,7 @@ public class Album {
 
     private void showAlbums(StringBuilder sb, List<Album> subAlbums, int nivel) {
         nivel++;
+        subAlbums.sort(Comparator.comparing(Album::getName));
         for (Album album : subAlbums) {
             for (int i = 0; i < nivel; i++) {
                 sb.append("\t");
@@ -85,16 +83,13 @@ public class Album {
     }
 
     public Map<Class<Publicacion>, Integer> amountPublicationsType() {
-        Map<Class<Publicacion>, Integer> mapa = new HashMap<>(); // creo el mapa que va a guardar la cantidad
+        Map<Class<Publicacion>, Integer> mapa = new HashMap<>();
         for (Publicacion publicacion : publications) {
-            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass(); // creo el objeto "clase" que puede
-            // ser de cualquier tipo y obtengo
-            // de que clase es
-            if (mapa.containsKey(clase)) // se fija si ya esta la clase en el mapa
-                mapa.put(clase, mapa.get(clase) + 1); // si esta incrementa {.put asigna clave/valor} {.get recupera el
-                // valor asignado a una clave}
+            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass();
+            if (mapa.containsKey(clase))
+                mapa.put(clase, mapa.get(clase) + 1);
             else
-                mapa.put(clase, 1); // si no esta inicia el contador en 1;
+                mapa.put(clase, 1);
         }
         return mapa;
     }

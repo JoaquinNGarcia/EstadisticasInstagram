@@ -7,8 +7,6 @@ public class Video extends Publicacion {
     private float duration, resolution;
     private int totalFrames;
 
-    // Avanzar, detener, aplicar filtro
-
     public Video(String name, String Hashtags, String type,
                  LocalDate dateUploaded, int amountLikes, String id, float duration, float resolution, int totalFrames) {
         super(name, Hashtags, type, dateUploaded, amountLikes, id);

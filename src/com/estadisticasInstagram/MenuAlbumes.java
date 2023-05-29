@@ -6,7 +6,6 @@ import com.estadisticasInstagram.dominio.*;
 import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
-
 public class MenuAlbumes {
     private static Scanner scanner = new Scanner(System.in);
     private String optionSubMenu;
@@ -14,7 +13,7 @@ public class MenuAlbumes {
     private int publicationIndex;
     private boolean itsEmpty;
 
-    public void startMenuAlbumes(Album root, PerfilInstagram profile) { // HACER EL MENU MAS LINDO
+    public void startMenuAlbumes(Album root, PerfilInstagram profile) {
         String option = "";
         do {
             itsEmpty = root.getAlbumList().isEmpty();
@@ -25,10 +24,9 @@ public class MenuAlbumes {
             System.out.println(BOLD + "\t\t\t\t4. Agregar publicación a un álbum " + RESET);
             System.out.println(BOLD + "\t\t\t\t5. Mostrar publicaciones de un álbum " + RESET);
             System.out.println(BOLD + "\t\t\t\t6. Eliminar publicación de un álbum especifico" + RESET);
-            System.out.println(BOLD + "\t\t\t\t7. Eliminar publicación de todos los álbumes" + RESET);
-            System.out.println(BOLD + "\t\t\t\t8. Eliminar album" + RESET);
-            System.out.println(BOLD + "\t\t\t\t9. Cantidad de me gustas acumulados de un álbum" + RESET);
-            System.out.println(BOLD + "\t\t\t\t10. Cantidad de publicaciones total y por tipo" + RESET);
+            System.out.println(BOLD + "\t\t\t\t7. Eliminar album" + RESET);
+            System.out.println(BOLD + "\t\t\t\t8. Cantidad de me gustas acumulados de un álbum" + RESET);
+            System.out.println(BOLD + "\t\t\t\t9. Cantidad de publicaciones total y por tipo" + RESET);
             System.out.println(BOLD + "\t\t\t\t0. Salir" + RESET);
 
             option = scanner.nextLine().trim();
@@ -45,10 +43,9 @@ public class MenuAlbumes {
                 case "4" -> addPublication(root, profile);
                 case "5" -> showPublicationsAlbum(root,profile);
                 case "6" -> removePublication(root, profile);
-                case "7" -> removePublicationAllAlbums(root, profile);
-                case "8" -> removeAlbum(root, profile);
-                case "9" -> totalAcummulatedLikesAlbum(root);
-                case "10" -> totalPublicationsAlbum(root);
+                case "7" -> removeAlbum(root, profile);
+                case "8" -> totalAcummulatedLikesAlbum(root);
+                case "9" -> totalPublicationsAlbum(root);
                 case "0" -> System.out.println(BOLD + BLUE + "Ha salido del gestor de álbumes" + RESET);
             }
         } while (!option.equals("0"));
@@ -252,58 +249,6 @@ public class MenuAlbumes {
             else
                 System.out.println(BOLD + RED + "Opción inválida" + RESET);
         }
-    }
-
-    public void removePublicationAllAlbums(Album root, PerfilInstagram profile) {
-        if (!itsEmpty) {
-            System.out.println(BOLD + "Elija la publicación a eliminar" + RESET);
-            int k = 1;
-            for (Publicacion publicacion : profile.getPublicationList()) {
-                System.out.println(k + ". " + publicacion.getId());
-                k++;
-            }
-            try {
-                publicationIndex = scanner.nextInt() - 1;
-                scanner.nextLine();
-                if (publicationIndex >= 0 && publicationIndex < profile.getPublicationList().size()) {
-                    profile.showPublication(profile.getPublicationList().get(publicationIndex));
-                    System.out.println(BOLD + "Desea eliminar esta publicación de todos los albumes?" + RESET);
-                    System.out.println(BOLD + GREEN + "1.Confirmar" + RESET);
-                    System.out.println(BOLD + RED + "2.Cancelar" + RESET);
-                    optionSubMenu = scanner.nextLine();
-                    if (optionSubMenu.equals("1")) {
-                        int j = 0;
-                        int publicacionesEliminadas = 0;
-                        String nombrePublicacionEliminar = profile.getPublicationList().get(publicationIndex).getId();
-                        for (int i = 0; i < root.getAlbumList().size(); i++) {
-                            while (j < root.getAlbumList().get(i).getPublications().size()) {
-                                if (root.getAlbumList().get(i).getPublications().get(j).getId()
-                                        .equals(nombrePublicacionEliminar)) {
-                                    root.getAlbumList().get(i).getPublications().remove(j);
-                                    profile.getPublicationList().get(publicationIndex).getAlbumList().remove(root.getAlbumList().get(i).getName());
-                                    publicacionesEliminadas++;
-                                }
-                                j++;
-                            }
-                            j = 0;
-                        }
-                        if (publicacionesEliminadas == 0)
-                            System.out.println(BOLD + RED + "La publicación no estaba en ningun álbum" + RESET);
-                        else
-                            System.out.println(
-                                    BOLD + GREEN + "La publicación ha sido eliminada de todos los albumes" + RESET);
-                    } else if (optionSubMenu.equals("2"))
-                        System.out.println(BOLD + RED + "Ha cancelado la acción" + RESET);
-                    else
-                        System.out.println(BOLD + RED + "Opción inválida" + RESET);
-                } else
-                    System.out.println(BOLD + RED + "Opción inválida" + RESET);
-            } catch (InputMismatchException error) {
-                System.out.println(BOLD + RED + "Opción inválida" + RESET);
-                scanner.nextLine();
-            }
-        } else
-            System.out.println(BOLD + RED + "No hay albumes existentes" + RESET);
     }
 
     public void insertPublication(Album albumSelected, Publicacion publication) {
