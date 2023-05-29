@@ -3,7 +3,7 @@ package com.estadisticasInstagram.dominio;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
-public abstract class Publicacion { // NO VA A HABER instancias
+public abstract class Publicacion {
     private String name, Hashtags, type, id;
     private LinkedList<String> listAlbums;
 
@@ -79,6 +79,5 @@ public abstract class Publicacion { // NO VA A HABER instancias
         listAlbums.add(album.getName());
     }
 
-    public void setFilter() {
-    };
+    public void setFilter() {};
 }

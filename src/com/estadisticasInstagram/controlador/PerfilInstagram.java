@@ -4,7 +4,7 @@ import com.estadisticasInstagram.dominio.*;
 
 import java.util.*;
 
-public class PerfilInstagram { // NO VA A HABER instancias
+public class PerfilInstagram {
     private static LinkedList<Publicacion> listPublication;
     private LinkedList<Album> listAlbums = new LinkedList<>(); // podemos hacer tree o el list
 
@@ -33,9 +33,7 @@ public class PerfilInstagram { // NO VA A HABER instancias
     }
 
     public void showList() {
-        System.out.println("\033[0;1m" + "============================" + " PUBLICACION " + "\033[0;1m"
-                + "============================");
-        listPublication.sort(Comparator.comparing(Publicacion::getName));
+        System.out.println("\033[0;1m" + "============================" + " PUBLICACION " + "\033[0;1m" + "============================");
         for (Publicacion publication : listPublication) {
             // Collections.sort(publication, new sortByName());
             System.out.println("ID: " + publication.getId());
@@ -44,6 +42,38 @@ public class PerfilInstagram { // NO VA A HABER instancias
             System.out.println("Etiquetas - Hashtags: " + publication.getHashtags());
             System.out.println("Cantidad de me gustas: " + publication.getAmountLikes());
             // Imprimir cada elemento de la lista de albumes
+            System.out.print("Pertenece a los siguiente albumes: ");
+            for (String elem : publication.getAlbumList()) {
+                System.out.print(elem + " ");
+            }
+            System.out.println();
+            if (publication instanceof Video) {
+                Video video = (Video) publication;
+                System.out.println("Duración del video: " + video.getDuration());
+                System.out.println("Resolución del video: " + video.getResolution());
+                System.out.println("Cantidad de cuadros: " + video.getTotalFrames());
+            } else if (publication instanceof Imagen) {
+                Imagen imagen = (Imagen) publication;
+                System.out.println("Resolución de la imagen: " + imagen.getResolution());
+                System.out.println("Ancho de la imagen: " + imagen.getWidth());
+                System.out.println("Alto de la imagen: " + imagen.getHeight());
+            } else if (publication instanceof Audio) {
+                Audio audio = (Audio) publication;
+                System.out.println("Duración del audio: " + audio.getDuration());
+                System.out.println("Velocidad de bits: " + audio.getVelocityBits());
+            }
+            System.out.println("\033[0;1m" + "=====================================================================");
+        }
+    }
+    public void showListSortByName() {
+        System.out.println("\033[0;1m" + "============================" + " PUBLICACION " + "\033[0;1m" + "============================");
+        listPublication.sort(Comparator.comparing(Publicacion::getName));
+        for (Publicacion publication : listPublication) {
+            System.out.println("ID: " + publication.getId());
+            System.out.println("Nombre : " + publication.getName());
+            System.out.println("Fecha de subida: " + publication.getDateUploaded());
+            System.out.println("Etiquetas - Hashtags: " + publication.getHashtags());
+            System.out.println("Cantidad de me gustas: " + publication.getAmountLikes());
             System.out.print("Pertenece a los siguiente albumes: ");
             for (String elem : publication.getAlbumList()) {
                 System.out.print(elem + " ");
@@ -76,7 +106,6 @@ public class PerfilInstagram { // NO VA A HABER instancias
         System.out.println("Fecha de subida: " + publication.getDateUploaded());
         System.out.println("Etiquetas - Hashtags: " + publication.getHashtags());
         System.out.println("Cantidad de me gustas: " + publication.getAmountLikes());
-        // Imprimir cada elemento de la lista de albumes
         System.out.print("Pertenece a los siguiente albumes: ");
         for (String elem : publication.getAlbumList()) {
             System.out.print(elem + " ");

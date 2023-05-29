@@ -1,29 +1,20 @@
 package com.estadisticasInstagram;
 
 import com.estadisticasInstagram.controlador.PerfilInstagram;
-import com.estadisticasInstagram.dominio.Album;
-import com.estadisticasInstagram.dominio.Publicacion;
+import com.estadisticasInstagram.dominio.*;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
 import static com.estadisticasInstagram.archivos.readPublicaciones.uploadPublicationList;
 
 public class Menu {
-
-    // private com.estadisticasInstagram.controlador.PerfilInstagram
-    // perfilInstagram;
-    // public com.estadisticasInstagram.Main() {
-    // this.perfilInstagram = new
-    // com.estadisticasInstagram.controlador.PerfilInstagram();
-    // }
-
     public void menuPrincipal() {
         LinkedList<Publicacion> listP = null;
         Album root = new Album("ALBUMES:");
-        //LinkedList<Publicacion> publicacionesAReproducir = new LinkedList<>();
         boolean updateFile = false;
         PerfilInstagram profilePublications = new PerfilInstagram(listP);
         String option = "";
@@ -87,7 +78,8 @@ public class Menu {
                         System.out.println(BOLD + "============================" + " Generar reportes " + "============================" + RESET);
                         amountPublications(profilePublications);
                         amountLikesPublication(profilePublications);
-
+                        averageLikesPerType(profilePublications);
+                        showAlbumsAlphabetically(profilePublications);
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
@@ -129,13 +121,13 @@ public class Menu {
 
     public static void uploadFilePublications(PerfilInstagram listaPublicacionPerfil) {
         System.out.println();
-        listaPublicacionPerfil.showList();
+        listaPublicacionPerfil.showListSortByName();
         System.out.println();
         System.out.println();
     }
 
     public void amountPublications(PerfilInstagram listaPublicacionPerfil) {
-        System.out.println( BOLD + "\nPublicaciones por tipo y total de todas las publicaciones. \n" + RESET);
+        System.out.println( BOLD + UNDERLINED + "\nPublicaciones por tipo y total de todas las publicaciones.\n" + RESET);
         Map<Class<Publicacion>, Integer> mapa;
         mapa = listaPublicacionPerfil.amountPublicationsType();
         int totalPublicaciones = 0;
@@ -143,16 +135,82 @@ public class Menu {
             System.out.println( BOLD + "\t" + entry.getKey().getSimpleName() + ": " + entry.getValue() + RESET);
             totalPublicaciones += entry.getValue();
         }
-        System.out.println( BOLD + "\tEl total de publicaciones es de: " + totalPublicaciones + RESET);
+        System.out.println( BOLD + "\t\nEl total de publicaciones es de: " + totalPublicaciones + RESET);
+    }
+
+    public void averageLikesPerType (PerfilInstagram listaPublicacionPerfil) {
+        int sumVideo = 0;
+        int sumAudio = 0;
+        int sumImage = 0;
+        int countVideo = 0;
+        int countImage = 0;
+        int countAudio = 0;
+        for (Publicacion publication : listaPublicacionPerfil.getPublicationList()) {
+            if (publication instanceof Video) {
+                Video video = (Video) publication;
+                sumVideo += publication.getAmountLikes();
+                countVideo++;
+            } else if (publication instanceof Imagen) {
+                Imagen imagen = (Imagen) publication;
+                sumImage += publication.getAmountLikes();
+                countImage++;
+            } else if (publication instanceof Audio) {
+                Audio audio = (Audio) publication;
+                sumAudio += publication.getAmountLikes();
+                countAudio++;
+            }
+        }
+        System.out.println(BOLD + UNDERLINED + "Cantidad de Me Gusta promedio por tipo de publicación.\n" + RESET);
+        if (countVideo > 0 )
+            System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de video: " + sumVideo/countVideo + RESET);
+        if (countImage > 0)
+            System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de imagen: " + sumImage/countImage + RESET);
+        if (countAudio > 0)
+            System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de audio: " + sumAudio/countAudio + RESET);
+    }
+    public void amountLikesPublication(PerfilInstagram listaPublicacionPerfil) {
+        System.out.println( BOLD + "\nCantidad de Me Gusta por publicacion. \n" + RESET);
+        listaPublicacionPerfil.getPublicationList().sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
+        System.out.println( BOLD + "Lista ordenada por 'me gustas' de manera descendente" + RESET);
+        listaPublicacionPerfil.showList();
+        System.out.println( BOLD + "El total de 'me gustas' es de: " + listaPublicacionPerfil.totalLikes() + RESET);
         System.out.println();
         System.out.println();
     }
-
-    public void amountLikesPublication(PerfilInstagram listaPublicacionPerfil) {
-        System.out.println( BOLD + "\nCantidad de Me Gusta por publicacion. \n" + RESET);
-        System.out.println( BOLD + "El total de 'me gustas' es de: " + listaPublicacionPerfil.totalLikes() + RESET);
-        // hacer instance of ...
-        System.out.println();
-        System.out.println();
+    public void showPublicationsBetweenDates(List<Album> listAlbum, LocalDate date1, LocalDate date2) {
+        for (Album album : listAlbum) {
+            int countPublications = 0;
+            System.out.println(BOLD + "Publicaciones del álbum " + BOLD + BLUE + album.getName() + RESET + " dentro de las fechas ingresadas: " + RESET);
+            for (Publicacion publication : album.getPublications()) {
+                LocalDate publicationDate = publication.getDateUploaded();
+                if (publicationDate.isAfter(date1) && publicationDate.isBefore(date2)) {
+                    countPublications++;
+                }
+            }
+            System.out.println(countPublications);
+            showPublicationsBetweenDates(album.getAlbumList(), date1, date2);
+        }
+    }
+    public void showAlbumsAlphabetically (PerfilInstagram listaAlbumes) {
+        Scanner render = new Scanner(System.in);
+        System.out.println("Ingrese una fecha minima y otra maxima para mostrar (formato dd/MM/yyyy)");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String date1Str = render.nextLine();
+        String date2Str = render.nextLine();
+        LocalDate date1 = null;
+        LocalDate date2 = null;
+        try {
+            date1 = LocalDate.parse(date1Str, formatter);
+            date2 = LocalDate.parse(date2Str, formatter);
+        }
+        catch (DateTimeParseException e) {
+            System.out.println(BOLD + "Error al analizar las fechas ingresadas. Asegúrese de ingresarlas en el formato correcto." + RESET);
+            showAlbumsAlphabetically(listaAlbumes);
+        }
+        System.out.println(BOLD + UNDERLINED + "\nListado alfabetico de álbumes" + RESET);
+        for (Album album : listaAlbumes.getAlbumsList()) {
+            System.out.println(album);
+            showPublicationsBetweenDates(album.getAlbumList(), date1,date2);
+        }
     }
 }
