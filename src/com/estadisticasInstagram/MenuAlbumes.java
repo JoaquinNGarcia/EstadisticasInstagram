@@ -3,7 +3,6 @@ package com.estadisticasInstagram;
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
 
-import javax.swing.*;
 import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;

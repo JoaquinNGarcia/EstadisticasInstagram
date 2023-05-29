@@ -4,9 +4,7 @@ import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.Album;
 import com.estadisticasInstagram.dominio.Publicacion;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
 import static com.estadisticasInstagram.archivos.readPublicaciones.uploadPublicationList;

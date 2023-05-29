@@ -14,10 +14,15 @@ public class MenuReproduccionMultimedia {
     private static Scanner render = new Scanner(System.in);
 
     private String seePublications, applyFilters;
-    private int publicationIndex;
     private boolean itsEmpty;
     LinkedList<Publicacion> publicacionesAReproducir = new LinkedList<>();
     Set<String> idsSeleccionados = new HashSet<>();
+
+    enum Filters {
+        TOKIO,
+        NEWYORK,
+        BUENOSAIRES
+    }
 
     public void startReproduccionMultimedia(PerfilInstagram profile) {
         String option = "";
@@ -101,12 +106,6 @@ public class MenuReproduccionMultimedia {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    enum Filters {
-        TOKIO,
-        NEWYORK,
-        BUENOSAIRES
     }
 
     public void AddPublicationsToPlay(PerfilInstagram profile) {
