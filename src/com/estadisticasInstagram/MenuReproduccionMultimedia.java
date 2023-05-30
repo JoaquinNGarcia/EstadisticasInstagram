@@ -112,7 +112,7 @@ public class MenuReproduccionMultimedia {
         if (!itsEmpty) {
             System.out.println(BOLD + "Elija la/s publicación/es que quiere reproducir." + RESET);
             for (int i = 0; i < profile.getPublicationList().size(); i++)
-                System.out.println("\t" + profile.getPublicationList().get(i).getId() + "\t" + profile.getPublicationList().get(i).getName());
+                System.out.println("\t" + profile.getPublicationList().get(i).getId() + "\t" + profile.getPublicationList().get(i).getName() + "\t" + profile.getPublicationList().get(i).getType());
             System.out.println(BOLD + "Ingrese el ID de manera exacta... Por ejemplo '10'." + RESET);
             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
             try {

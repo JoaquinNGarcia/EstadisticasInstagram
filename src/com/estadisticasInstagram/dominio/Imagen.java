@@ -1,7 +1,6 @@
 package com.estadisticasInstagram.dominio;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 
 public class Imagen extends Publicacion {
     private float resolution;
@@ -41,6 +40,6 @@ public class Imagen extends Publicacion {
     }
 
     public void setFilter() {
-        // System.out.println("Se aplico filtro en imagen");
+        // System.o ut.println("Se aplico filtro en imagen");
     }
 }

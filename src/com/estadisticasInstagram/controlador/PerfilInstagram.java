@@ -35,18 +35,11 @@ public class PerfilInstagram {
     public void showList() {
         System.out.println("\033[0;1m" + "============================" + " PUBLICACION " + "\033[0;1m" + "============================");
         for (Publicacion publication : listPublication) {
-            // Collections.sort(publication, new sortByName());
             System.out.println("ID: " + publication.getId());
             System.out.println("Nombre : " + publication.getName());
             System.out.println("Fecha de subida: " + publication.getDateUploaded());
             System.out.println("Etiquetas - Hashtags: " + publication.getHashtags());
             System.out.println("Cantidad de me gustas: " + publication.getAmountLikes());
-            // Imprimir cada elemento de la lista de albumes
-            System.out.print("Pertenece a los siguiente albumes: ");
-            for (String elem : publication.getAlbumList()) {
-                System.out.print(elem + " ");
-            }
-            System.out.println();
             if (publication instanceof Video) {
                 Video video = (Video) publication;
                 System.out.println("Duración del video: " + video.getDuration());
@@ -74,11 +67,6 @@ public class PerfilInstagram {
             System.out.println("Fecha de subida: " + publication.getDateUploaded());
             System.out.println("Etiquetas - Hashtags: " + publication.getHashtags());
             System.out.println("Cantidad de me gustas: " + publication.getAmountLikes());
-            System.out.print("Pertenece a los siguiente albumes: ");
-            for (String elem : publication.getAlbumList()) {
-                System.out.print(elem + " ");
-            }
-            System.out.println();
             if (publication instanceof Video) {
                 Video video = (Video) publication;
                 System.out.println("Duración del video: " + video.getDuration());
@@ -106,11 +94,6 @@ public class PerfilInstagram {
         System.out.println("Fecha de subida: " + publication.getDateUploaded());
         System.out.println("Etiquetas - Hashtags: " + publication.getHashtags());
         System.out.println("Cantidad de me gustas: " + publication.getAmountLikes());
-        System.out.print("Pertenece a los siguiente albumes: ");
-        for (String elem : publication.getAlbumList()) {
-            System.out.print(elem + " ");
-        }
-        System.out.println();
         if (publication instanceof Video) {
             Video video = (Video) publication;
             System.out.println("Duración del video: " + video.getDuration());

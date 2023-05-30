@@ -317,7 +317,7 @@ public class MenuAlbumes {
         subMenuAlbum((albumSelected));
         if (!itsEmpty) {
             if (optionSubMenu.equals("1")) {
-                System.out.println(BOLD + "Cantidad de me gustas acumulados: " + RESET);
+                System.out.print(BOLD + "Cantidad de me gustas acumulados: " + RESET);
                 System.out.println(albumSelected.getAlbumList().get(albumIndex).totalLikes());
             } else if (optionSubMenu.equals("2"))
                 totalAcummulatedLikesAlbum(albumSelected.getAlbumList().get(albumIndex));
@@ -330,8 +330,7 @@ public class MenuAlbumes {
         subMenuAlbum((albumSelected));
         if (!itsEmpty) {
             if (optionSubMenu.equals("1")) {
-                System.out.println(BOLD + "Cantidad de publicaciones total: "
-                        + albumSelected.getAlbumList().get(albumIndex).totalPublications() + RESET);
+                System.out.println(BOLD + "Cantidad de publicaciones total: " + albumSelected.getAlbumList().get(albumIndex).totalPublications() + RESET);
                 System.out.print(BOLD + "Cantidad de publicaciones por tipo: " + RESET);
                 Map<Class<Publicacion>, Integer> mapa = albumSelected.getAlbumList().get(albumIndex)
                         .amountPublicationsType();

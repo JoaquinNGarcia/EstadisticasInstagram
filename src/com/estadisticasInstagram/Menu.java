@@ -169,25 +169,24 @@ public class Menu {
             System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de audio: " + sumAudio/countAudio + RESET);
     }
     public void amountLikesPublication(PerfilInstagram listaPublicacionPerfil) {
-        System.out.println( BOLD + "\nCantidad de Me Gusta por publicacion. \n" + RESET);
         listaPublicacionPerfil.getPublicationList().sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
         System.out.println( BOLD + "Lista ordenada por 'me gustas' de manera descendente" + RESET);
         listaPublicacionPerfil.showList();
         System.out.println( BOLD + "El total de 'me gustas' es de: " + listaPublicacionPerfil.totalLikes() + RESET);
         System.out.println();
-        System.out.println();
+        listaPublicacionPerfil.getPublicationList().sort(Comparator.comparing(Publicacion::getId));
     }
     public void showPublicationsBetweenDates(List<Album> listAlbum, LocalDate date1, LocalDate date2) {
         for (Album album : listAlbum) {
             int countPublications = 0;
-            System.out.println(BOLD + "Publicaciones del álbum " + BOLD + BLUE + album.getName() + RESET + " dentro de las fechas ingresadas: " + RESET);
+            System.out.print(BOLD + "Publicaciones del álbum " + BOLD + BLUE + album.getName() + RESET + " dentro de las fechas ingresadas: " + RESET);
             for (Publicacion publication : album.getPublications()) {
                 LocalDate publicationDate = publication.getDateUploaded();
                 if (publicationDate.isAfter(date1) && publicationDate.isBefore(date2)) {
                     countPublications++;
                 }
             }
-            System.out.println(countPublications);
+            System.out.print(countPublications + "\n");
             showPublicationsBetweenDates(album.getAlbumList(), date1, date2);
         }
     }
