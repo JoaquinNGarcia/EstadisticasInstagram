@@ -8,8 +8,8 @@ public class Video extends Publicacion {
     private int totalFrames;
 
     public Video(String name, String Hashtags, String type,
-                 LocalDate dateUploaded, int amountLikes, String id, float duration, float resolution, int totalFrames) {
-        super(name, Hashtags, type, dateUploaded, amountLikes, id);
+                 LocalDate dateUploaded, int amountLikes, String id, float duration, float resolution, int totalFrames,LinkedList<String> listComments) {
+        super(name, Hashtags, type, dateUploaded, amountLikes, id,listComments);
         this.duration = duration;
         this.resolution = resolution;
         this.totalFrames = totalFrames;

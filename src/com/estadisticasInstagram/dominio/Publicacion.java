@@ -7,14 +7,16 @@ public abstract class Publicacion {
     private String name, Hashtags, type, id;
     private LinkedList<String> listAlbums;
 
+    private LinkedList<String> listComments;
     private LocalDate dateUploaded;
     private int amountLikes;
 
-    public Publicacion(String name, String Hashtags, String type, LocalDate dateUploaded, int amountLikes, String id) {
+    public Publicacion(String name, String Hashtags, String type, LocalDate dateUploaded, int amountLikes, String id,LinkedList<String> listComments) {
         this.name = name;
         this.Hashtags = Hashtags;
         this.type = type;
         this.listAlbums = new LinkedList<>();
+        this.listComments = listComments;
         this.dateUploaded = dateUploaded;
         this.amountLikes = amountLikes;
         this.id = id;
@@ -73,6 +75,22 @@ public abstract class Publicacion {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public LinkedList<String> getListAlbums() {
+        return listAlbums;
+    }
+
+    public void setListAlbums(LinkedList<String> listAlbums) {
+        this.listAlbums = listAlbums;
+    }
+
+    public LinkedList<String> getListComments() {
+        return listComments;
+    }
+
+    public void setListComments(LinkedList<String> listComments) {
+        this.listComments = listComments;
     }
 
     public void addAlbum(Album album) {

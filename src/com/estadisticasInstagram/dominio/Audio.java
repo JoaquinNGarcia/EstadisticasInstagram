@@ -9,8 +9,8 @@ public class Audio extends Publicacion {
     // avanzar, detener;
 
     public Audio(String name, String Hashtags, String type,
-                 LocalDate dateUploaded, int amountLikes, String id, float duration, int velocityBits) {
-        super(name, Hashtags, type, dateUploaded, amountLikes, id);
+                 LocalDate dateUploaded, int amountLikes, String id, float duration, int velocityBits,LinkedList<String> listComments) {
+        super(name, Hashtags, type, dateUploaded, amountLikes, id,listComments);
         this.duration = duration;
         this.velocityBits = velocityBits;
     }

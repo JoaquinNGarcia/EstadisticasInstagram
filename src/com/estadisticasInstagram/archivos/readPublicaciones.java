@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class readPublicaciones {
     public static LinkedList<Publicacion> uploadPublicationList() {
-        String name, Hashtags, type,id;
+        String name, Hashtags, type,id, comments;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String dateUploaded;
         int amountLikes;
@@ -27,7 +27,6 @@ public class readPublicaciones {
         int velocityBits;
 
         LinkedList<Publicacion> listPublication = new LinkedList<>();
-
         File f = new File("archivoPublicaciones.txt");
         Scanner s;
         try {
@@ -43,13 +42,18 @@ public class readPublicaciones {
                 Hashtags = sl.next();
                 amountLikes = Integer.parseInt(sl.next());
                 type = sl.next();
+                comments = sl.next();
+                LinkedList<String> listComments = new LinkedList<>();
+                String[] arrayComments = comments.split("_");
+                for (String comment : arrayComments) {
+                    listComments.add(comment);
+                }
                 switch (type) {
                     case "Video": {
                         duration = Float.parseFloat(sl.next());
                         resolution = Float.parseFloat(sl.next());
                         totalFrames = Integer.parseInt(sl.next());
-                        Video video = new Video(name, Hashtags, type, fecha, amountLikes, id,
-                                duration, resolution, totalFrames);
+                        Video video = new Video(name, Hashtags, type, fecha, amountLikes, id, duration, resolution, totalFrames, listComments);
                         listPublication.add(video);
                         break;
                     }
@@ -57,16 +61,14 @@ public class readPublicaciones {
                         resolution = Float.parseFloat(sl.next());
                         width = Integer.parseInt(sl.next());
                         heigth = Integer.parseInt(sl.next());
-                        Imagen imagen = new Imagen(name, Hashtags, type, fecha, amountLikes, id,
-                                resolution, width, heigth);
+                        Imagen imagen = new Imagen(name, Hashtags, type, fecha, amountLikes, id, resolution, width, heigth, listComments);
                         listPublication.add(imagen);
                         break;
                     }
                     case "Audio": {
                         duration = Float.parseFloat(sl.next());
                         velocityBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(name, Hashtags, type, fecha, amountLikes, id,
-                                duration, velocityBits);
+                        Audio audio = new Audio(name, Hashtags, type, fecha, amountLikes, id, duration, velocityBits, listComments);
                         listPublication.add(audio);
                         break;
                     }

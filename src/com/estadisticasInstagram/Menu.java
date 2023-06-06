@@ -77,6 +77,7 @@ public class Menu {
                     if (updateFile) {
                         System.out.println(BOLD + "============================" + " Generar reportes " + "============================" + RESET);
                         amountPublications(profilePublications);
+                        showPublicationsByType(profilePublications);
                         amountLikesPublication(profilePublications);
                         averageLikesPerType(profilePublications);
                         showAlbumsAlphabetically(profilePublications);
@@ -132,10 +133,10 @@ public class Menu {
         mapa = listaPublicacionPerfil.amountPublicationsType();
         int totalPublicaciones = 0;
         for (Map.Entry<Class<Publicacion>, Integer> entry : mapa.entrySet()) {
-            System.out.println( BOLD + "\t" + entry.getKey().getSimpleName() + ": " + entry.getValue() + RESET);
+            System.out.println( BOLD + "\t" + entry.getKey().getSimpleName() + ": " + RESET + entry.getValue());
             totalPublicaciones += entry.getValue();
         }
-        System.out.println( BOLD + "\t\nEl total de publicaciones es de: " + totalPublicaciones + RESET);
+        System.out.println( BOLD + "\t\nEl total de publicaciones es de: " + RESET + totalPublicaciones);
     }
 
     public void averageLikesPerType (PerfilInstagram listaPublicacionPerfil) {
@@ -160,19 +161,34 @@ public class Menu {
                 countAudio++;
             }
         }
-        System.out.println(BOLD + UNDERLINED + "Cantidad de Me Gusta promedio por tipo de publicación.\n" + RESET);
+        System.out.println(BOLD + "Cantidad de" + RED + " 'me gustas' " + RESET + BOLD + "promedio por tipo de publicación.\n" + RESET);
         if (countVideo > 0 )
-            System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de video: " + sumVideo/countVideo + RESET);
+            System.out.println(BOLD + "\tCantidad de" + RED + " 'me gustas' " + RESET + BOLD + "promedio de video: " + RESET + RED + "❤" + sumVideo/countVideo + RESET);
         if (countImage > 0)
-            System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de imagen: " + sumImage/countImage + RESET);
+            System.out.println(BOLD + "\tCantidad de" + RED + " 'me gustas' " + RESET + BOLD + "promedio de imagen: " + RESET + RED + "❤" + sumImage/countImage + RESET);
         if (countAudio > 0)
-            System.out.println(BOLD + "\tCantidad de 'me gustas' promedio de audio: " + sumAudio/countAudio + RESET);
+            System.out.println(BOLD + "\tCantidad de" + RED + " 'me gustas' " + RESET + BOLD + "promedio de audio: " + RESET + RED + "❤" + sumAudio/countAudio + RESET + "\n");
+    }
+    public void showPublicationsByType(PerfilInstagram listaPublicacionPerfil) {
+        System.out.println("\n" + BOLD + "Lista ordenada" + RED + " 'me gustas' " + RESET + BOLD + "de manera descendente por tipos: \n" + RESET);
+        LinkedList<Publicacion> publications = listaPublicacionPerfil.getListPublicationByType("Video");
+        publications.sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
+        PerfilInstagram.showListByType(publications);
+        System.out.println();
+
+        publications = listaPublicacionPerfil.getListPublicationByType("Imagen");
+        publications.sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
+        PerfilInstagram.showListByType(publications);
+        System.out.println();
+
+        publications = listaPublicacionPerfil.getListPublicationByType("Audio");
+        publications.sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
+        PerfilInstagram.showListByType(publications);
+        System.out.println();
+
     }
     public void amountLikesPublication(PerfilInstagram listaPublicacionPerfil) {
-        listaPublicacionPerfil.getPublicationList().sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
-        System.out.println( BOLD + "Lista ordenada por 'me gustas' de manera descendente" + RESET);
-        listaPublicacionPerfil.showList();
-        System.out.println( BOLD + "El total de 'me gustas' es de: " + listaPublicacionPerfil.totalLikes() + RESET);
+        System.out.println( BOLD + "El total de " + RED + "'me gustas' " + RESET + BOLD + "es de: " + RESET + RED + "❤" + listaPublicacionPerfil.totalLikes() + RESET);
         System.out.println();
         listaPublicacionPerfil.getPublicationList().sort(Comparator.comparing(Publicacion::getId));
     }
