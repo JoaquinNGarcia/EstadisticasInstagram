@@ -1,8 +1,10 @@
 package com.estadisticasInstagram;
 
+import com.estadisticasInstagram.Graficos.GraficoTortas;
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -30,7 +32,7 @@ public class Menu {
                 "  ####    ##   ##   #####    ####    ##  ##     #####  #### ##  ##  ##   ##   ##\n" + BOLD +
                 " ================================================================================" + RESET);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -38,7 +40,7 @@ public class Menu {
         System.out.println(BOLD + " =================== UNIVERSIDAD CAECE - TRABAJO PRÁCTICO JAVA ==================" + RESET);
         System.out.println(BOLD + " ================================================================================" + RESET);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,9 +52,10 @@ public class Menu {
             System.out.println("" + BOLD +
                     "1" + " - Cargar archivos de publicaciones.\n" +
                     "2" + " - Mostrar las publicaciones.\n" +
-                    "3" + " - Generar reportes.\n" +
-                    "4" + " - Gestor de reproducion de contenido.\n" +
-                    "5" + " - Gestor de Albumes.\n" +
+                    "3" + " - Generar estadisticas.\n" +
+                    "4" + " - Generar reportes.\n" +
+                    "5" + " - Gestor de reproducion de contenido.\n" +
+                    "6" + " - Gestor de Albumes.\n" +
                     "0" + " - Salir\n" + RESET);
             option = render.nextLine().trim();
             switch (option) {
@@ -75,6 +78,24 @@ public class Menu {
                     break;
                 case "3":
                     if (updateFile) {
+                        String[] titles = {"Video", "Imagen", "Audio"};
+                        int[] data = arrayOfPublicationsByType(profilePublications);
+
+                        JFrame frame = new JFrame("Grafico Tortas");
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.setSize(400, 400);
+
+                        GraficoTortas pieChart = new GraficoTortas(titles, data);
+                        frame.add(pieChart);
+
+                        frame.setVisible(true);
+                    }
+                    else {
+                        System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
+                    }
+                    break;
+                case "4":
+                    if (updateFile) {
                         System.out.println(BOLD + "============================" + " Generar reportes " + "============================" + RESET);
                         amountPublications(profilePublications);
                         showPublicationsByType(profilePublications);
@@ -85,7 +106,7 @@ public class Menu {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
                     break;
-                case "4":
+                case "5":
                     if (updateFile) {
                         MenuReproduccionMultimedia menuReproduccionMultimedia = new MenuReproduccionMultimedia();
                         menuReproduccionMultimedia.startReproduccionMultimedia(profilePublications);
@@ -99,7 +120,7 @@ public class Menu {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
                     break;
-                case "5":
+                case "6":
                     if (updateFile) {
                         System.out.println(BOLD + "============================" + " Gestor de álbumes " + "============================" + RESET);
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
@@ -125,6 +146,16 @@ public class Menu {
         listaPublicacionPerfil.showListSortByName();
         System.out.println();
         System.out.println();
+    }
+
+    public int[] arrayOfPublicationsByType(PerfilInstagram profile) {
+        int[] data = {0,0,0};
+        for (Publicacion publication : profile.getPublicationList()) {
+            if (publication instanceof Video) {data[0] += 1;}
+            else if (publication instanceof Imagen) {data[1] += 1;}
+            else if (publication instanceof Audio) {data[2] += 1;}
+        }
+        return data;
     }
 
     public void amountPublications(PerfilInstagram listaPublicacionPerfil) {
@@ -208,7 +239,7 @@ public class Menu {
     }
     public void showAlbumsAlphabetically (PerfilInstagram listaAlbumes) {
         Scanner render = new Scanner(System.in);
-        System.out.println("Ingrese una fecha minima y otra maxima para mostrar (formato dd/MM/yyyy)");
+        System.out.println(BOLD + "Ingrese una fecha minima y otra maxima para mostrar (formato dd/MM/yyyy)" + RESET);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date1Str = render.nextLine();
         String date2Str = render.nextLine();
