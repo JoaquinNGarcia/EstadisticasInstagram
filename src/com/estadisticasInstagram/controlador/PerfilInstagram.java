@@ -167,6 +167,31 @@ public class PerfilInstagram {
         return mapa;
     }
 
+    public Map<String, Integer> getPeopleWithAmountLikes() {
+        Map<String, Integer> mapa = new HashMap<String, Integer>();
+        for (Publicacion publication : listPublication) {
+            String name = publication.getName();
+            int likes = publication.getAmountLikes();
+            if (mapa.containsKey(name))
+                mapa.put(name, mapa.get(name) + likes);
+            else
+                mapa.put(name, likes);
+        }
+        return mapa;
+    }
+
+    public Map<String, Integer> getPeopleWithAmountPublications() {
+        Map<String, Integer> mapa = new HashMap<String, Integer>();
+        for (Publicacion publication : listPublication) {
+            String name = publication.getName();
+            if (mapa.containsKey(name))
+                mapa.put(name, mapa.get(name) + 1);
+            else
+                mapa.put(name, 1);
+        }
+        return mapa;
+    }
+
     public int totalLikes() {
         int amount = 0;
         for (Publicacion publication : listPublication) {

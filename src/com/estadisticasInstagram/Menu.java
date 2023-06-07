@@ -1,10 +1,10 @@
 package com.estadisticasInstagram;
 
 import com.estadisticasInstagram.Graficos.GraficoTortas;
+import com.estadisticasInstagram.Graficos.Histograma;
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -78,17 +78,13 @@ public class Menu {
                     break;
                 case "3":
                     if (updateFile) {
-                        String[] titles = {"Video", "Imagen", "Audio"};
                         int[] data = arrayOfPublicationsByType(profilePublications);
+                        GraficoTortas.createAndShowGUIPieGraphic(data);
 
-                        JFrame frame = new JFrame("Grafico Tortas");
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.setSize(400, 400);
-
-                        GraficoTortas pieChart = new GraficoTortas(titles, data);
-                        frame.add(pieChart);
-
-                        frame.setVisible(true);
+                        Map<String, Integer> mapaInformation = profilePublications.getPeopleWithAmountLikes();
+                        Histograma.createAndShowGUIHistogramLikes(mapaInformation);
+                        mapaInformation = profilePublications.getPeopleWithAmountPublications();
+                        Histograma.createAndShowGUIHistogramPublication(mapaInformation);
                     }
                     else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);

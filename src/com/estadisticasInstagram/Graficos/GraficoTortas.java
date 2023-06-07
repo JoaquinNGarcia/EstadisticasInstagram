@@ -64,4 +64,14 @@ public class GraficoTortas extends JPanel {
         Color[] colors = {Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, Color.ORANGE};
         return colors[index % colors.length];
     }
+
+    public static void createAndShowGUIPieGraphic(int[] data) {
+        String[] titles = {"Video", "Imagen", "Audio"};
+        JFrame frame = new JFrame("Grafico Torta");
+        frame.setSize(400, 400);
+        GraficoTortas pieChart = new GraficoTortas(titles, data);
+        frame.add(pieChart);
+        frame.setVisible(true);
+
+    }
 }
