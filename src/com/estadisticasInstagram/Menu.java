@@ -154,6 +154,10 @@ public class Menu {
         return data;
     }
 
+    /*public int[] amountOfPublicationsDate (int date) {
+
+    }*/
+
     public void amountPublications(PerfilInstagram listaPublicacionPerfil) {
         System.out.println( BOLD + UNDERLINED + "\nPublicaciones por tipo y total de todas las publicaciones.\n" + RESET);
         Map<Class<Publicacion>, Integer> mapa;

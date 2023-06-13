@@ -39,7 +39,9 @@ public class GraficoTortas extends JPanel {
             // Dibujar el nombre y el porcentaje dentro del gráfico
             String label = labels[i];
             String percentage = String.format("%.1f%%", (double) data[i] / total * 100);
+            Graphics2D g2d = (Graphics2D) g;
             if (label.equals("Video")) {
+                g2d.setFont(new Font("Arial", Font.BOLD, 12));
                 g.setColor(Color.BLUE);
                 g.drawString(label, 250, 300);
                 g.drawString(percentage, 250, 300 + 15);
