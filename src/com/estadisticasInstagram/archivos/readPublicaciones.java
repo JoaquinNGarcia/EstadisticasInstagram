@@ -14,18 +14,10 @@ import java.util.Scanner;
 
 public class readPublicaciones {
     public static LinkedList<Publicacion> uploadPublicationList() {
-        String name, Hashtags, type,id, comments;
+        String name, Hashtags, type,id, comments, dateUploaded, filtro;;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dateUploaded;
-        int amountLikes;
-        // Video
+        int amountLikes, totalFrames, width, heigth, velocityBits;
         float duration, resolution;
-        int totalFrames;
-        // Imagen
-        int width, heigth;
-        // Audio
-        int velocityBits;
-
         LinkedList<Publicacion> listPublication = new LinkedList<>();
         File f = new File("archivoPublicaciones.txt");
         Scanner s;
@@ -50,18 +42,20 @@ public class readPublicaciones {
                 }
                 switch (type) {
                     case "Video": {
+                        filtro = sl.next();
                         duration = Float.parseFloat(sl.next());
                         resolution = Float.parseFloat(sl.next());
                         totalFrames = Integer.parseInt(sl.next());
-                        Video video = new Video(name, Hashtags, type, fecha, amountLikes, id, duration, resolution, totalFrames, listComments);
+                        Video video = new Video(name, Hashtags, type, fecha, amountLikes, id, listComments, duration, resolution, totalFrames,  filtro);
                         listPublication.add(video);
                         break;
                     }
                     case "Imagen": {
+                        filtro = sl.next();
                         resolution = Float.parseFloat(sl.next());
                         width = Integer.parseInt(sl.next());
                         heigth = Integer.parseInt(sl.next());
-                        Imagen imagen = new Imagen(name, Hashtags, type, fecha, amountLikes, id, resolution, width, heigth, listComments);
+                        Imagen imagen = new Imagen(name, Hashtags, type, fecha, amountLikes, id, listComments, resolution, width, heigth, filtro);
                         listPublication.add(imagen);
                         break;
                     }

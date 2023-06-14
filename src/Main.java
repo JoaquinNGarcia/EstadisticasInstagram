@@ -1,4 +1,4 @@
-import com.estadisticasInstagram.Menu;
+import com.estadisticasInstagram.menu.Menu;
 
 public class Main {
     public static void main(String[] args) {

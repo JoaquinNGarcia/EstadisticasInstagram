@@ -1,7 +1,7 @@
-package com.estadisticasInstagram;
+package com.estadisticasInstagram.menu;
 
-import com.estadisticasInstagram.Graficos.GraficoTortas;
-import com.estadisticasInstagram.Graficos.Histograma;
+import com.estadisticasInstagram.graficos.GraficoTortas;
+import com.estadisticasInstagram.graficos.Histograma;
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
 
@@ -59,7 +59,7 @@ public class Menu {
                     "0" + " - Salir\n" + RESET);
             option = render.nextLine().trim();
             switch (option) {
-                case "1":
+                case "1" -> {
                     if (updateFile) {
                         System.out.println(BOLD + RED + "\t\t\t\t\tEl archivo ya fue cargado.\n" + RESET);
                     } else {
@@ -68,15 +68,15 @@ public class Menu {
                         listP = uploadPublicationList();
                         profilePublications.setPublicationList(listP);
                     }
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     if (updateFile) {
                         uploadFilePublications(profilePublications);
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
-                    break;
-                case "3":
+                }
+                case "3" -> {
                     if (updateFile) {
                         int[] data = arrayOfPublicationsByType(profilePublications);
                         GraficoTortas.createAndShowGUIPieGraphic(data);
@@ -85,12 +85,11 @@ public class Menu {
                         Histograma.createAndShowGUIHistogramLikes(mapaInformation);
                         mapaInformation = profilePublications.getPeopleWithAmountPublications();
                         Histograma.createAndShowGUIHistogramPublication(mapaInformation);
-                    }
-                    else {
+                    } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
-                    break;
-                case "4":
+                }
+                case "4" -> {
                     if (updateFile) {
                         System.out.println(BOLD + "============================" + " Generar reportes " + "============================" + RESET);
                         amountPublications(profilePublications);
@@ -101,8 +100,8 @@ public class Menu {
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
-                    break;
-                case "5":
+                }
+                case "5" -> {
                     if (updateFile) {
                         MenuReproduccionMultimedia menuReproduccionMultimedia = new MenuReproduccionMultimedia();
                         menuReproduccionMultimedia.startReproduccionMultimedia(profilePublications);
@@ -115,8 +114,8 @@ public class Menu {
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
-                    break;
-                case "6":
+                }
+                case "6" -> {
                     if (updateFile) {
                         System.out.println(BOLD + "============================" + " Gestor de álbumes " + "============================" + RESET);
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
@@ -128,11 +127,12 @@ public class Menu {
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
-                    break;
-                case "0": System.out.println(BOLD + BLUE +"H" + RESET + BLUE + "A" + RESET + BOLD + CYAN + " S" + RESET + CYAN + "A" + RESET +
-                        BOLD + PURPLE + "L" + RESET + PURPLE + "I" + RESET + BOLD + RED + "D" + RESET + RED + "O " + RESET +
-                        BOLD + YELLOW + "D" + RESET + YELLOW + "E" + RESET + BOLD + GREEN + "L " + RESET + GREEN + "P" + RESET + BOLD + BLUE +"R" + RESET +
-                        BLUE + "O" + RESET + BOLD + CYAN + "G" + RESET + CYAN + "R" + RESET + BOLD + PURPLE + "A" + RESET + PURPLE + "M" + RESET + BOLD + RED + "A " + RESET);
+                }
+                case "0" ->
+                        System.out.println(BOLD + BLUE + "H" + RESET + BLUE + "A" + RESET + BOLD + CYAN + " S" + RESET + CYAN + "A" + RESET +
+                                BOLD + PURPLE + "L" + RESET + PURPLE + "I" + RESET + BOLD + RED + "D" + RESET + RED + "O " + RESET +
+                                BOLD + YELLOW + "D" + RESET + YELLOW + "E" + RESET + BOLD + GREEN + "L " + RESET + GREEN + "P" + RESET + BOLD + BLUE + "R" + RESET +
+                                BLUE + "O" + RESET + BOLD + CYAN + "G" + RESET + CYAN + "R" + RESET + BOLD + PURPLE + "A" + RESET + PURPLE + "M" + RESET + BOLD + RED + "A " + RESET);
             }
         } while (!option.equals("0"));
     }

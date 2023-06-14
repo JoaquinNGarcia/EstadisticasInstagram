@@ -62,11 +62,13 @@ public class PerfilInstagram {
             System.out.println("\n");
             if (publication instanceof Video) {
                 Video video = (Video) publication;
+                System.out.println(BOLD + "Filtro: " + RESET + video.getFiltro() + "\n");
                 System.out.println(BOLD + "Duración del video: " + RESET + video.getDuration());
                 System.out.println(BOLD + "Resolución del video: " + RESET + video.getResolution());
                 System.out.println(BOLD + "Cantidad de cuadros: " + RESET + video.getTotalFrames());
             } else if (publication instanceof Imagen) {
                 Imagen imagen = (Imagen) publication;
+                System.out.println(BOLD + "Filtro: " + RESET + imagen.getFiltro() + "\n");
                 System.out.println(BOLD + "Resolución de la imagen: " + RESET + imagen.getResolution());
                 System.out.println(BOLD + "Ancho de la imagen: " + RESET + imagen.getWidth());
                 System.out.println(BOLD + "Alto de la imagen: " + RESET + imagen.getHeight());
@@ -96,11 +98,13 @@ public class PerfilInstagram {
             System.out.println("\n");
             if (publication instanceof Video) {
                 Video video = (Video) publication;
+                System.out.println(BOLD + "Filtro: " + RESET + video.getFiltro() + "\n");
                 System.out.println(BOLD + "Duración del video: " + RESET + video.getDuration());
                 System.out.println(BOLD + "Resolución del video: " + RESET + video.getResolution());
                 System.out.println(BOLD + "Cantidad de cuadros: " + RESET + video.getTotalFrames());
             } else if (publication instanceof Imagen) {
                 Imagen imagen = (Imagen) publication;
+                System.out.println(BOLD + "Filtro: " + RESET + imagen.getFiltro() + "\n");
                 System.out.println(BOLD + "Resolución de la imagen: " + RESET + imagen.getResolution());
                 System.out.println(BOLD + "Ancho de la imagen: " + RESET + imagen.getWidth());
                 System.out.println(BOLD + "Alto de la imagen: " + RESET + imagen.getHeight());
@@ -112,7 +116,6 @@ public class PerfilInstagram {
             System.out.println("\033[0;1m" + "=====================================================================");
         }
         listPublication.sort(Comparator.comparing(Publicacion::getId));
-
     }
 
     public void showPublication(Publicacion publication) {
@@ -130,11 +133,13 @@ public class PerfilInstagram {
         System.out.println("\n");
         if (publication instanceof Video) {
             Video video = (Video) publication;
+            System.out.println(BOLD + "Filtro: " + RESET + video.getFiltro() + "\n");
             System.out.println(BOLD + "Duración del video: " + RESET + video.getDuration());
             System.out.println(BOLD + "Resolución del video: " + RESET + video.getResolution());
             System.out.println(BOLD + "Cantidad de cuadros: " + RESET + video.getTotalFrames());
         } else if (publication instanceof Imagen) {
             Imagen imagen = (Imagen) publication;
+            System.out.println(BOLD + "Filtro: " + RESET + imagen.getFiltro() + "\n");
             System.out.println(BOLD + "Resolución de la imagen: " + RESET + imagen.getResolution());
             System.out.println(BOLD + "Ancho de la imagen: " + RESET + imagen.getWidth());
             System.out.println(BOLD + "Alto de la imagen: " + RESET + imagen.getHeight());

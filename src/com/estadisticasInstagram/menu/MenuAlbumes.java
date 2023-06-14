@@ -1,4 +1,4 @@
-package com.estadisticasInstagram;
+package com.estadisticasInstagram.menu;
 
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;

@@ -1,4 +1,4 @@
-package com.estadisticasInstagram.Graficos;
+package com.estadisticasInstagram.graficos;
 
 import javax.swing.*;
 import java.awt.*;
