@@ -1,12 +1,14 @@
 package com.estadisticasInstagram.dominio;
 
+import com.estadisticasInstagram.interfaces.ContenidoMultimedia;
+
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 import static com.estadisticasInstagram.ColorsConsole.BOLD;
 import static com.estadisticasInstagram.ColorsConsole.RESET;
 
-public class Video extends Publicacion {
+public class Video extends Publicacion implements ContenidoMultimedia {
     private float duration, resolution;
     private int totalFrames;
     private String filtro;

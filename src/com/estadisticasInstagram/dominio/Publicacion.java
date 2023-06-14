@@ -1,11 +1,13 @@
 package com.estadisticasInstagram.dominio;
 
+import com.estadisticasInstagram.interfaces.ContenidoMultimedia;
+
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
 
-public abstract class Publicacion {
+public abstract class Publicacion implements ContenidoMultimedia {
     private String name, Hashtags, type, id;
     private LinkedList<String> listAlbums;
 
