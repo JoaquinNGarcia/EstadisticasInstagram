@@ -1,22 +1,22 @@
-01-Fernando-23/07/2018-#Naturaleza-50-Imagen-hermoso lugar-N/D-123-23-23-/
-02-Vanesa-12/01/2021-#tbt-125-Audio-buena foto!-35.4-63-/
-03-Joaquin-21/03/2018-#Cancion-150-Imagen-tremenda-N/D-345-34-23-/
-04-Martin-01/09/2021-#Cancion-75-Video-como estas-N/D-345.4-34.3-23-/
-05-Jose-21/03/2018-#Tecnologia-50-Imagen-hola como estas_buena foto!-N/D-123-23-23-/
-06-Vanesa-13/02/2023-#Aventura-170-Audio-holaaaa-75.3-63-/
-07-Estefania-13/02/2023-#Terror-140-Audio-hola-145.8-63-/
-08-Joaquin-21/03/2022-#Entretenimiento-122-Imagen-linda foto-N/D-345-34-23-/
-09-Martin-03/12/2021-#Naturaleza-154-Video-buenisimo el lugar-N/D-345.4-34.3-23-/
-10-Rodolfo-21/04/2023-#Automovil-230-Imagen-hola_como estas_buena foto-N/D-123-23-23-/
-11-Camila-03/07/2021-#Naturaleza-401-Video-hola_lindo lugar_buena foto-N/D-345.4-34.3-23-/
-12-Facundo-01/10/2018-#Tecnologia-103-Imagen-hola_como estas_buena foto-N/D-345-34-23-/
-13-Tomas-03/12/2021-#Naturaleza-107-Video-hola_lindo lugar_buena foto-N/D-345.4-34.3-23-/
-14-Fernando-21/03/2018-#Terror-112-Imagen-hola_como estas_buena foto-N/D-123-23-23-/
-15-Sergio-03/12/2021-#Naturaleza-321-Video-hola_como estas_buena foto-N/D-345.4-34.3-23-/
-16-Sofia-21/03/2021-#Autos-231-Imagen-hola_como estas_buena foto-N/D-345-34-23-/
-17-Fernando-22/04/2022-#Autos-101-Imagen-hola_como estas_buena foto-N/D-123-23-23-/
-18-Sergio-21/10/2018-#Naturaleza-50-Imagen-hola_lindo lugar_buena foto-N/D-345-34-23-/
-19-Vanesa-13/02/2023-#Naturaleza-12-Audio-hola_como estas_buena foto-68.2-63-/
-20-Martin-03/12/2021-#Motos-56-Video-hola_como estas_buena foto-N/D-345.4-34.3-23-/
-21-Lucas-13/02/2023-#Naturaleza-28-Audio-hola_lindo lugar_buena foto-65-63-/
-22-Felipe-13/02/2023-#Naturaleza-432-Audio-hola_como estas_buena foto-45.3-62-/
+01-Fernando-23/07/2018-#Naturaleza-50-Imagen-hermoso lugar-0-N/D-123-23-23-/
+02-Vanesa-12/01/2021-#tbt-125-Audio-buena foto!-0-35.4-63-/
+03-Joaquin-21/03/2018-#Cancion-150-Imagen-tremenda-0-N/D-345-34-23-/
+04-Martin-01/09/2021-#Cancion-75-Video-como estas-0-N/D-345.4-34.3-23-/
+05-Jose-21/03/2018-#Tecnologia-50-Imagen-hola como estas_buena foto!-0-N/D-123-23-23-/
+06-Vanesa-13/02/2023-#Aventura-170-Audio-holaaaa-0-75.3-63-/
+07-Estefania-13/02/2023-#Terror-140-Audio-hola-0-145.8-63-/
+08-Joaquin-21/03/2022-#Entretenimiento-122-Imagen-linda foto-0-N/D-345-34-23-/
+09-Martin-03/12/2021-#Naturaleza-154-Video-buenisimo el lugar-0-N/D-345.4-34.3-23-/
+10-Rodolfo-21/04/2023-#Automovil-230-Imagen-hola_como estas_buena foto-0-N/D-123-23-23-/
+11-Camila-03/07/2021-#Naturaleza-401-Video-hola_lindo lugar_buena foto-0-N/D-345.4-34.3-23-/
+12-Facundo-01/10/2018-#Tecnologia-103-Imagen-hola_como estas_buena foto-0-N/D-345-34-23-/
+13-Tomas-03/12/2021-#Naturaleza-107-Video-hola_lindo lugar_buena foto-0-N/D-345.4-34.3-23-/
+14-Fernando-21/03/2018-#Terror-112-Imagen-hola_como estas_buena foto-0-N/D-123-23-23-/
+15-Sergio-03/12/2021-#Naturaleza-321-Video-hola_como estas_buena foto-0-N/D-345.4-34.3-23-/
+16-Sofia-21/03/2021-#Autos-231-Imagen-hola_como estas_buena foto-0-N/D-345-34-23-/
+17-Fernando-22/04/2022-#Autos-101-Imagen-hola_como estas_buena foto-0-N/D-123-23-23-/
+18-Sergio-21/10/2018-#Naturaleza-50-Imagen-hola_lindo lugar_buena foto-0-N/D-345-34-23-/
+19-Vanesa-13/02/2023-#Naturaleza-12-Audio-hola_como estas_buena foto-0-68.2-63-/
+20-Martin-03/12/2021-#Motos-56-Video-hola_como estas_buena foto-0-N/D-345.4-34.3-23-/
+21-Lucas-13/02/2023-#Naturaleza-28-Audio-hola_lindo lugar_buena foto-50-65-63-/
+22-Felipe-13/02/2023-#Naturaleza-432-Audio-hola_como estas_buena foto-0-45.3-62-/

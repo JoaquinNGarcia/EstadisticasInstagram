@@ -59,6 +59,7 @@ public class PerfilInstagram {
                 System.out.print("\n" + BOLD + "Comentario " + RESET + i + ": " + comment);
                 i++;
             }
+            System.out.println("\n" + BOLD + "Progreso: " + publication.getProgress() + RESET);
             System.out.println("\n");
             if (publication instanceof Video) {
                 Video video = (Video) publication;
@@ -95,6 +96,7 @@ public class PerfilInstagram {
                 System.out.print("\n" + BOLD + "Comentario " + RESET + i + ": " + comment);
                 i++;
             }
+            System.out.println("\n" + BOLD + "Progreso: " + publication.getProgress() + RESET);
             System.out.println("\n");
             if (publication instanceof Video) {
                 Video video = (Video) publication;
@@ -130,6 +132,7 @@ public class PerfilInstagram {
             System.out.print("\n" + BOLD + "Comentario " + RESET + i + ": " + comment);
             i++;
         }
+        System.out.println("\n" + BOLD + "Progreso: " + publication.getProgress() + RESET);
         System.out.println("\n");
         if (publication instanceof Video) {
             Video video = (Video) publication;

@@ -144,6 +144,8 @@ public class Menu implements Serializable {
 
     public void deserializar(){
         listP = SerFiltros.deserializarFiltros();
+        //System.out.println("resultado" + SerProgress.deserializarProgress());
+
     }
 
     public static void uploadFilePublications(PerfilInstagram listaPublicacionPerfil) {

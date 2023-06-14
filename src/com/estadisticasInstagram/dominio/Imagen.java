@@ -14,8 +14,8 @@ public class Imagen extends Publicacion implements ContenidoMultimedia, Serializ
     private int width, height;
     private String filtro;
 
-    public Imagen(String name, String Hashtags, String type, LocalDate dateUploaded, int amountLikes, String id, LinkedList<String> listComments, float resolution, int width, int heigth, String filtro) {
-        super(name, Hashtags, type, dateUploaded, amountLikes, id, listComments);
+    public Imagen(String name, String Hashtags, String type, LocalDate dateUploaded, int amountLikes, String id, LinkedList<String> listComments,int progress, float resolution, int width, int heigth, String filtro) {
+        super(name, Hashtags, type, dateUploaded, amountLikes, id, listComments,progress);
         this.resolution = resolution;
         this.width = width;
         this.height = heigth;
@@ -63,7 +63,7 @@ public class Imagen extends Publicacion implements ContenidoMultimedia, Serializ
         System.out.println(BOLD + "Reproduciendo: " + publicacion.getType() + "\t" + publicacion.getId() + "\t" + publicacion.getName() + RESET);
         if (publicacion instanceof Imagen imagen) {
             System.out.println(BOLD + "Filtro: " + imagen.getFiltro());
-            simulateProgressBar(100, 50, 100); // 10 segundos por defecto.
+            simulateProgressBar(100, 50, 100, imagen.getProgress(),imagen.getId()); // 10 segundos por defecto.
         }
     }
 }

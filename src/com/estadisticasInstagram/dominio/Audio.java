@@ -15,8 +15,8 @@ public class Audio extends Publicacion implements ContenidoMultimedia, Serializa
     // avanzar, detener;
 
     public Audio(String name, String Hashtags, String type,
-                 LocalDate dateUploaded, int amountLikes, String id, float duration, int velocityBits,LinkedList<String> listComments) {
-        super(name, Hashtags, type, dateUploaded, amountLikes, id,listComments);
+                 LocalDate dateUploaded, int amountLikes, String id, float duration, int velocityBits,LinkedList<String> listComments,int progress) {
+        super(name, Hashtags, type, dateUploaded, amountLikes, id,listComments,progress);
         this.duration = duration;
         this.velocityBits = velocityBits;
     }
@@ -41,7 +41,7 @@ public class Audio extends Publicacion implements ContenidoMultimedia, Serializa
     public void reproducirContenido(Publicacion publicacion) {
         System.out.println(BOLD + "Reproduciendo: " + publicacion.getType() + "\t" +  publicacion.getId() + "\t" + publicacion.getName() + RESET);
         if (publicacion instanceof Audio audio) {
-            simulateProgressBar(100, 50, audio.getDuration());
+            simulateProgressBar(100, 50, audio.getDuration(),audio.getProgress(),audio.getId());
         }
     }
 }

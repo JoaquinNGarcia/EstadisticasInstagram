@@ -1,19 +1,20 @@
 package com.estadisticasInstagram.serializacion;
 
-import com.estadisticasInstagram.dominio.Publicacion;
-
 import java.io.*;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SerFiltros {
-    public static void serializarFiltros( LinkedList<Publicacion> publi) {
+public class SerProgress {
+    public static void serializarProgress(int proceso,String id) {
         try {
-            File f = new File("publicaciones.ser");
+            File f = new File("progress.ser");
+            Map <Integer,String> myMap = new HashMap<>();
+            myMap.put(proceso,id);
             if (!f.exists())
                 f.createNewFile();
             FileOutputStream fos = new FileOutputStream(f);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(publi);
+            oos.writeObject(myMap);
             oos.close();
         }
         catch(IOException e){
@@ -23,14 +24,15 @@ public class SerFiltros {
     }
 
     @SuppressWarnings("unchecked")
-    public static LinkedList<Publicacion> deserializarFiltros() {
-        LinkedList<Publicacion> publi = new LinkedList<>();
+    public static int deserializarProgress() {
+        int proceso = 0;
         try {
-            File f = new File("publicaciones.ser");
+            File f = new File("progress.ser");
             FileInputStream fis = new FileInputStream(f);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object stream = ois.readObject();
-            publi = (LinkedList<Publicacion>)stream;
+            proceso = (int)stream;
+            System.out.println("PROCESO" + proceso);
             ois.close();
         }
         catch(FileNotFoundException e){
@@ -43,8 +45,7 @@ public class SerFiltros {
         catch(ClassNotFoundException e){
             System.out.println("No se encuentra la clase");
         }
-        return publi;
+        return proceso;
 
     }
-
 }
