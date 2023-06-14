@@ -2,13 +2,14 @@ package com.estadisticasInstagram.dominio;
 
 import com.estadisticasInstagram.interfaces.ContenidoMultimedia;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 import static com.estadisticasInstagram.ColorsConsole.BOLD;
 import static com.estadisticasInstagram.ColorsConsole.RESET;
 
-public class Audio extends Publicacion implements ContenidoMultimedia {
+public class Audio extends Publicacion implements ContenidoMultimedia, Serializable {
     private float duration;
     private int velocityBits;
     // avanzar, detener;

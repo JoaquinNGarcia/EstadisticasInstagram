@@ -2,12 +2,13 @@ package com.estadisticasInstagram.dominio;
 
 import com.estadisticasInstagram.interfaces.ContenidoMultimedia;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
 
-public abstract class Publicacion implements ContenidoMultimedia {
+public abstract class Publicacion implements ContenidoMultimedia, Serializable {
     private String name, Hashtags, type, id;
     private LinkedList<String> listAlbums;
 
@@ -100,8 +101,6 @@ public abstract class Publicacion implements ContenidoMultimedia {
     public void addAlbum(Album album) {
         listAlbums.add(album.getName());
     }
-
-    public void setFilter() {};
 
     public abstract void reproducirContenido(Publicacion publicacion);
 

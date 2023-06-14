@@ -5,12 +5,14 @@ import com.estadisticasInstagram.dominio.Audio;
 import com.estadisticasInstagram.dominio.Imagen;
 import com.estadisticasInstagram.dominio.Publicacion;
 import com.estadisticasInstagram.dominio.Video;
+import com.estadisticasInstagram.serializacion.SerFiltros;
 
+import java.io.Serializable;
 import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
 
-public class MenuReproduccionMultimedia {
+public class MenuReproduccionMultimedia implements Serializable {
     private static Scanner render = new Scanner(System.in);
 
     private String seePublications, applyFilters;
@@ -27,6 +29,10 @@ public class MenuReproduccionMultimedia {
         TOKIO,
         NEWYORK,
         BUENOSAIRES
+    }
+
+    public void serializar(LinkedList<Publicacion> publi) {
+        SerFiltros.serializarFiltros(publi);
     }
 
     public void startReproduccionMultimedia(PerfilInstagram profile) {
@@ -129,7 +135,7 @@ public class MenuReproduccionMultimedia {
                             System.out.println("Ingrese uno manera exacta... Por ejemplo 'BUENOSAIRES'.");
                             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
                             String filtroSeleccionado;
-                            if(!(filtroSeleccionado = render.nextLine()).equals("0")) {
+                            if (!(filtroSeleccionado = render.nextLine()).equals("0")) {
                                 if (publicacion instanceof Imagen imagen) {
                                     imagen.setFiltro(filtroSeleccionado.toUpperCase());
                                     System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en la Imagen: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
@@ -143,6 +149,7 @@ public class MenuReproduccionMultimedia {
                             }
                             break;
                         }
+
                     }
                     if (!encontrado) {
                         System.out.println("El ID ingresado no existe en la lista de publicaciones. Inténtelo nuevamente.");
@@ -151,6 +158,7 @@ public class MenuReproduccionMultimedia {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+            serializar(profile.getPublicationList());
         }
     }
 
@@ -199,26 +207,4 @@ public class MenuReproduccionMultimedia {
         } else
             System.out.println(BOLD + RED + "No hay publicaciones seleccionadas." + RESET);
     }
-
-    /*
-    public void reproducirContenido(LinkedList<Publicacion> publicacionesSeleccionadas, String tipoDeClase) {
-        for (Publicacion publicacion : publicacionesSeleccionadas) {
-            Class<Publicacion> clase = (Class<Publicacion>) publicacion.getClass();
-            if (clase.getSimpleName().equals(tipoDeClase)) {
-                if (publicacion instanceof Audio audio) {
-
-                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getName() + RESET);
-                    simulateProgressBar(100, 50, audio.getDuration());
-                } else if (publicacion instanceof Imagen) {
-                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getName()  + RESET);
-                    simulateProgressBar(100, 50, 100); // 10 segundos por defecto.
-                } else if (publicacion instanceof Video video) {
-                    System.out.println(BOLD + "Reproduciendo: " + publicacion.getId() + "\t" + publicacion.getName() + RESET);
-                    simulateProgressBar(100, 50, video.getDuration());
-                }
-            }
-        }
-    }
-    */
-
 }

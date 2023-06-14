@@ -1,10 +1,12 @@
 package com.estadisticasInstagram.menu;
 
-import com.estadisticasInstagram.graficos.GraficoTortas;
-import com.estadisticasInstagram.graficos.Histograma;
 import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
+import com.estadisticasInstagram.graficos.GraficoTortas;
+import com.estadisticasInstagram.graficos.Histograma;
+import com.estadisticasInstagram.serializacion.SerFiltros;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,14 +15,16 @@ import java.util.*;
 import static com.estadisticasInstagram.ColorsConsole.*;
 import static com.estadisticasInstagram.archivos.readPublicaciones.uploadPublicationList;
 
-public class Menu {
+public class Menu implements Serializable {
+    LinkedList<Publicacion> listP = null;
     public void menuPrincipal() {
-        LinkedList<Publicacion> listP = null;
+
         Album root = new Album("ALBUMES:");
         boolean updateFile = false;
         PerfilInstagram profilePublications = new PerfilInstagram(listP);
         String option = "";
         Scanner render = new Scanner(System.in); // Acoplamiento con interfaz (lectura!!)
+
         System.out.println(BOLD + "\n ================================================================================" + RESET);
         System.out.println(BOLD + " ================================================================================" + RESET + BLUE +
                 "\n  ####    ##   ##   #####   ######     ##       ####   ######     ##     ##   ##" + "\n" + CYAN +
@@ -66,6 +70,7 @@ public class Menu {
                         System.out.println(BOLD + GREEN + "\t\t\t\t\tEl archivo fue cargado con exito. \n\n" + RESET);
                         updateFile = true;
                         listP = uploadPublicationList();
+                        deserializar();
                         profilePublications.setPublicationList(listP);
                     }
                 }
@@ -135,6 +140,10 @@ public class Menu {
                                 BLUE + "O" + RESET + BOLD + CYAN + "G" + RESET + CYAN + "R" + RESET + BOLD + PURPLE + "A" + RESET + PURPLE + "M" + RESET + BOLD + RED + "A " + RESET);
             }
         } while (!option.equals("0"));
+    }
+
+    public void deserializar(){
+        listP = SerFiltros.deserializarFiltros();
     }
 
     public static void uploadFilePublications(PerfilInstagram listaPublicacionPerfil) {
