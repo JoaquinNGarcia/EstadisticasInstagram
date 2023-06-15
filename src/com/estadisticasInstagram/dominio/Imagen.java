@@ -54,10 +54,7 @@ public class Imagen extends Publicacion implements ContenidoMultimedia, Serializ
         this.filtro = filtro;
     }
 
-    public void setFilter() {
-        // System.o ut.println("Se aplico filtro en imagen");
-    }
-
+    /** reproduce las imagenes*/
     @Override
     public void reproducirContenido(Publicacion publicacion) {
         System.out.println(BOLD + "Reproduciendo: " + publicacion.getType() + "\t" + publicacion.getId() + "\t" + publicacion.getName() + RESET);

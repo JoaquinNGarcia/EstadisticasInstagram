@@ -126,6 +126,7 @@ public abstract class Publicacion implements ContenidoMultimedia, Serializable {
 
     public void serializar(int progress,String id) {SerProgress.serializeProgress(progress,id);}
 
+    /** da opciones de adelantar,retroceder o detener la reproducción*/
     public void simulateProgressBar(int total, int width, float delayMillis, int progress, String id) {
 
         int prevProgress = -1;
@@ -224,6 +225,8 @@ public abstract class Publicacion implements ContenidoMultimedia, Serializable {
         frame.dispose();
     }
 
+    /** barra interactiva que simula una carga
+     * @see #simulateProgressBar(int, int, float, int, String) */
     private String buildProgressBar(int currentWidth, int totalWidth, int progress) {
         StringBuilder progressBar = new StringBuilder("[");
         for (int i = 0; i < currentWidth; i++) {

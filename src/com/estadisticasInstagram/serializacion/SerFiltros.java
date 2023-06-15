@@ -5,6 +5,7 @@ import com.estadisticasInstagram.dominio.Publicacion;
 import java.io.*;
 import java.util.LinkedList;
 
+/** clase utilizada para serializar los filtros*/
 public class SerFiltros {
     public static void serializeFilters( LinkedList<Publicacion> publi) {
         try {

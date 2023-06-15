@@ -17,6 +17,7 @@ import java.util.*;
 import static com.estadisticasInstagram.ColorsConsole.*;
 import static com.estadisticasInstagram.archivos.readPublicaciones.uploadPublicationList;
 
+/** menú principal del programa*/
 public class Menu implements Serializable {
     LinkedList<Publicacion> listP = null;
     public void menuPrincipal() {
@@ -38,7 +39,7 @@ public class Menu implements Serializable {
                 "  ####    ##   ##   #####    ####    ##  ##     #####  #### ##  ##  ##   ##   ##\n" + BOLD +
                 " ================================================================================" + RESET);
         try {
-            Thread.sleep(0);
+            Thread.sleep(350);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -46,7 +47,7 @@ public class Menu implements Serializable {
         System.out.println(BOLD + " =================== UNIVERSIDAD CAECE - TRABAJO PRÁCTICO JAVA ==================" + RESET);
         System.out.println(BOLD + " ================================================================================" + RESET);
         try {
-            Thread.sleep(0);
+            Thread.sleep(250);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -163,6 +164,7 @@ public class Menu implements Serializable {
         }
     }
 
+
     public static void uploadFilePublications(PerfilInstagram listaPublicacionPerfil) {
         System.out.println();
         listaPublicacionPerfil.showListSortByName();
@@ -170,6 +172,8 @@ public class Menu implements Serializable {
         System.out.println();
     }
 
+    /**
+     * @return arreglo con la cantidad de publicaciones subidas de cada tipo*/
     public int[] arrayOfPublicationsByType(PerfilInstagram profile) {
         int[] data = {0,0,0};
         for (Publicacion publication : profile.getPublicationList()) {
@@ -180,6 +184,7 @@ public class Menu implements Serializable {
         return data;
     }
 
+    /** muestra las cantidades de publicaciones por tipo de publicación y total de las mismas*/
     public void amountPublications(PerfilInstagram listaPublicacionPerfil) {
         System.out.println( BOLD + UNDERLINED + "\nPublicaciones por tipo y total de todas las publicaciones.\n" + RESET);
         Map<Class<Publicacion>, Integer> mapa;
@@ -191,6 +196,8 @@ public class Menu implements Serializable {
         }
         System.out.println( BOLD + "\t\nEl total de publicaciones es de: " + RESET + totalPublicaciones);
     }
+
+    /** muestra los 'me gusta' promedio por tipo de publicación*/
 
     public void averageLikesPerType (PerfilInstagram listaPublicacionPerfil) {
         int sumVideo = 0;
@@ -222,6 +229,9 @@ public class Menu implements Serializable {
         if (countAudio > 0)
             System.out.println(BOLD + "\tCantidad de" + RED + " 'me gustas' " + RESET + BOLD + "promedio de audio: " + RESET + RED + "❤" + sumAudio/countAudio + RESET + "\n");
     }
+
+    /** muestra las publicaciones por tipo, descendentemente por los 'me gusta'*/
+
     public void showPublicationsByType(PerfilInstagram listaPublicacionPerfil) {
         System.out.println("\n" + BOLD + "Lista ordenada" + RED + " 'me gustas' " + RESET + BOLD + "de manera descendente por tipos: \n" + RESET);
         LinkedList<Publicacion> publications = listaPublicacionPerfil.getListPublicationByType("Video");
@@ -240,28 +250,41 @@ public class Menu implements Serializable {
         System.out.println();
 
     }
+
+    /** muestra el total de 'me gustas' entre todas las publicaciones */
+
     public void amountLikesPublication(PerfilInstagram listaPublicacionPerfil) {
         System.out.println( BOLD + "El total de " + RED + "'me gustas' " + RESET + BOLD + "es de: " + RESET + RED + "❤" + listaPublicacionPerfil.totalLikes() + RESET);
         System.out.println();
         listaPublicacionPerfil.getPublicationList().sort(Comparator.comparing(Publicacion::getId));
     }
+
+    /** muestra la cantidad de publicaciones subidas en un rango de fechas de un álbum*/
+
     public void showPublicationsBetweenDates(List<Album> listAlbum, LocalDate date1, LocalDate date2) {
         for (Album album : listAlbum) {
             int countPublications = 0;
-            System.out.print(BOLD + "Publicaciones del álbum " + BOLD + BLUE + album.getName() + RESET + " dentro de las fechas ingresadas: " + RESET);
+            int countComments = 0;
+            System.out.print(BOLD + "Publicaciones del álbum " + BOLD + BLUE + album.getName() + RESET + BOLD + " dentro de las fechas ingresadas: " + RESET);
             for (Publicacion publication : album.getPublications()) {
                 LocalDate publicationDate = publication.getDateUploaded();
                 if (publicationDate.isAfter(date1) && publicationDate.isBefore(date2)) {
                     countPublications++;
+                    for (String comment : publication.getListComments()) {
+                        countComments++;
+                    }
                 }
             }
             System.out.print(countPublications + "\n");
+            System.out.println(BOLD + "Cantidad de comentarios: " + countComments + RESET);
             showPublicationsBetweenDates(album.getAlbumList(), date1, date2);
         }
     }
+
+    /** muestra los álbumes ordenados alfabéticamente*/
     public void showAlbumsAlphabetically (PerfilInstagram listaAlbumes) {
         Scanner render = new Scanner(System.in);
-        System.out.println(BOLD + "Ingrese una fecha minima y otra maxima para mostrar (formato dd/MM/yyyy)" + RESET);
+        System.out.println(BOLD + "Ingrese una fecha mínma y otra máxima para mostrar (formato dd/MM/yyyy)" + RESET);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date1Str = render.nextLine();
         String date2Str = render.nextLine();
@@ -275,10 +298,14 @@ public class Menu implements Serializable {
             System.out.println(BOLD + "Error al analizar las fechas ingresadas. Asegúrese de ingresarlas en el formato correcto." + RESET);
             showAlbumsAlphabetically(listaAlbumes);
         }
-        System.out.println(BOLD + UNDERLINED + "\nListado alfabetico de álbumes" + RESET);
-        for (Album album : listaAlbumes.getAlbumsList()) {
-            System.out.println(album);
-            showPublicationsBetweenDates(album.getAlbumList(), date1,date2);
+        if (date1.isBefore(date2) || date1.isEqual(date2)) {
+            System.out.println(BOLD + UNDERLINED + "\nListado alfabetico de álbumes" + RESET);
+            for (Album album : listaAlbumes.getAlbumsList()) {
+                System.out.println(album);
+                showPublicationsBetweenDates(album.getAlbumList(), date1, date2);
+            }
         }
+        else
+            System.out.println(BOLD + "Ha puesto la fecha miníma mayor o igual que la máxima" + RESET);
     }
 }
