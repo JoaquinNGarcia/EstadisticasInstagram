@@ -63,7 +63,7 @@ public class readPublicaciones {
                     case "Audio": {
                         duration = Float.parseFloat(sl.next());
                         velocityBits = Integer.parseInt(sl.next());
-                        Audio audio = new Audio(name, Hashtags, type, fecha, amountLikes, id, duration, velocityBits, listComments,progress);
+                        Audio audio = new Audio(name, Hashtags, type, fecha, amountLikes, id, duration, velocityBits, listComments, progress);
                         listPublication.add(audio);
                         break;
                     }

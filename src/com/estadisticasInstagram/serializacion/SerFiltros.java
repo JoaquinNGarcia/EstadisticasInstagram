@@ -44,7 +44,5 @@ public class SerFiltros {
             System.out.println("No se encuentra la clase");
         }
         return publi;
-
     }
-
 }

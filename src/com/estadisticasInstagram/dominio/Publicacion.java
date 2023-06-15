@@ -126,7 +126,7 @@ public abstract class Publicacion implements ContenidoMultimedia, Serializable {
 
     public void serializar(int progress,String id) {SerProgress.serializarProgress(progress,id);}
 
-    public void simulateProgressBar(int total, int width, float delayMillis,int progress,String id) {
+    public void simulateProgressBar(int total, int width, float delayMillis, int progress, String id) {
 
         int prevProgress = -1;
 
@@ -184,7 +184,7 @@ public abstract class Publicacion implements ContenidoMultimedia, Serializable {
                     e.printStackTrace();
                 }
 
-                serializar(progress,id);
+                serializar(progress, id);
                 break;
             }
             if (!isNext) {

@@ -5,6 +5,7 @@ import com.estadisticasInstagram.dominio.*;
 import com.estadisticasInstagram.graficos.GraficoTortas;
 import com.estadisticasInstagram.graficos.Histograma;
 import com.estadisticasInstagram.serializacion.SerFiltros;
+import com.estadisticasInstagram.serializacion.SerProgress;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -144,8 +145,11 @@ public class Menu implements Serializable {
 
     public void deserializar(){
         listP = SerFiltros.deserializarFiltros();
-        //System.out.println("resultado" + SerProgress.deserializarProgress());
-
+        Map <String, Object> progress = SerProgress.deserializarProgress();
+        for (Publicacion publication : listP){
+            if (publication.getId().equals(progress.get("id")))
+                publication.setProgress((Integer) progress.get("proceso"));
+        }
     }
 
     public static void uploadFilePublications(PerfilInstagram listaPublicacionPerfil) {
@@ -164,10 +168,6 @@ public class Menu implements Serializable {
         }
         return data;
     }
-
-    /*public int[] amountOfPublicationsDate (int date) {
-
-    }*/
 
     public void amountPublications(PerfilInstagram listaPublicacionPerfil) {
         System.out.println( BOLD + UNDERLINED + "\nPublicaciones por tipo y total de todas las publicaciones.\n" + RESET);
