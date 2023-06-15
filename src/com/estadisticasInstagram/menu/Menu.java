@@ -21,7 +21,6 @@ import static com.estadisticasInstagram.archivos.readPublicaciones.uploadPublica
 public class Menu implements Serializable {
     LinkedList<Publicacion> listP = null;
     public void menuPrincipal() {
-
         Album root = new Album("ALBUMES:");
         boolean updateFile = false;
         PerfilInstagram profilePublications = new PerfilInstagram(listP);
@@ -123,12 +122,17 @@ public class Menu implements Serializable {
                     if (updateFile) {
                         System.out.println(BOLD + "============================" + " Gestor de álbumes " + "============================" + RESET);
                         MenuAlbumes menuAlbumes = new MenuAlbumes();
-                        menuAlbumes.startMenuAlbumes(root, profilePublications);
 
+                        if (profilePublications.getAlbumsList().isEmpty())
+                            menuAlbumes.startMenuAlbumes(root, profilePublications);
+                        else {
+                            root = profilePublications.getAlbumsList().getFirst();
+                            menuAlbumes.startMenuAlbumes(root, profilePublications);
+                        }
                         LinkedList<Album> albumesPerfil = new LinkedList<>();
                         albumesPerfil.add(root);
                         profilePublications.setAlbumsList(albumesPerfil);
-                        serializar(albumesPerfil);
+                        serializar(root);
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
@@ -148,14 +152,15 @@ public class Menu implements Serializable {
         } while (!option.equals("0"));
     }
 
-    public void serializar(LinkedList<Album> album) {
+    public void serializar(Album album) {
         SerAlbum.serializeAlbum(album);
     }
 
     public void deserializar(PerfilInstagram profilePublications){
         listP = SerFiltros.deserializeFilters();
-        LinkedList<Album> albumesPerfil = SerAlbum.deserializeAlbum();
-        System.out.println("albumesPerfil: " + albumesPerfil);
+        Album root = SerAlbum.deserializeAlbum();
+        LinkedList<Album> albumesPerfil = new LinkedList<>();
+        albumesPerfil.add(root);
         profilePublications.setAlbumsList(albumesPerfil);
         Map <String, Object> progress = SerProgress.deserializeProgress();
         for (Publicacion publication : listP) {

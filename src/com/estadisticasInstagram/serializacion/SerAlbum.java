@@ -3,11 +3,10 @@ package com.estadisticasInstagram.serializacion;
 import com.estadisticasInstagram.dominio.Album;
 
 import java.io.*;
-import java.util.LinkedList;
 
 public class SerAlbum {
 
-    public static void serializeAlbum(LinkedList<Album> album) {
+    public static void serializeAlbum(Album album) {
         try {
             File f = new File("album.ser");
             if (!f.exists())
@@ -24,14 +23,14 @@ public class SerAlbum {
     }
 
     @SuppressWarnings("unchecked")
-    public static LinkedList<Album> deserializeAlbum() {
-        LinkedList<Album> albumesPerfil = new LinkedList<>();
+    public static Album deserializeAlbum() {
+        Album root = new Album("ALBUMES:");
         try {
             File f = new File("album.ser");
             FileInputStream fis = new FileInputStream(f);
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object stream = ois.readObject();
-            albumesPerfil = (LinkedList<Album>)stream;
+            root = (Album)stream;
             ois.close();
         }
         catch(FileNotFoundException e){
@@ -44,6 +43,6 @@ public class SerAlbum {
         catch(ClassNotFoundException e){
             System.out.println("No se encuentra la clase");
         }
-        return albumesPerfil;
+        return root;
     }
 }
