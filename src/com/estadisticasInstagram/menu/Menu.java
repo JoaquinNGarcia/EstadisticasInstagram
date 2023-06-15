@@ -4,6 +4,7 @@ import com.estadisticasInstagram.controlador.PerfilInstagram;
 import com.estadisticasInstagram.dominio.*;
 import com.estadisticasInstagram.graficos.GraficoTortas;
 import com.estadisticasInstagram.graficos.Histograma;
+import com.estadisticasInstagram.serializacion.SerAlbum;
 import com.estadisticasInstagram.serializacion.SerFiltros;
 import com.estadisticasInstagram.serializacion.SerProgress;
 
@@ -71,7 +72,7 @@ public class Menu implements Serializable {
                         System.out.println(BOLD + GREEN + "\t\t\t\t\tEl archivo fue cargado con exito. \n\n" + RESET);
                         updateFile = true;
                         listP = uploadPublicationList();
-                        deserializar();
+                        deserializar(profilePublications);
                         profilePublications.setPublicationList(listP);
                     }
                 }
@@ -126,6 +127,7 @@ public class Menu implements Serializable {
                         LinkedList<Album> albumesPerfil = new LinkedList<>();
                         albumesPerfil.add(root);
                         profilePublications.setAlbumsList(albumesPerfil);
+                        serializar(albumesPerfil);
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
@@ -145,10 +147,17 @@ public class Menu implements Serializable {
         } while (!option.equals("0"));
     }
 
-    public void deserializar(){
+    public void serializar(LinkedList<Album> album) {
+        SerAlbum.serializeAlbum(album);
+    }
+
+    public void deserializar(PerfilInstagram profilePublications){
         listP = SerFiltros.deserializeFilters();
+        LinkedList<Album> albumesPerfil = SerAlbum.deserializeAlbum();
+        System.out.println("albumesPerfil: " + albumesPerfil);
+        profilePublications.setAlbumsList(albumesPerfil);
         Map <String, Object> progress = SerProgress.deserializeProgress();
-        for (Publicacion publication : listP){
+        for (Publicacion publication : listP) {
             if (publication.getId().equals(progress.get("id")))
                 publication.setProgress((Integer) progress.get("proceso"));
         }

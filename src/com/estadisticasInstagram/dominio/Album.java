@@ -1,9 +1,9 @@
 package com.estadisticasInstagram.dominio;
 
-import java.time.LocalDate;
+import java.io.Serializable;
 import java.util.*;
 
-public class Album {
+public class Album implements Serializable {
     private String name;
     private List<Album> subAlbums;
 
