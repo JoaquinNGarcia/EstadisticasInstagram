@@ -57,6 +57,8 @@ public class Video extends Publicacion implements ContenidoMultimedia, Serializa
     public void setFilter() {
         // System.o ut.println("Se aplico filtro en imagen");
     }
+
+    /** reproduce los videos*/
     @Override
     public void reproducirContenido(Publicacion publicacion) {
         System.out.println(BOLD + "Reproduciendo: " + publicacion.getType() + "\t" +  publicacion.getId() + "\t" + publicacion.getName() + RESET);

@@ -6,6 +6,8 @@ import com.estadisticasInstagram.dominio.*;
 import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
+
+/** menú que gestiona los álbumes*/
 public class MenuAlbumes {
     private static Scanner scanner = new Scanner(System.in);
     private String optionSubMenu;
@@ -51,6 +53,7 @@ public class MenuAlbumes {
         } while (!option.equals("0"));
     }
 
+    /** agrega un álbum*/
     private void addAlbum(Album albumCreated, Album father) {
         String option;
         System.out.println(BOLD + GREEN + "1. Confirmar" + RESET);
@@ -91,6 +94,7 @@ public class MenuAlbumes {
         }
     }
 
+    /** navega por los sub-álbumes*/
     public void subMenuAlbum(Album albumSelected) {
         if (albumSelected.getAlbumList().isEmpty())
             System.out.println(BOLD + RED + "No hay álbumes existentes" + RESET);
@@ -117,6 +121,7 @@ public class MenuAlbumes {
         }
     }
 
+    /** cambia el nombre a un álbum*/
     public void renameAlbum(Album albumChanged, PerfilInstagram profile) {
         subMenuAlbum(albumChanged);
         if (!itsEmpty) {
@@ -150,6 +155,7 @@ public class MenuAlbumes {
         }
     }
 
+    /** muestra las publicaciones dentro de un álbum*/
     public void showPublicationsAlbum(Album albumSelected,PerfilInstagram profile) {
         subMenuAlbum(albumSelected);
         if (!itsEmpty) {
@@ -168,6 +174,7 @@ public class MenuAlbumes {
         }
     }
 
+    /** elimina un álbum*/
     public void removeAlbum(Album albumRemove, PerfilInstagram profile) {
         subMenuAlbum((albumRemove));
         if (!itsEmpty) {
@@ -193,6 +200,7 @@ public class MenuAlbumes {
         }
     }
 
+    /** elimina una publicación de un álbum*/
     public void removePublication(Album albumSelected, PerfilInstagram profile) {
         subMenuAlbum(albumSelected);
         if (!itsEmpty) {
@@ -251,6 +259,8 @@ public class MenuAlbumes {
         }
     }
 
+    /** inserta una publicación a un álbum*/
+
     public void insertPublication(Album albumSelected, Publicacion publication) {
         subMenuAlbum(albumSelected);
         if (!itsEmpty) {
@@ -275,6 +285,8 @@ public class MenuAlbumes {
         }
     }
 
+    /** agrega una publicación a un álbum
+     * @see #insertPublication(Album, Publicacion)*/
     public void addPublication(Album albumSelected, PerfilInstagram profile) {
         if (!itsEmpty) {
             int i = 1;
@@ -313,6 +325,7 @@ public class MenuAlbumes {
             System.out.println(BOLD + RED + "No hay albumes existentes" + RESET);
     }
 
+    /** muestra la cantidad de 'me gustas' acumulados de un álbum*/
     public void totalAcummulatedLikesAlbum(Album albumSelected) {
         subMenuAlbum((albumSelected));
         if (!itsEmpty) {
@@ -326,6 +339,7 @@ public class MenuAlbumes {
         }
     }
 
+    /** muestra la cantidad de publicaciones por tipo y total de un álbum*/
     public void totalPublicationsAlbum(Album albumSelected) {
         subMenuAlbum((albumSelected));
         if (!itsEmpty) {

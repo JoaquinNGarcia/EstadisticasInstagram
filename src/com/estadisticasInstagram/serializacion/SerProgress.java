@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/** clase utilizada para serializar el progreso de la reproducción*/
 public class SerProgress {
     public static void serializeProgress(int proceso, String id) {
         try {

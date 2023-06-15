@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/** clase que lee el archivo .txt*/
 public class readPublicaciones {
     public static LinkedList<Publicacion> uploadPublicationList() {
         String name, Hashtags, type,id, comments, dateUploaded, filtro;;

@@ -12,6 +12,7 @@ import java.util.*;
 
 import static com.estadisticasInstagram.ColorsConsole.*;
 
+/** menú que gestiona la reproducción y filtros de las publicaciones*/
 public class MenuReproduccionMultimedia implements Serializable {
     private static Scanner render = new Scanner(System.in);
 
@@ -30,7 +31,6 @@ public class MenuReproduccionMultimedia implements Serializable {
         NEWYORK,
         BUENOSAIRES
     }
-
     public void serialize(LinkedList<Publicacion> publi) {
         SerFiltros.serializeFilters(publi);
     }
@@ -117,6 +117,7 @@ public class MenuReproduccionMultimedia implements Serializable {
         publicationsToReproduce.sort(Comparator.comparing(Publicacion::getId));
     }
 
+    /** aplica filtros a las publicaciones*/
     public void applyFilter(PerfilInstagram profile) {
         if(!profile.getPublicationList().isEmpty()){
             System.out.println(BOLD + "Elija la publicación a la cual quiere aplicar el filtro." + RESET);
@@ -162,6 +163,7 @@ public class MenuReproduccionMultimedia implements Serializable {
         }
     }
 
+    /** reproduce las publicaciones elegidas */
     public void AddPublicationsToPlay(PerfilInstagram profile) {
         if (!itsEmpty) {
             System.out.println(BOLD + "Elija la/s publicación/es que quiere reproducir." + RESET);

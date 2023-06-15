@@ -37,6 +37,7 @@ public class Audio extends Publicacion implements ContenidoMultimedia, Serializa
         this.velocityBits = velocityBits;
     }
 
+    /** reproduce los audios*/
     @Override
     public void reproducirContenido(Publicacion publicacion) {
         System.out.println(BOLD + "Reproduciendo: " + publicacion.getType() + "\t" +  publicacion.getId() + "\t" + publicacion.getName() + RESET);
