@@ -124,7 +124,7 @@ public abstract class Publicacion implements ContenidoMultimedia, Serializable {
 
     public abstract void reproducirContenido(Publicacion publicacion);
 
-    public void serializar(int progress,String id) {SerProgress.serializarProgress(progress,id);}
+    public void serializar(int progress,String id) {SerProgress.serializeProgress(progress,id);}
 
     public void simulateProgressBar(int total, int width, float delayMillis, int progress, String id) {
 
