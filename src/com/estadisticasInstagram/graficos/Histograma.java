@@ -18,6 +18,10 @@ public class Histograma extends JPanel
     private int barGap = 10;
     private JPanel barPanel;
     private JPanel labelPanel;
+
+    private static JFrame firstFrame;
+
+    private static JFrame secondFrame;
     private List<Bar> bars = new ArrayList<Bar>();
 
     public Histograma()
@@ -173,17 +177,21 @@ public class Histograma extends JPanel
         return new Color(red, green, blue);
     }
 
+    public static JFrame getFirstFrame() {return firstFrame;}
+
+    public static JFrame getSecondFrame() {return secondFrame;}
+
     public static void createAndShowGUIHistogramPublication(Map<String,Integer> mapaInformation) {
         Histograma panel = new Histograma();
         mapaInformation.forEach((name, data) -> panel.addHistogramColumn(name, data, generateRandomColor()));
 
         panel.layoutHistogramAmountPublications();
 
-        JFrame frame = new JFrame("Histogram Panel Publications Per Person");
-        frame.add(panel);
-        frame.setLocationByPlatform(true);
-        frame.pack();
-        frame.setVisible(true);
+        firstFrame = new JFrame("Histogram Panel Publications Per Person");
+        firstFrame.add(panel);
+        firstFrame.setLocationByPlatform(true);
+        firstFrame.pack();
+        firstFrame.setVisible(true);
 
     }
     public static void createAndShowGUIHistogramLikes(Map<String,Integer> mapaInformation) {
@@ -192,11 +200,10 @@ public class Histograma extends JPanel
 
         panel.layoutHistogramAmountLikes();
 
-        JFrame frame = new JFrame("Histogram Panel Likes Per Person");
-        frame.add(panel);
-        frame.setLocationByPlatform(true);
-        frame.pack();
-        frame.setVisible(true);
-
+        secondFrame = new JFrame("Histogram Panel Likes Per Person");
+        secondFrame.add(panel);
+        secondFrame.setLocationByPlatform(true);
+        secondFrame.pack();
+        secondFrame.setVisible(true);
     }
 }

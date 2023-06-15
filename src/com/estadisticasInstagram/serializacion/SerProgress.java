@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SerProgress {
-    public static void serializarProgress(int proceso, String id) {
+    public static void serializeProgress(int proceso, String id) {
         try {
             File f = new File("progress.ser");
             Map <String, Object> myMap = new HashMap<>();
@@ -25,7 +25,7 @@ public class SerProgress {
     }
 
     @SuppressWarnings("unchecked")
-    public static Map <String, Object> deserializarProgress() {
+    public static Map <String, Object> deserializeProgress() {
         Map <String, Object> myMap = new HashMap<>();
         try {
             File f = new File("progress.ser");

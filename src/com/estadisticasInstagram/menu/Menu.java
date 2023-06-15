@@ -85,12 +85,14 @@ public class Menu implements Serializable {
                 case "3" -> {
                     if (updateFile) {
                         int[] data = arrayOfPublicationsByType(profilePublications);
-                        GraficoTortas.createAndShowGUIPieGraphic(data);
-
-                        Map<String, Integer> mapaInformation = profilePublications.getPeopleWithAmountLikes();
-                        Histograma.createAndShowGUIHistogramLikes(mapaInformation);
-                        mapaInformation = profilePublications.getPeopleWithAmountPublications();
-                        Histograma.createAndShowGUIHistogramPublication(mapaInformation);
+                        if (GraficoTortas.getFrame() == null)
+                            GraficoTortas.createAndShowGUIPieGraphic(data);
+                        if (Histograma.getFirstFrame() == null) {
+                            Map<String, Integer> mapaInformation = profilePublications.getPeopleWithAmountLikes();
+                            Histograma.createAndShowGUIHistogramLikes(mapaInformation);
+                            mapaInformation = profilePublications.getPeopleWithAmountPublications();
+                            Histograma.createAndShowGUIHistogramPublication(mapaInformation);
+                        }
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
@@ -110,13 +112,7 @@ public class Menu implements Serializable {
                 case "5" -> {
                     if (updateFile) {
                         MenuReproduccionMultimedia menuReproduccionMultimedia = new MenuReproduccionMultimedia();
-                        menuReproduccionMultimedia.startReproduccionMultimedia(profilePublications);
-
-                        //LinkedList<Publicacion> listaPublicacionesAReproducir = new LinkedList<>();
-
-                        //LinkedList<Album> albumesPerfil = new LinkedList<Album>();
-                        //listaPublicacionesAReproducir.add(publicacionesAReproducir);
-                        //profilePublications.setListaAlbumes(albumesPerfil);
+                        menuReproduccionMultimedia.startReproductionMultimedia(profilePublications);
                     } else {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
@@ -134,18 +130,24 @@ public class Menu implements Serializable {
                         System.out.println(BOLD + RED + "\t\t\t\t\tPrimero debe cargar el archivo.\n" + RESET);
                     }
                 }
-                case "0" ->
-                        System.out.println(BOLD + BLUE + "H" + RESET + BLUE + "A" + RESET + BOLD + CYAN + " S" + RESET + CYAN + "A" + RESET +
-                                BOLD + PURPLE + "L" + RESET + PURPLE + "I" + RESET + BOLD + RED + "D" + RESET + RED + "O " + RESET +
-                                BOLD + YELLOW + "D" + RESET + YELLOW + "E" + RESET + BOLD + GREEN + "L " + RESET + GREEN + "P" + RESET + BOLD + BLUE + "R" + RESET +
-                                BLUE + "O" + RESET + BOLD + CYAN + "G" + RESET + CYAN + "R" + RESET + BOLD + PURPLE + "A" + RESET + PURPLE + "M" + RESET + BOLD + RED + "A " + RESET);
+                case "0" -> {
+                    System.out.println(BOLD + BLUE + "H" + RESET + BLUE + "A" + RESET + BOLD + CYAN + " S" + RESET + CYAN + "A" + RESET +
+                            BOLD + PURPLE + "L" + RESET + PURPLE + "I" + RESET + BOLD + RED + "D" + RESET + RED + "O " + RESET +
+                            BOLD + YELLOW + "D" + RESET + YELLOW + "E" + RESET + BOLD + GREEN + "L " + RESET + GREEN + "P" + RESET + BOLD + BLUE + "R" + RESET +
+                            BLUE + "O" + RESET + BOLD + CYAN + "G" + RESET + CYAN + "R" + RESET + BOLD + PURPLE + "A" + RESET + PURPLE + "M" + RESET + BOLD + RED + "A " + RESET);
+                    if (GraficoTortas.getFrame() != null) {
+                        GraficoTortas.getFrame().dispose();
+                        Histograma.getFirstFrame().dispose();
+                        Histograma.getSecondFrame().dispose();
+                    }
+                }
             }
         } while (!option.equals("0"));
     }
 
     public void deserializar(){
-        listP = SerFiltros.deserializarFiltros();
-        Map <String, Object> progress = SerProgress.deserializarProgress();
+        listP = SerFiltros.deserializeFilters();
+        Map <String, Object> progress = SerProgress.deserializeProgress();
         for (Publicacion publication : listP){
             if (publication.getId().equals(progress.get("id")))
                 publication.setProgress((Integer) progress.get("proceso"));

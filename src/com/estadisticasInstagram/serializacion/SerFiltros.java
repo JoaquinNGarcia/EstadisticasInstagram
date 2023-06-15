@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class SerFiltros {
-    public static void serializarFiltros( LinkedList<Publicacion> publi) {
+    public static void serializeFilters( LinkedList<Publicacion> publi) {
         try {
             File f = new File("publicaciones.ser");
             if (!f.exists())
@@ -23,7 +23,7 @@ public class SerFiltros {
     }
 
     @SuppressWarnings("unchecked")
-    public static LinkedList<Publicacion> deserializarFiltros() {
+    public static LinkedList<Publicacion> deserializeFilters() {
         LinkedList<Publicacion> publi = new LinkedList<>();
         try {
             File f = new File("publicaciones.ser");

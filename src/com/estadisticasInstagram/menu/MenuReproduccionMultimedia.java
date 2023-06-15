@@ -17,11 +17,11 @@ public class MenuReproduccionMultimedia implements Serializable {
 
     private String seePublications, applyFilters;
     private boolean itsEmpty;
-    LinkedList<Publicacion> publicacionesAReproducir = new LinkedList<>();
-    Set<String> idsSeleccionados = new HashSet<>();
+    LinkedList<Publicacion> publicationsToReproduce = new LinkedList<>();
+    Set<String> idsSelected = new HashSet<>();
 
     private LinkedList<Audio> listAudio = new LinkedList<>();
-    private LinkedList<Imagen> listImagen = new LinkedList<>();
+    private LinkedList<Imagen> listImage = new LinkedList<>();
     private LinkedList<Video> listVideo = new LinkedList<>();
     
 
@@ -31,33 +31,33 @@ public class MenuReproduccionMultimedia implements Serializable {
         BUENOSAIRES
     }
 
-    public void serializar(LinkedList<Publicacion> publi) {
-        SerFiltros.serializarFiltros(publi);
+    public void serialize(LinkedList<Publicacion> publi) {
+        SerFiltros.serializeFilters(publi);
     }
 
-    public void startReproduccionMultimedia(PerfilInstagram profile) {
+    public void startReproductionMultimedia(PerfilInstagram profile) {
         double fullDuration = 0;
-        String optionReproduccionSeleccionada = "", optionOrdenReproduccion = "";
+        String optionReproductionSelected = "", optionOrderReproduccion = "";
         System.out.println(BOLD + "Desea aplicar filtros a las imagenes o los videos?" + RESET);
         System.out.println(BOLD + GREEN + "1.Si" + RESET);
         System.out.println(BOLD + RED + "2.No" + RESET);
         applyFilters = render.nextLine();
         while(applyFilters.equals("1")) {
-            aplicarFiltros(profile);
+            applyFilter(profile);
             System.out.println(BOLD + "Desea aplicar filtros a las imagenes o los videos?" + RESET);
             System.out.println(BOLD + GREEN + "1.Si" + RESET);
             System.out.println(BOLD + RED + "2.No" + RESET);
             applyFilters = render.nextLine();
         }
         AddPublicationsToPlay(profile);
-        itsEmpty = publicacionesAReproducir.isEmpty();
+        itsEmpty = publicationsToReproduce.isEmpty();
         if(!itsEmpty) {
             System.out.println(BOLD + "\nDesea reproducir las publicaciones seleccionadas? " + RESET);
             System.out.println(BOLD + GREEN + "1.Si" + RESET);
             System.out.println(BOLD + RED + "2.No" + RESET);
-            optionReproduccionSeleccionada = render.nextLine().trim();
+            optionReproductionSelected = render.nextLine().trim();
             try {
-                if(optionReproduccionSeleccionada.equals("1") && !itsEmpty) {
+                if(optionReproductionSelected.equals("1") && !itsEmpty) {
                     System.out.println(BOLD + "\nPuede elegir 3 maneras de reproducir el contenido: \n" + RESET);
                     System.out.println(BOLD + "1.Ordenado por Tipo (Ascendente)." + RESET);
                     System.out.println(BOLD + "2.Ordenado por Tipo (Descendente)." + RESET);
@@ -65,30 +65,30 @@ public class MenuReproduccionMultimedia implements Serializable {
                     System.out.println(BOLD + "4.Ordenado por cantidad de 'me gustas' (Ascendente)." + RESET);
                     System.out.println(BOLD + "5.Ordenado por cantidad de 'me gustas' (Descendente)." + RESET);
                     System.out.println(BOLD + "0.Salir.\n" + RESET);
-                    optionOrdenReproduccion = render.nextLine().trim();
-                    switch (optionOrdenReproduccion){
+                    optionOrderReproduccion = render.nextLine().trim();
+                    switch (optionOrderReproduccion){
                         case "1" -> {
-                            publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getType));
+                            publicationsToReproduce.sort(Comparator.comparing(Publicacion::getType));
                         }
                         case "2" -> {
-                            publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getType).reversed());
+                            publicationsToReproduce.sort(Comparator.comparing(Publicacion::getType).reversed());
                         }
                         case "3" -> {
-                            publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getName));
+                            publicationsToReproduce.sort(Comparator.comparing(Publicacion::getName));
                         }
                         case "4" -> {
-                            publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getAmountLikes));
+                            publicationsToReproduce.sort(Comparator.comparing(Publicacion::getAmountLikes));
 
                         }
                         case "5" -> {
-                            publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
+                            publicationsToReproduce.sort(Comparator.comparing(Publicacion::getAmountLikes).reversed());
                         }
                         case "0" -> {
                             System.out.println(BOLD + "Se aplicara el valor por defecto.\n" + RESET);
-                            publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getId));
+                            publicationsToReproduce.sort(Comparator.comparing(Publicacion::getId));
                         }
                     }
-                    for(Publicacion publicacion : publicacionesAReproducir) {
+                    for(Publicacion publicacion : publicationsToReproduce) {
                         if (publicacion instanceof Audio audio) {
                             fullDuration += audio.getDuration();
                         } else {
@@ -100,7 +100,7 @@ public class MenuReproduccionMultimedia implements Serializable {
                         }
                     }
                     System.out.println(BOLD + "El tiempo total de reproducción es de: " + Math.round(fullDuration / 10) + " segundos. " + RESET);
-                    for(Publicacion publicacion : publicacionesAReproducir) {
+                    for(Publicacion publicacion : publicationsToReproduce) {
                         publicacion.reproducirContenido(publicacion);
                     }
 
@@ -114,34 +114,34 @@ public class MenuReproduccionMultimedia implements Serializable {
         } else {
             System.out.println(BOLD + RED + "No se agrego ninguna publicacion." + RESET);
         }
-        publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getId));
+        publicationsToReproduce.sort(Comparator.comparing(Publicacion::getId));
     }
 
-    public void aplicarFiltros(PerfilInstagram profile) {
+    public void applyFilter(PerfilInstagram profile) {
         if(!profile.getPublicationList().isEmpty()){
             System.out.println(BOLD + "Elija la publicación a la cual quiere aplicar el filtro." + RESET);
             for (int i = 0; i < profile.getPublicationList().size(); i++)
-                System.out.println("\t" + profile.getPublicationList().get(i).getId() + "\t" + profile.getPublicationList().get(i).getName());
+                System.out.println("\t" + "#" + profile.getPublicationList().get(i).getId() + "\t" + profile.getPublicationList().get(i).getName());
             System.out.println(BOLD + "Ingrese el ID de manera exacta... Por ejemplo '10'." + RESET);
             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
             try {
-                String idSeleccionado;
-                if(!(idSeleccionado = render.nextLine()).equals("0")) {
-                    boolean encontrado = false;
+                String idSelected;
+                if(!(idSelected = render.nextLine()).equals("0")) {
+                    boolean found = false;
                     for (Publicacion publicacion : profile.getPublicationList()) {
-                        if (publicacion.getId().equals(idSeleccionado)) {
-                            encontrado = true;
+                        if (publicacion.getId().equals(idSelected)) {
+                            found = true;
                             System.out.println(BOLD + "Puede elegir entre estos 3 filtros para colocar \n\t" + Filters.BUENOSAIRES + " " + Filters.NEWYORK + " " + Filters.TOKIO + RESET);
                             System.out.println("Ingrese uno manera exacta... Por ejemplo 'BUENOSAIRES'.");
                             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
-                            String filtroSeleccionado;
-                            if (!(filtroSeleccionado = render.nextLine()).equals("0")) {
-                                if (publicacion instanceof Imagen imagen) {
-                                    imagen.setFiltro(filtroSeleccionado.toUpperCase());
-                                    System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en la Imagen: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
+                            String filterSelected;
+                            if (!(filterSelected = render.nextLine()).equals("0")) {
+                                if (publicacion instanceof Imagen image) {
+                                    image.setFiltro(filterSelected.toUpperCase());
+                                    System.out.println(BOLD + "Se aplico un filtro " + filterSelected.toUpperCase() + " en la Imagen: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
                                 } else if (publicacion instanceof Video video) {
-                                    video.setFiltro(filtroSeleccionado.toUpperCase());
-                                    System.out.println(BOLD + "Se aplico un filtro " + filtroSeleccionado.toUpperCase() + " en el Video: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
+                                    video.setFiltro(filterSelected.toUpperCase());
+                                    System.out.println(BOLD + "Se aplico un filtro " + filterSelected.toUpperCase() + " en el Video: " + publicacion.getId() + "\t" + publicacion.getName() + "\n\n" + RESET);
                                 } else {
                                     System.out.println(BOLD + RED + "No se puede aplicar un filtro porque es un audio" + "\n\n" + RESET);
 
@@ -151,14 +151,14 @@ public class MenuReproduccionMultimedia implements Serializable {
                         }
 
                     }
-                    if (!encontrado) {
+                    if (!found) {
                         System.out.println("El ID ingresado no existe en la lista de publicaciones. Inténtelo nuevamente.");
                     }
                 }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            serializar(profile.getPublicationList());
+            serialize(profile.getPublicationList());
         }
     }
 
@@ -170,20 +170,20 @@ public class MenuReproduccionMultimedia implements Serializable {
             System.out.println(BOLD + "Ingrese el ID de manera exacta... Por ejemplo '10'." + RESET);
             System.out.println(BOLD + "Ingrese 0 para salir." + RESET);
             try {
-                String idSeleccionado;
-                while (!(idSeleccionado = render.nextLine()).equals("0")) {
-                    boolean encontrado = false;
+                String idSelected;
+                while (!(idSelected = render.nextLine()).equals("0")) {
+                    boolean found = false;
                     for (Publicacion publicacion : profile.getPublicationList()) {
-                        if (publicacion.getId().equals(idSeleccionado)) {
-                            if(!(idsSeleccionados.contains(idSeleccionado))) {
-                                publicacionesAReproducir.add(publicacion);
-                                idsSeleccionados.add(idSeleccionado);
+                        if (publicacion.getId().equals(idSelected)) {
+                            if(!(idsSelected.contains(idSelected))) {
+                                publicationsToReproduce.add(publicacion);
+                                idsSelected.add(idSelected);
                             }
-                            encontrado = true;
+                            found = true;
                             break;
                         }
                     }
-                    if (!encontrado) {
+                    if (!found) {
                         System.out.println("El ID ingresado no existe en la lista de publicaciones. Inténtelo nuevamente.");
                     }
                 }
@@ -192,12 +192,12 @@ public class MenuReproduccionMultimedia implements Serializable {
                 System.out.println(BOLD + RED + "2.No" + RESET);
                 seePublications = render.nextLine();
                 if (seePublications.equals("1")) {
-                    if (publicacionesAReproducir.isEmpty()) {
+                    if (publicationsToReproduce.isEmpty()) {
                         System.out.println(BOLD + RED + "No hay publicaciones seleccionadas." + RESET);
                     } else {
                         System.out.println("Publicaciones seleccionadas ordenadas por nombre:");
-                        publicacionesAReproducir.sort(Comparator.comparing(Publicacion::getName));
-                        publicacionesAReproducir.forEach(profile::showPublication);
+                        publicationsToReproduce.sort(Comparator.comparing(Publicacion::getName));
+                        publicationsToReproduce.forEach(profile::showPublication);
                     }
                 }
             } catch (InputMismatchException error) {

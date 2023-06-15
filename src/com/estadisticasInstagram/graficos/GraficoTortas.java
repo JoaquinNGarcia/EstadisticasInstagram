@@ -7,6 +7,8 @@ public class GraficoTortas extends JPanel {
     private final String[] labels;
     private final int[] data;
 
+    private static JFrame frame;
+
     public GraficoTortas(String[] labels, int[] data) {
         this.labels = labels;
         this.data = data;
@@ -67,9 +69,11 @@ public class GraficoTortas extends JPanel {
         return colors[index % colors.length];
     }
 
+    public static JFrame getFrame() {return frame;}
+
     public static void createAndShowGUIPieGraphic(int[] data) {
         String[] titles = {"Video", "Imagen", "Audio"};
-        JFrame frame = new JFrame("Grafico Torta");
+        frame = new JFrame("Grafico Torta");
         frame.setSize(400, 400);
         GraficoTortas pieChart = new GraficoTortas(titles, data);
         frame.add(pieChart);
